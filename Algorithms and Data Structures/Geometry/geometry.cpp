@@ -1,3 +1,51 @@
+struct Point
+{
+  double x, y;
+  double distance(Point &p)
+  {
+    return sqrt((x-p.x)*(x-p.x) + (y-p.y)*(y-p.y));
+  }
+  void normalize()
+  {
+    double norm = sqrt(x*x + y*y);
+    x /= norm, y /= norm;
+  }
+  Point operator-(const Point &p)
+  {
+    return Point({x - p.x, y - p.y});
+  }
+  double operator*(const Point &p)
+  {
+    return x * p.x + y * p.y;
+  }
+  Point closestPoint(Point &p1, Point &p2)
+  {
+    Point v = p2 - p1, u = p1 - *this, w = p2 - *this;
+    double vu = v * u, vv = v * v;
+    double t = -vu / vv;
+    // return pointBetween(t, p1, p2); if it's a line and not a segment
+    if (t >= 0 && t <= 1) return vectorToSegment(t, p1, p2);
+    return u*u <= w*w ? p1 : p2;
+  }
+  Point vectorToSegment(double t, Point &p1, Point &p2)
+  {
+    return Point({(1 - t) * p1.x + t * p2.x,
+                  (1 - t) * p1.y + t * p2.y});
+  }
+  void print()
+  {
+    // printf("%.4lf\n%.4lf\n", x, y);
+    printf("%.4lf %.4lf\n", x, y);
+  }
+};
+
+/* Closest point to a line:
+  a*x + b*y + c = 0:
+    x = (b(b*x - a*y) - a*c) / (a^2 + b^2)
+    y = (a(-b*x + a*y) - b*c) / (a^2 + b^2)
+  two points:
+    
+*/
 /* triangle area given points a, b and c
   1/2 * det({a.x, b.x, c.x},
             {a.y, b.y, c.y},
