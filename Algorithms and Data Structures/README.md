@@ -11,6 +11,7 @@
   * [Delivery Bears](https://codeforces.com/contest/653/problem/D) (BinarySearch + MaxFlow)
   * [Soldier And Traveling](https://codeforces.com/contest/546/problem/E) (Easy modeling MaxFlow, needs information recover from flow)
   * [Kill the Werewolf](https://www.urionlinejudge.com.br/judge/en/problems/view/2354) (Modeling isn't trivial, but it's interesting)
+  * [Olimpíadas](https://br.spoj.com/problems/OLIMP/) (Modeling is easy, but you will have to find the flow paths; it's amazing)
   * [HackerEarth Problem Package](https://www.hackerearth.com/pt-br/practice/algorithms/graphs/maximum-flow/practice-problems/)
   * [UVA Problem Package](https://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&category=685)
 
