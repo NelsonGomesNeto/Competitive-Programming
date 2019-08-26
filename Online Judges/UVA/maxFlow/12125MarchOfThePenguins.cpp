@@ -1,114 +1,102 @@
 #include <bits/stdc++.h>
+#define lli long long int
 using namespace std;
-const int maxVertices = 100 + 100 + 2;
-int matrixGraph[maxVertices][maxVertices], level[maxVertices], inf = 1<<20;
 
-int bfs(vector<int> graph[], int source, int target)
+const int maxN = 1e3, maxV = 2e3 + 2, inf = 1e9; int n, penguins; double d;
+struct Ice { int x, y, penguins, jumps; };
+Ice ices[maxN];
+// We will try all possible sinks and save the ones that all penguins can meet
+// Vertex capacity will be needed
+// source (0) -[penguins]> in ices (1 : n) -[jumps]> out ices (n + 1 : n + n) -[all penguins]> sink (n + n + 1)
+int source = 0, sink, vertices;
+int ptr[maxV], level[maxV];
+struct Edge { int to, back, flow, capacity; };
+vector<Edge> graph[maxV];
+void addEdge(int u, int v, int f)
 {
-  memset(level, -1, sizeof(level)); level[source] = 0;
-  deque<int> queue; queue.push_back(source);
-  while (!queue.empty())
+  graph[u].push_back({v, (int) graph[v].size(), f, f});
+  graph[v].push_back({u, (int) graph[u].size() - 1, 0, 0});
+}
+
+bool bfs()
+{
+  memset(level, -1, sizeof(level));
+  queue<int> q; q.push(source), level[source] = 0;
+  while (!q.empty())
   {
-    int u = queue.front(); queue.pop_front();
-    for (auto v: graph[u])
-      if (level[v] < 0 && matrixGraph[u][v] > 0)
-      {
-        level[v] = level[u] + 1;
-        queue.push_back(v);
-      }
+    int u = q.front(); q.pop();
+    for (Edge &e: graph[u])
+      if (e.flow && level[e.to] == -1)
+        q.push(e.to), level[e.to] = level[u] + 1;
   }
-  return(level[target] > 0);
+  return level[sink] != -1;
 }
-
-int dfs(vector<int> graph[], int u, int target, int flow)
+int dfs(int u = source, int flow = inf)
 {
-  if (u == target) return(flow);
-  int actualFlow = 0;
-  for (auto v: graph[u])
-    if (level[u] + 1 == level[v] && matrixGraph[u][v] > 0)
+  if (u == sink || !flow) return flow;
+  for (int &p = ptr[u]; p < graph[u].size(); p ++)
+  {
+    Edge &e = graph[u][p];
+    if (e.flow && level[e.to] == level[u] + 1)
     {
-      int pathFlow = dfs(graph, v, target, min(flow, matrixGraph[u][v]));
-      flow -= pathFlow;
-      matrixGraph[u][v] -= pathFlow;
-      matrixGraph[v][u] += pathFlow;
-      actualFlow += pathFlow;
+      int delivered = dfs(e.to, min(flow, e.flow));
+      e.flow -= delivered;
+      graph[e.to][e.back].flow += delivered;
+      if (delivered) return delivered;
     }
-  return(actualFlow);
+  }
+  return 0;
+}
+int dinic()
+{
+  int maxFlow = 0, flow;
+  while (bfs())
+  {
+    memset(ptr, 0, sizeof(ptr));
+    while (flow = dfs()) maxFlow += flow;
+  }
+  return maxFlow;
 }
 
-int dinic(vector<int> graph[], int source, int target)
+double dist(int i, int j)
 {
-  int maxFlow = 0, pathFlow;
-  while (bfs(graph, source, target))
-    do
-    {
-      pathFlow = dfs(graph, source, target, inf);
-      maxFlow += pathFlow;
-    } while (pathFlow);
-  return(maxFlow);
+  return sqrt((ices[i].x - ices[j].x)*(ices[i].x - ices[j].x) + (ices[i].y - ices[j].y)*(ices[i].y - ices[j].y));
 }
-
-double dist(int i1[], int i2[])
+bool can(int target)
 {
-  return(sqrt( pow(i1[0] - i2[0], 2) + pow(i1[1] -  i2[1], 2) ));
-}
-
-void addEdge(vector<int> graph[], int u, int v, int c1, int c2)
-{
-  graph[u].push_back(v);
-  matrixGraph[u][v] = c1;
-  graph[v].push_back(u);
-  matrixGraph[v][u] = c2;
-}
-
-void printGraph(vector<int> graph[])
-{
-  for (int i = 0; i < maxVertices; i ++)
-    if (graph[i].size())
-    {
-      printf("%d", i);
-      for (auto j: graph[i])
-        printf(" -> (%d, %d)", j, matrixGraph[i][j]);
-      printf("\n");
-    }
+  for (int i = 0; i < vertices; i ++) graph[i].clear();
+  for (int i = 0; i < n; i ++)
+  {
+    addEdge(source, 1 + i, ices[i].penguins);
+    addEdge(1 + i, n + 1 + i, ices[i].jumps);
+    if (i == target) addEdge(1 + i, sink, penguins);
+    for (int j = 0; j < n; j ++)
+      if (i != j && dist(i, j) <= d)
+        addEdge(n + 1 + i, 1 + j, penguins);
+  }
+  int maxFlow = dinic();
+  return maxFlow == penguins;
 }
 
 int main()
 {
-  int tests; scanf("%d", &tests);
-  while (tests -- > 0)
+  int t; scanf("%d", &t);
+  while (t --)
   {
-    memset(matrixGraph, 0, sizeof(matrixGraph));
-    vector<int> graph[maxVertices];
-
-    int ices; double power; scanf("%d %lf", &ices, &power);
-    int ice[ices][4], penguins = 0;
-    for (int i = 0; i < ices; i ++)
+    scanf("%d %lf", &n, &d);
+    sink = 2*n + 1; vertices = sink + 1, penguins = 0;
+    for (int i = 0; i < n; i ++)
     {
-      for (int j = 0; j < 4; j ++)
-        scanf("%d", &ice[i][j]);
-      penguins += ice[i][2];
-      addEdge(graph, 0, i + 1, ice[i][2], 0);
-      addEdge(graph, i + 1, i + 1 + 100, ice[i][3], 0);
-      addEdge(graph, i + 1 + 100, maxVertices - 1, inf, inf);
+      scanf("%d %d %d %d", &ices[i].x, &ices[i].y, &ices[i].penguins, &ices[i].jumps);
+      penguins += ices[i].penguins;
     }
 
-    for (int i = 0; i < ices; i ++)
-      for (int j = i + 1; j < ices; j ++)
-        if (i != j)
-          if (dist(ice[i], ice[j]) <= power)
-          {
-            //printf("%d %d %lf\n", i, j, dist(ice[i], ice[j]));
-            addEdge(graph, i + 1 + 100, j + 1, inf, inf);
-            addEdge(graph, j + 1 + 100, i + 1, inf, inf);
-          }
-
-    printGraph(graph);
-    int maxFlow = dinic(graph, 0, 0 + 1);
-    printf("\n%d %d %d\n\n", penguins == maxFlow, penguins, maxFlow);
-    printGraph(graph); printf("\n");
-
+    vector<int> ans;
+    for (int i = 0; i < n; i ++)
+      if (can(i))
+        ans.push_back(i);
+    if (ans.empty()) printf("-1\n");
+    else for (int i = 0; i < ans.size(); i ++) printf("%d%c", ans[i], i < ans.size() - 1 ? ' ' : '\n');
   }
-
   return(0);
 }
