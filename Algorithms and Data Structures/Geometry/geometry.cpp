@@ -18,7 +18,7 @@ struct Point
   {
     return x * p.x + y * p.y;
   }
-  Point closestPoint(Point &p1, Point &p2)
+  Point pointOfInterception(Point &p1, Point &p2)
   {
     Point v = p2 - p1, u = p1 - *this, w = p2 - *this;
     double vu = v * u, vv = v * v;
@@ -26,6 +26,10 @@ struct Point
     // return pointBetween(t, p1, p2); if it's a line and not a segment
     if (t >= 0 && t <= 1) return vectorToSegment(t, p1, p2);
     return u*u <= w*w ? p1 : p2;
+  }
+  bool ccw(Point &B, Point &C)
+  {
+    return (C.y - this->y) * (B.x - this->x) > (B.y - this->y) * (C.x - this->x);
   }
   Point vectorToSegment(double t, Point &p1, Point &p2)
   {
@@ -36,6 +40,19 @@ struct Point
   {
     // printf("%.4lf\n%.4lf\n", x, y);
     printf("%.4lf %.4lf\n", x, y);
+  }
+};
+
+struct Segment
+{
+  Point p1, p2;
+  bool interceptsSegment(Point &q1, Point &q2)
+  {
+    return this->p1.ccw(q1, q2) != p2.ccw(q1, q2) && this->p1.ccw(p2, q1) != this->p1.ccw(p2, q2);
+  }
+  bool interceptsSegment(Segment &s)
+  {
+    return this->interceptsSegment(s.p1, s.p2);
   }
 };
 
