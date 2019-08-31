@@ -1,65 +1,55 @@
 #include <bits/stdc++.h>
+#define lli long long int
 using namespace std;
-set<string> done;
-vector<string> intToString;
-int dp[(int) 1e6];
 
-int dfs(vector<vector<pair<int, int > > > graph, int u, int target, int size)
+const int maxN = 4e3; int n, origin, destination;
+map<string, int> stringToInt;
+string intToString[maxN];
+vector<int> graph[maxN];
+
+void read(int i)
 {
-  // printf("%d %d %d\n", u, graph[u].size(), dp[u]);
-  if (u == target)
+  char s[100], end; scanf("%s", s);
+  string ss = s;
+  if (!stringToInt.count(ss)) stringToInt[ss] = stringToInt.size();
+  int u = stringToInt[ss];
+  while (scanf("%c", &end) != EOF && end == ' ')
   {
-    // done.insert(path.c_str());
-    return(1);
+    scanf("%s", s); ss = s;
+    if (!stringToInt.count(ss)) stringToInt[ss] = stringToInt.size();
+    graph[u].push_back(stringToInt[ss]);
   }
-  if (dp[u] == -1)
+}
+
+void printSpaces(int spaces) { while (spaces --) printf("   "); }
+int memo[maxN];
+int dfs(int u = origin, int depth = 0)
+{
+  if (u == destination) return 1;
+  // printSpaces(depth);
+  // printf("%d\n", u);
+  if (memo[u] == -1)
   {
-    int ans = 0;
-    // dp[u] = 0;
-    for (auto v: graph[u])
-      // path += intToString[v.first];
-      if (dp[v.first] == -1)
-        ans += dfs(graph, v.first, target, size + v.second);
-      // path.erase(path.begin() + size);
-    dp[u] = 1 + ans;
+    memo[u] = 0;
+    for (int v: graph[u])
+      memo[u] += dfs(v, depth + 1);
   }
-  return(dp[u]);
+  return memo[u];
 }
 
 int main()
 {
-  memset(dp, -1, sizeof(dp));
-  int n; scanf("%d\n", &n);
-  map<string, int> stringToInt;
-  vector<vector<pair<int, int> > > graph;
-  char u[1000] = "", v[1000] = "", end;
-  string uu, vv;
+  scanf("%d\n", &n);
   for (int i = 0; i < n; i ++)
-  {
-    scanf("%s%c", u, &end); uu = u;
-    if (!stringToInt.count(uu)) stringToInt[uu] = stringToInt.size(), graph.push_back(vector<pair<int, int> >()), intToString.push_back(uu);
-    if (end == '\n') continue;
-    while (scanf("%s%c", v, &end) && end != '\n')
-    {
-      vv = v;
-      if (!stringToInt.count(vv)) stringToInt[vv] = stringToInt.size(), graph.push_back(vector<pair<int, int> >()), intToString.push_back(vv);
-      graph[stringToInt[uu]].push_back({stringToInt[vv], (int) strlen(v)});
-    }
-    vv = v;
-    if (!stringToInt.count(vv)) stringToInt[vv] = stringToInt.size(), graph.push_back(vector<pair<int, int> >()), intToString.push_back(vv);
-    graph[stringToInt[uu]].push_back({stringToInt[vv], (int) strlen(v)});
-  }
-  scanf("%s %s", u, v);
-  string path = ""; uu = u; vv = v;
-  if (!stringToInt.count(uu) || !stringToInt.count(vv)) printf("0\n");
-  else
-  {
-    path += u;
-    printf("QQQ\n");
-    int lol = dfs(graph, stringToInt[uu], stringToInt[vv], (int) strlen(u));
-    for (auto s: done) printf("%s\n", s.c_str());
-    printf("%d\n", (int) done.size());
-    printf("%d\n", lol);
-  }
+    read(i);
+
+  char uu[100], vv[100];
+  scanf("%s %s", uu, vv);
+  string uuu = uu, vvv = vv;
+  origin = stringToInt[uuu], destination = stringToInt[vvv];
+  memset(memo, -1, sizeof(memo));
+  int ans = dfs();
+  printf("%d\n", ans);
+
   return(0);
 }
