@@ -1,73 +1,40 @@
 #include <bits/stdc++.h>
-long long inf = 1e10;
+#define lli long long int
+using namespace std;
 
-long long max(long long a, long long b)
+const int maxN = 1e3; int n;
+const lli inf = 1e9;
+int a[maxN];
+
+lli memo[maxN][maxN][2];
+lli solve(int lo = 0, int hi = n - 1, bool turn = true)
 {
-  return(a > b ? a : b);
-}
-
-long long qCards;
-
-long long solve(long long **dp, long long cards[], long long lo, long long hi)
-{
-  if (lo >= hi)
-    return(0);
-
-  if (dp[lo][hi] == -inf)
+  if (lo > hi) return 0;
+  if (memo[lo][hi][turn] == -1)
   {
-    long long aux = -inf;
-    long long me = cards[lo], greedy;
-    long long theMid = solve(dp, cards, lo + 1, hi - 1);
-    if (cards[lo + 1] >= cards[hi])
-    {
-      greedy = cards[lo + 1];
-      aux = max(aux, solve(dp, cards, lo + 2, hi) + (me - greedy));
-    }
+    lli ans;
+    if (turn)
+      ans = max(solve(lo + 1, hi, !turn) + a[lo], solve(lo, hi - 1, !turn) + a[hi]);
     else
-    {
-      greedy = cards[hi];
-      aux = max(aux, theMid + (me - greedy));
-    }
-    me = cards[hi];
-    if (cards[lo] >= cards[hi - 1])
-    {
-      greedy = cards[lo];
-      aux = max(aux, theMid + (me - greedy));
-    }
-    else
-    {
-      greedy = cards[hi - 1];
-      aux = max(aux, solve(dp, cards, lo, hi - 2) + (me - greedy));
-    }
-    dp[lo][hi] = aux;
+      ans = a[lo] >= a[hi] ? solve(lo + 1, hi, !turn) - a[lo] : solve(lo, hi - 1, !turn) - a[hi];
+    memo[lo][hi][turn] = ans;
   }
-
-  return(dp[lo][hi]);
+  return memo[lo][hi][turn];
 }
 
 int main()
 {
-  long long run = 0, qCards;
-  while (scanf("%Ld", &qCards) && qCards != 0)
+  int t = 1;
+  while (scanf("%d", &n) && n)
   {
-    run ++;
-    long long cards[qCards];
-    for (long long i = 0; i < qCards; i ++)
-      scanf("%Ld", &cards[i]);
+    // printf("%d\n", n); fflush(stdout);
+    for (int i = 0; i < n; i ++)
+      scanf("%d", &a[i]);
 
-    long long **dp = (long long**) malloc(qCards * sizeof(long long*));
-    for (long long i = 0; i < qCards; i ++)
-    {
-      dp[i] = (long long*) malloc(qCards * sizeof(long long));
-      for (long long j = 0; j < qCards; j ++)
-        dp[i][j] = -inf;
-    }
-
-    long long answer = solve(dp, cards, 0, qCards - 1);
-
-    printf("In game %Ld, the greedy strategy might lose by as many as %Ld points.\n", run, answer);
-
-    free(dp);
+    for (int i = 0; i < n; i ++) for (int j = 0; j < n; j ++) memo[i][j][0] = memo[i][j][1] = -1;
+    // memset(memo, -1, sizeof(memo));
+    lli ans = solve();
+    printf("In game %d, the greedy strategy might lose by as many as %lld points.\n", t ++, ans);
   }
   return(0);
 }
