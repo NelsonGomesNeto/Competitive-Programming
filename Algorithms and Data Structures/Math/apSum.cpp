@@ -7,6 +7,11 @@ lli apSum(lli a1, lli an, lli n)
   return(n * (a1 + an) / 2.0);
 }
 
+// lli apSum(lli a1, lli n, lli q)
+// {
+//   return (a1+a1+(n-1)*q)*n / 2LL;
+// }
+
 int main()
 {
   lli a1, an, n;
