@@ -2,29 +2,26 @@
 #define lli long long int
 using namespace std;
 
-const int maxN = 1e4, maxX = 1e5; int n, m;
-int a[maxN], b[maxN], aCnt[maxX + 1], bCnt[maxX + 1];
+const int maxN = 20; int b, n;
+int money[maxN];
 
 int main()
 {
-  while (scanf("%d %d", &n, &m) && !(!n && !m))
+  while (scanf("%d %d", &b, &n) && !(!b && !n))
   {
-    memset(aCnt, 0, sizeof(aCnt)), memset(bCnt, 0, sizeof(bCnt));
+    for (int i = 0; i < b; i ++) scanf("%d", &money[i]);
+
     for (int i = 0; i < n; i ++)
     {
-      scanf("%d", &a[i]);
-      aCnt[a[i]] ++;
-    }
-    for (int i = 0; i < m; i ++)
-    {
-      scanf("%d", &b[i]);
-      bCnt[b[i]] ++;
+      int d, c, v; scanf("%d %d %d", &d, &c, &v);
+      money[d - 1] -= v, money[c - 1] += v;
     }
 
-    int aa = 0, bb = 0;
-    for (int i = 1; i <= maxX; i ++)
-      aa += aCnt[i] && !bCnt[i], bb += bCnt[i] && !aCnt[i];
-    printf("%d\n", min(aa, bb));
+    bool can = true;
+    for (int i = 0; i < b; i ++)
+      if (money[i] < 0)
+        can = false;
+    printf("%c\n", can ? 'S' : 'N');
   }
   return(0);
 }
