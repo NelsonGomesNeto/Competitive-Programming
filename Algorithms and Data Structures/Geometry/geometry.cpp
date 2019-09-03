@@ -1,22 +1,18 @@
+const long double EPS = 1e-7;
+
 struct Point
 {
   double x, y;
-  double distance(Point &p)
-  {
-    return sqrt((x-p.x)*(x-p.x) + (y-p.y)*(y-p.y));
-  }
+  Point operator+(const Point &other) { return Point{x + other.x, y + other.y}; }
+  Point operator-(const Point &other) { return Point{x - other.x, y - other.y}; }
+  Point operator*(const long double a) { return Point{x * a, y * a}; }
+  long double operator*(const Point &other) { return x * other.x + y * other.y; }
+  long double distance(Point &p) { return sqrt((x-p.x)*(x-p.x) + (y-p.y)*(y-p.y)); }
+  long double cross(Point &other) { return x*other.y - y*other.x; }
   void normalize()
   {
     double norm = sqrt(x*x + y*y);
     x /= norm, y /= norm;
-  }
-  Point operator-(const Point &p)
-  {
-    return Point({x - p.x, y - p.y});
-  }
-  double operator*(const Point &p)
-  {
-    return x * p.x + y * p.y;
   }
   Point pointOfInterception(Point &p1, Point &p2)
   {
@@ -36,12 +32,46 @@ struct Point
     return Point({(1 - t) * p1.x + t * p2.x,
                   (1 - t) * p1.y + t * p2.y});
   }
-  void print()
-  {
-    // printf("%.4lf\n%.4lf\n", x, y);
-    printf("%.4lf %.4lf\n", x, y);
-  }
+  void print() { printf("%.4lf %.4lf\n", x, y); }
 };
+
+struct Circle
+{
+  Point center; long double radious;
+  bool contains(Point &p) { return center.distance(p) <= radious + EPS; }
+};
+
+Circle circumCircle(Point &a, Point &b, Point &c)
+{
+  Point u = Point{(b - a).y, (a - b).x};
+  Point v = Point{(c - a).y, (a - c).x};
+  Point n = (c - b) * 0.5;
+  long double t = u.cross(n) / v.cross(u);
+  Point center = ((a + c)*0.5) + v*t;
+  return Circle{center, center.distance(a)};
+}
+
+Circle minimumCircle(vector<Point> &p)
+{
+  random_shuffle(p.begin(), p.end());
+  Circle circle = Circle{p[0], 0};
+  for (int i = 0; i < p.size(); i ++)
+  {
+    if (circle.contains(p[i])) continue;
+    circle = Circle{p[i], 0};
+    for (int j = 0; j < i; j ++)
+    {
+      if (circle.contains(p[j])) continue;
+      circle = Circle{(p[j] + p[i])*0.5, p[j].distance(p[i])*0.5};
+      for (int k = 0; k < j; k ++)
+      {
+        if (circle.contains(p[k])) continue;
+        circle = circumCircle(p[j], p[i], p[k]);
+      }
+    }
+  }
+  return circle;
+}
 
 struct Segment
 {
