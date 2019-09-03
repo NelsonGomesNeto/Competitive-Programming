@@ -188,6 +188,7 @@
   * [Chladni Figure](https://codeforces.com/contest/1162/problem/D) (Interesting math problem (just test with all divisors))
   * [The LCMs Must be Large](https://codeforces.com/contest/1166/problem/E) (Amazing LCM problem, contradiction is the way)
   * [Couples](https://www.urionlinejudge.com.br/judge/en/problems/view/2939) (Interesting combinatorics problem, f(n) * n! * 2^n, the real problem is to find the function f)
+  * [Vampires](https://www.urionlinejudge.com.br/judge/en/problems/view/1093) (AWESOME, using Gambler's Ruin is very easy, but try to model as a Markov Chain)
 
 # Geometry
 * #### Problems
@@ -204,8 +205,6 @@
   * [Maximum Balanced Circle](https://codeforces.com/contest/1157/problem/F) (AWESOME, remeber that it's a circle (so it goes back and forth))
   * [Trabalho do Papa](https://neps.academy/problem/343) (Mind blowing greedy sorting to allow amazing DP; DO IT)
   * [Bicoloured RBS](https://codeforces.com/contest/1167/problem/D) (Very interesting parenthesis balancing problem, think simple)
-
-
 
 # Data Structures
 ## Trie
