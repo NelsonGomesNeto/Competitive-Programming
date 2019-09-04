@@ -25,26 +25,27 @@ vector<pair<int, int>> bridges;
 void dfs(int u, int prv)
 {
   visited[u] = true;
-  in[u] = low[u] = ++ t;
+  in[u] = low[u] = ++ t; int children = 0;
   for (auto v: graph[u])
     if (!visited[v])
     {
       tree[u].push_back(v);
       dfs(v, u);
       low[u] = min(low[u], low[v]);
-      if (low[v] > in[u]) bridges.push_back({u, v}), articulation[u] = articulation[v] = true;
+      if (low[v] > in[u]) bridges.push_back({u, v});
+      if (low[v] >= in[u] && prv != -1) articulation[u] = true;
+      children ++;
     }
     else if (v != prv) low[u] = min(low[u], in[v]);
+  if (prv == -1 && children > 1) articulation[u] = true;
 }
 void tarjan()
 {
   memset(visited, false, sizeof(visited));
+  memset(articulation, false, sizeof(articulation));
   for (int i = 0; i < n; i ++)
     if (!visited[i])
       dfs(i, -1);
-  for (int i = 0; i < n; i ++)
-    if (graph[i].size() <= 1)
-      articulation[i] = false;
 }
 
 int main()
@@ -52,7 +53,7 @@ int main()
   scanf("%d %d", &n, &m);
   for (int i = 0; i < m; i ++)
   {
-    int u, v; scanf("%d %d", &u, &v); u --, v --;
+    int u, v; scanf("%d %d", &u, &v); //u --, v --;
     graph[u].push_back(v); graph[v].push_back(u);
   }
   tarjan();
@@ -63,7 +64,7 @@ int main()
   printf("Articulation vertices:\n");
   for (int i = 0; i < n; i ++)
     if (articulation[i])
-      printf("\t%d\n", i + 1);
+      printf("\t%d\n", i);
   printf("Tree:\n");
   printGraph(tree, 0, 0);
   return(0);
