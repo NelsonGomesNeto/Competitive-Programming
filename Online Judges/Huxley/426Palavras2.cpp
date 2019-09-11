@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-const int maxN = 20, maxS = 40 + 1, maxRes = 40 + 1;
+const int maxN = 20, maxS = 40 + 1, maxRes = 20*40 + 1;
 int n1, n2;
 int size1[maxN], size2[maxN];
 char strings1[maxN][maxS], strings2[maxN][maxS];
