@@ -1,17 +1,29 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #define lli long long int
 #define DEBUG if(0)
 char expression[5] = "+-*e";
 
+char ans[1000][20]; int ansCnt;
+
 void printResult(char n[], char selected[])
 {
-  int i, j; printf("%c", n[0]);
+  int i, j; // printf("%c", n[0]);
+  char tmp[20]; int pos = 1;
+  tmp[0] = n[0];
   for (i = 1, j = 0; n[i]; i ++, j ++)
   {
-    if (selected[j] != 'e') printf("%c", selected[j]);
-    printf("%c", n[i]);
+    if (selected[j] != 'e')
+    {
+      // printf("%c", selected[j]);
+      tmp[pos ++] = selected[j];
+    }
+    // printf("%c", n[i]);
+    tmp[pos ++] = n[i];
   }
+  tmp[pos] = '\0';
+  strcpy(ans[ansCnt ++], tmp);
 }
 
 int countNumbers(char selected[])
@@ -86,7 +98,7 @@ lli calculateResult(char n[], char selected[])
   return(result);
 }
 
-int isFirst = 1, now = 0; char answer[100000][13];
+int isFirst = 1;
 
 void tryAll(char n[], char selected[], int i, lli target)
 {
@@ -96,7 +108,13 @@ void tryAll(char n[], char selected[], int i, lli target)
 
     lli result = calculateResult(n, selected);
     DEBUG printf("%lld\n\n", result);
-    if (result == target) strcpy(answer[now ++], selected);
+    if (result == target)
+    {
+      // if (isFirst) printf("[");
+      // if (!isFirst) printf(", ");
+      printResult(n, selected);
+      isFirst = 0;
+    }
     return;
   }
   int k;
@@ -105,6 +123,7 @@ void tryAll(char n[], char selected[], int i, lli target)
     selected[i] = expression[k];
     tryAll(n, selected, i + 1, target);
   }
+  // if (!i) printf("%s]\n", isFirst ? "[" : "\0");
 }
 
 int main()
@@ -113,11 +132,20 @@ int main()
   char selected[13] = "";
   tryAll(n, selected, 0, t);
 
-  printf("["); printResult(n, answer[0]);
-  int o; for (o = 1; o < now; o ++)
+  int i, j;
+  for (i = 0; i < ansCnt; i ++)
+    for (j = i + 1; j < ansCnt; j ++)
+      if (strcmp(ans[i], ans[j]) > 0)
+      {
+        char aux[20]; strcpy(aux, ans[i]);
+        strcpy(ans[i], ans[j]);
+        strcpy(ans[j], aux);
+      }
+  printf("[");
+  for (i = 0; i < ansCnt; i ++)
   {
-    printf(", ");
-    printResult(n, answer[o]);
+    if (i) printf(", ");
+    printf("%s", ans[i]);
   }
   printf("]\n");
 
