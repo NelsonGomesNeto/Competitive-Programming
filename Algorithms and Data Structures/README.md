@@ -168,6 +168,10 @@
   * [Moovie Mooving](http://www.usaco.org/index.php?page=viewproblem2&cpid=515) (Amazing bitmask dp problem)
   * [Guard Mark](http://www.usaco.org/index.php?page=viewproblem2&cpid=494) (Mind blowing bitmask dp + greedy problem)
 
+## Advanced Optimizations
+* #### Problems
+  * [Ciel and Gondolas](https://codeforces.com/contest/321/problem/E) (Very interesting Divide and Conquer optimization example)
+
 # Search
 * #### Problems
   * [12192 - Grapevine](https://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=3344) (Interesting lowerBound + upperBound)
