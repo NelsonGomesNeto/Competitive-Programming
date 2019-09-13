@@ -170,7 +170,9 @@
 
 ## Advanced Optimizations
 * #### Problems
-  * [Ciel and Gondolas](https://codeforces.com/contest/321/problem/E) (Very interesting Divide and Conquer optimization example)
+  * [Ciel and Gondolas](https://codeforces.com/contest/321/problem/E) (Very interesting Divide and Conquer DP optimization)
+  * [Guardians of the Lunatics](https://www.hackerrank.com/contests/ioi-2014-practice-contest-2/challenges/guardians-lunatics-ioi14/problem) (Very interesting easy case of Divide and Conquer DP optimization)
+  * [Branch Assignment](https://icpc.kattis.com/problems/branch) (AMAZING Divide and Conquer DP Optimization)
 
 # Search
 * #### Problems
