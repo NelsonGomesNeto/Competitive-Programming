@@ -170,9 +170,10 @@
 
 ## Advanced Optimizations
 * #### Problems
-  * [Ciel and Gondolas](https://codeforces.com/contest/321/problem/E) (Very interesting Divide and Conquer DP optimization)
+  * [Ciel and Gondolas](https://codeforces.com/contest/321/problem/E) (Very interesting Divide and Conquer DP optimization (USE FAST IO, read as char and convert to int))
   * [Guardians of the Lunatics](https://www.hackerrank.com/contests/ioi-2014-practice-contest-2/challenges/guardians-lunatics-ioi14/problem) (Very interesting easy case of Divide and Conquer DP optimization)
-  * [Branch Assignment](https://icpc.kattis.com/problems/branch) (AMAZING Divide and Conquer DP Optimization)
+  * [Branch Assignment](https://icpc.kattis.com/problems/branch) (AMAZING Divide and Conquer DP optimization)
+  * [Lannister Army](https://www.spoj.com/problems/LARMY/) (Interesting Divida and Conquer DP optimization (time limit is very strict, precalculate the getCost))
 
 # Search
 * #### Problems
