@@ -1,6 +1,18 @@
 import os
 
-lines = ["#include <bits/stdc++.h>", "#define lli long long int", "using namespace std;", "", "int main()", "{", "  ", "  return(0);", "}"]
+lines = [
+    "#include <bits/stdc++.h>",
+    "#define DEBUG if(0)\n"
+    "#define lli long long int",
+    "#define ldouble long double",
+    "using namespace std;",
+    "",
+    "int main()",
+    "{",
+    "  ",
+    "  return 0;",
+    "}"
+]
 
 folders = os.listdir()
 i = 0

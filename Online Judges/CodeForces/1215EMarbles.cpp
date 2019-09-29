@@ -1,5 +1,5 @@
 #include <bits/stdc++.h>
-#define DEBUG if(1)
+#define DEBUG if(0)
 #define lli long long int
 #define ldouble long double
 using namespace std;
@@ -24,7 +24,7 @@ using namespace std;
 
 const int maxN = 4e5, maxA = 20; int n;
 const lli inf = LLONG_MAX;
-int a[maxN], cnt[maxN]
+int a[maxN], cnt[maxN];
 lli cost[maxA][maxA], memo[1 << maxA];
 
 int main()
