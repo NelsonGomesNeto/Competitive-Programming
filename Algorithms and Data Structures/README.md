@@ -120,6 +120,7 @@
   * [Optical Fiber](https://www.urionlinejudge.com.br/judge/en/problems/view/2941) (Interesting MST problem)
   * [Mania de Par](https://www.urionlinejudge.com.br/judge/en/problems/view/1931) (Remember, Dijkstra is a DP algorithm)
   * [Distruibição de Camisas](https://thehuxley.com/problem/676) (Very interesting Floyd-Warshall + all permutations problems)
+  * [Greg and Graph](https://codeforces.com/contest/295/problem/B) (MIND BLOWING Floyd-Warhsall problem, adding vertices while running Floyd, same complexity)
   * [HackerEarth ShortestPath](https://www.hackerearth.com/pt-br/practice/algorithms/graphs/shortest-path-algorithms/practice-problems/?sort_by=solved) (There are some interesting problems ^~^)
 
 # Dynamic Programming (DP)
@@ -150,6 +151,9 @@
   * [679 - Dropping Balls](https://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=620) (Very interesting)
   * [Gargari and Bishops](https://codeforces.com/contest/463/problem/C) (Amazing precalculation problem, think of an 1D way to represent the diagonals)
   * [Go--](https://www.urionlinejudge.com.br/judge/en/problems/view/2241) (Awesome accumulated sum problem, n³ is pretty easy, but try to improve it to n² (the idea is slightly different though))
+  * [Greg and Array](https://codeforces.com/contest/295/problem/A) (AWESOME accumulated sum problem and in-out problem)
+  * [Counting Rectangles is Fun](https://codeforces.com/problemset/problem/372/B) (MIND BLOWING accumulated sum problem, 4D WOW, I recommed to optimize to O(n²m² + q))
+  * [Interesting Array](https://codeforces.com/contest/482/problem/B) (Nice in-out problem, in-out to build the array and segtree to verify)
 
 ## Knapsack
 * #### Problems
