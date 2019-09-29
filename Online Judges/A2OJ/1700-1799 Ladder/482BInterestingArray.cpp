@@ -3,6 +3,19 @@
 #define lli long long int
 using namespace std;
 
+/* Tutorial:
+  For each bit, iterate through the queries:
+    if (q[j] requires i-th bit):
+      in[q[j].lo] ++, out[q[j].hi] ++
+    now = 0
+    for j in [0, n - 1]
+      now += in[j]
+      ans[j] = now > 0 ? 1 << i : 0
+      now -= out[j]
+  If it's possible, ans holds the answer
+  To test if it's valid: build a segtree and test each query
+*/
+
 const int maxN = 1e5, maxBit = 30; int n, m;
 const lli allSet = (1 << 30) - 1;
 int constraints[maxN][3];
