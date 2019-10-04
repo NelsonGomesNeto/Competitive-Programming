@@ -172,6 +172,7 @@
 * #### Problems
   * [Moovie Mooving](http://www.usaco.org/index.php?page=viewproblem2&cpid=515) (Amazing bitmask dp problem)
   * [Guard Mark](http://www.usaco.org/index.php?page=viewproblem2&cpid=494) (Mind blowing bitmask dp + greedy problem)
+  * [Yet Another Substring Reverse](https://codeforces.com/contest/1234/problem/F) (AWESOME bitmask dp)
 
 ## Advanced Optimizations
 * #### Problems
