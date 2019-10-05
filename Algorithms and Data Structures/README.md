@@ -155,6 +155,7 @@
   * [Counting Rectangles is Fun](https://codeforces.com/problemset/problem/372/B) (MIND BLOWING accumulated sum problem, 4D WOW, I recommed to optimize to O(n²m² + q))
   * [Interesting Array](https://codeforces.com/contest/482/problem/B) (Nice in-out problem, in-out to build the array and segtree to verify)
   * [Wi-Fi](https://codeforces.com/contest/1216/problem/F) (Awesome bottom-up problem, precalculate the nearest router on the right and choose)
+  * [Dima and Hares](https://codeforces.com/contest/1118/problem/B) (Easy interesting accumulated sum problem)
 
 ## Knapsack
 * #### Problems
