@@ -127,6 +127,7 @@
 ## Longest Common Sequence (LCS)
 * #### Problems:
   * [531 - Compromise](https://uva.onlinejudge.org/index.php?option=onlinejudge&page=show_problem&problem=472) (Pure, but needs retrieval)
+  * [Greenhouse Effect](https://codeforces.com/contest/269/problem/B) (Very interesting unexpected LCS)
 
 ## Longest Incresing Sequence (LIS)
 * #### Problems:
@@ -155,13 +156,15 @@
   * [Counting Rectangles is Fun](https://codeforces.com/problemset/problem/372/B) (MIND BLOWING accumulated sum problem, 4D WOW, I recommed to optimize to O(n²m² + q))
   * [Interesting Array](https://codeforces.com/contest/482/problem/B) (Nice in-out problem, in-out to build the array and segtree to verify)
   * [Wi-Fi](https://codeforces.com/contest/1216/problem/F) (Awesome bottom-up problem, precalculate the nearest router on the right and choose)
-  * [Dima and Hares](https://codeforces.com/contest/1118/problem/B) (Easy interesting accumulated sum problem)
+  * [Tanya and Candies](https://codeforces.com/contest/1118/problem/B) (Easy interesting accumulated sum problem)
+  * [The Brand New Function](https://codeforces.com/contest/243/problem/A) ("accumulated max position", quite interesting)
 
 ## Knapsack
 * #### Problems
   * [Shovels Shop](https://codeforces.com/contest/1154/problem/F) (Mind blowing knapsack problem)
   * [Beautiful Array](https://codeforces.com/contest/1155/problem/D) (Very beautiful knapsack problem)
   * [Neko and Aki's Prank](https://codeforces.com/contest/1152/problem/D) (Interesting knapsack using parenthesis balancement idea)
+  * [Dima and Hares](https://codeforces.com/contest/358/problem/D) (Interesting knapsack where information is needed in the next steps)
 
 ## Tree
 * #### Problems
