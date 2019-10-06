@@ -223,6 +223,7 @@
   * [Maximum Balanced Circle](https://codeforces.com/contest/1157/problem/F) (AWESOME, remeber that it's a circle (so it goes back and forth))
   * [Trabalho do Papa](https://neps.academy/problem/343) (Mind blowing greedy sorting to allow amazing DP; DO IT)
   * [Bicoloured RBS](https://codeforces.com/contest/1167/problem/D) (Very interesting parenthesis balancing problem, think simple)
+  * [Almost Arithmetical Progression](https://codeforces.com/contest/255/problem/C) (Amazing greedy, strongly recommended due to interesting implementation tricks)
 
 # Data Structures
 ## Trie
