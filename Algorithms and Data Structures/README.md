@@ -171,6 +171,7 @@
   * [Valera and Elections](https://codeforces.com/contest/369/problem/C) (Easy but beautiful DP on Tree)
   * [Distance in Tree](https://codeforces.com/problemset/problem/161/D) (Awesome DP on Tree)
   * [Serval and Rooted Tree](https://codeforces.com/contest/1153/problem/D) (Very interesting use of recursion (no DP actually needed))
+  * [Paint the Tree](https://codeforces.com/contest/1241/problem/E) (NICE DP on Tree, sorting needed to choose the k best choices)
 
 ## Bitmask
 * #### Problems
@@ -193,6 +194,7 @@
   * [Multiplication Table](https://codeforces.com/contest/448/problem/D) (Amazing binary search + math)
   * [Increasing by Modulo](https://codeforces.com/contest/1169/problem/C) (Very interesting binary search + math)
   * [Born This Way](https://codeforces.com/contest/1148/problem/B) (Interesting easy binary search problem, I like to use my own lower bound)
+  * [Save the Nature](https://codeforces.com/contest/1241/problem/C) (Awesome binary search for guessing the answer and greedy testing)
 
 # Math
 * #### Problems
