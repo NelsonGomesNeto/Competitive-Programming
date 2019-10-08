@@ -209,6 +209,8 @@
   * [The LCMs Must be Large](https://codeforces.com/contest/1166/problem/E) (Amazing LCM problem, contradiction is the way)
   * [Couples](https://www.urionlinejudge.com.br/judge/en/problems/view/2939) (Interesting combinatorics problem, f(n) * n! * 2^n, the real problem is to find the function f)
   * [Vampires](https://www.urionlinejudge.com.br/judge/en/problems/view/1093) (AWESOME, using Gambler's Ruin is very easy, but try to model as a Markov Chain)
+  * [Petya and Divisors](https://codeforces.com/problemset/problem/111/B) (Nice, divisibility problem; don't bother about prime numbers; answer the query and update something ;))
+  * [Matrix](https://codeforces.com/contest/364/problem/A) (NICE, try to factor the sum into the multiplication of two parts)
 
 # Geometry
 * #### Problems
