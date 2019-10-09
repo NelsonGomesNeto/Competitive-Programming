@@ -211,6 +211,7 @@
   * [Vampires](https://www.urionlinejudge.com.br/judge/en/problems/view/1093) (AWESOME, using Gambler's Ruin is very easy, but try to model as a Markov Chain)
   * [Petya and Divisors](https://codeforces.com/problemset/problem/111/B) (Nice, divisibility problem; don't bother about prime numbers; answer the query and update something ;))
   * [Matrix](https://codeforces.com/contest/364/problem/A) (NICE, try to factor the sum into the multiplication of two parts)
+  * [Good Sequences](https://codeforces.com/contest/264/problem/B) (AWESOME, Number Theory + DP problem)
 
 # Geometry
 * #### Problems
@@ -247,3 +248,4 @@
 # Etc
 * #### Problems
   * [Balé](http://olimpiada.ic.unicamp.br/pratique/p1/2011/f2/bale/) (Easy inversion count problem)
+  * [Little Elephant and Cards](https://codeforces.com/problemset/problem/204/B) (Interesting easy map problem, can be done using coordinate compression)
