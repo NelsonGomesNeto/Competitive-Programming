@@ -158,6 +158,7 @@
   * [Wi-Fi](https://codeforces.com/contest/1216/problem/F) (Awesome bottom-up problem, precalculate the nearest router on the right and choose)
   * [Tanya and Candies](https://codeforces.com/contest/1118/problem/B) (Easy interesting accumulated sum problem)
   * [The Brand New Function](https://codeforces.com/contest/243/problem/A) ("accumulated max position", quite interesting)
+  * [Mike and Feet](https://codeforces.com/contest/547/problem/B) (Amazing subproblem: max(j), where a(j) > a(i) and j < i; can be done with stack or dp; NICE)
 
 ## Knapsack
 * #### Problems
