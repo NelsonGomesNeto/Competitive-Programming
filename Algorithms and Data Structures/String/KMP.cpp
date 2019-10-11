@@ -12,8 +12,7 @@ void preProcess(char subStr[])
   for (int i = 0, j = -1; subStr[i];)
   {
     while (j >= 0 && subStr[i] != subStr[j]) j = backTable[j];
-    i ++, j ++;
-    backTable[i] = j;
+    backTable[++ i] = ++ j;
   }
 }
 vector<int> kmpSearch(char str[], char subStr[])

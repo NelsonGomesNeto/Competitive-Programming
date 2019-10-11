@@ -1,5 +1,5 @@
 #include <bits/stdc++.h>
-#define DEBUG if(1)
+#define DEBUG if(0)
 #define lli long long int
 #define ldouble long double
 using namespace std;
@@ -19,7 +19,7 @@ void prefixFunction(char str[])
   }
 
   DEBUG {
-    printf("%s\n", str); int end = min(2000, (int)strlen(str));
+    printf("%s\n", str); int end = min(1000, (int)strlen(str));
     for (int i = 0; i < end; i ++) printf("%3d%c", i, i < end - 1 ? ' ' : '\n');
     for (int i = 0; i < end; i ++) printf("%3d%c", biggestPrefix[i], i < end - 1 ? ' ' : '\n');
   }
