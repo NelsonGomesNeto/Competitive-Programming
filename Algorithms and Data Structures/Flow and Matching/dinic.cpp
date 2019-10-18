@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 const int maxVertices = 1e5;
-int source, target, inf = 1e8, vertices;
+int source, sink, inf = 1e8, vertices;
 int level[maxVertices], ptr[maxVertices];
 queue<int> q;
 
@@ -23,12 +23,12 @@ int bfs()
       if (e.flow && level[e.to] == -1)
         q.push(e.to), level[e.to] = level[u] + 1;
   }
-  return(level[target] != -1);
+  return(level[sink] != -1);
 }
 
 int dfs(int u, int flow)
 {
-  if (u == target || !flow) return(flow);
+  if (u == sink || !flow) return(flow);
   for (int &p = ptr[u]; p < graph[u].size(); p ++)
   {
     Edge &e = graph[u][p];
@@ -57,7 +57,7 @@ int dinic()
 int main()
 {
   int n, m; scanf("%d %d", &n, &m); vertices = n;
-  source = 0, target = n - 1;
+  source = 0, sink = n - 1;
 
   int u, v, f;
   for (int i = 0; i < m; i ++)

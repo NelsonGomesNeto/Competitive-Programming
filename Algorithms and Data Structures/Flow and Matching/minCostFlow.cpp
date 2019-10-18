@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 const int maxVertices = 1e5;
-int source, target, vertices, inf = 1e7;
+int source, sink, vertices, inf = 1e7;
 int cost[maxVertices], prevVertex[maxVertices], prevEdge[maxVertices], minFlow[maxVertices];
 int inqueue[maxVertices]; // needed for SPFA
 int potentials[maxVertices], visited[maxVertices]; // needed for Dijkstra with Potentials
@@ -18,8 +18,8 @@ void addEdge(int u, int v, int f, int c)
 }
 void printGraph()
 {
-  printf("\ncost: %3d\n", cost[target]);
-  for (int v = target, totalCost = 0; v != source; v = prevVertex[v])
+  printf("\ncost: %3d\n", cost[sink]);
+  for (int v = sink, totalCost = 0; v != source; v = prevVertex[v])
   {
     totalCost += graph[prevVertex[v]][prevEdge[v]].cost;
     printf("%d%s", v, prevVertex[v] != source ? " <- " : " <- 0");
@@ -54,7 +54,7 @@ bool SPFA()
       }
     }
   }
-  return(cost[target] != inf);
+  return(cost[sink] != inf);
 }
 
 bool dijkstraWithPotentials()
@@ -81,7 +81,7 @@ bool dijkstraWithPotentials()
     }
   }
   for (int i = 0; i < vertices; i ++) potentials[i] += cost[i];
-  return(cost[target] != inf);
+  return(cost[sink] != inf);
 }
 
 bool bellmanFord()
@@ -104,7 +104,7 @@ bool bellmanFord()
       }
     if (!done) break;
   }
-  return(cost[target] != inf);
+  return(cost[sink] != inf);
 }
 
 pair<int, int> minCostFlow()
@@ -113,9 +113,9 @@ pair<int, int> minCostFlow()
   int minCost = 0, totalFlow = 0;
   while (dijkstraWithPotentials())
   {
-    int flow = minFlow[target];
+    int flow = minFlow[sink];
     totalFlow += flow;
-    for (int v = target; v != source; v = prevVertex[v])
+    for (int v = sink; v != source; v = prevVertex[v])
     {
       Edge &e = graph[prevVertex[v]][prevEdge[v]];
       e.flow -= flow;
@@ -129,7 +129,7 @@ pair<int, int> minCostFlow()
 int main()
 {
   int n, m; scanf("%d %d", &n, &m); vertices = n;
-  source = 0, target = n - 1;
+  source = 0, sink = n - 1;
 
   int u, v, f, c;
   for (int i = 0; i < m; i ++)
