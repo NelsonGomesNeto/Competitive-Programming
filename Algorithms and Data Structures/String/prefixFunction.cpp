@@ -1,34 +1,31 @@
 #include <bits/stdc++.h>
-#define DEBUG if(0)
+#define DEBUG if(1)
 #define lli long long int
 #define ldouble long double
 using namespace std;
 
-const int maxN = 1e6 + 1;
+const int maxN = 1e6 + 1; int n;
 char s[maxN];
 
-int biggestPrefix[maxN];
-void prefixFunction(char str[])
+int pi[maxN];
+void prefixFunction(char str[], int strSize)
 {
-  biggestPrefix[0] = 0;
-  for (int i = 1; str[i]; i ++)
+  pi[0] = -1;
+  for (int i = 0, j = -1; i < strSize;)
   {
-    int j = biggestPrefix[i - 1];
-    while (j > 0 && str[i] != str[j]) j = biggestPrefix[j - 1];
-    biggestPrefix[i] = j + (str[i] == str[j]);
-  }
-
-  DEBUG {
-    printf("%s\n", str); int end = min(1000, (int)strlen(str));
-    for (int i = 0; i < end; i ++) printf("%3d%c", i, i < end - 1 ? ' ' : '\n');
-    for (int i = 0; i < end; i ++) printf("%3d%c", biggestPrefix[i], i < end - 1 ? ' ' : '\n');
+    while (j >= 0 && str[i] != str[j]) j = pi[j];
+    pi[++ i] = ++ j;
   }
 }
 
 int main()
 {
   scanf("%s", s);
-  prefixFunction(s);
+  n = strlen(s);
+  prefixFunction(s, n);
+  printf("%s\n", s);
+  for (int i = 0; i <= n; i ++) printf("%3d%c", i, i < n ? ' ' : '\n');
+  for (int i = 0; i <= n; i ++) printf("%3d%c", pi[i], i < n ? ' ' : '\n');
 
   return 0;
 }

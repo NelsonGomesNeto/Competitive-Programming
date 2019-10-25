@@ -249,7 +249,9 @@
 
 # String
 * #### Problems
+  * [Pattern Find](https://www.spoj.com/problems/NAJPF/) (Straightforward KMP problem)
   * [Password](https://codeforces.com/contest/126/problem/B) (Interesting prefix function problem)
+  * [MUH and Cube Walls](https://codeforces.com/problemset/problem/471/D) (Interesting easy KMP problem)
 
 # Etc
 * #### Problems

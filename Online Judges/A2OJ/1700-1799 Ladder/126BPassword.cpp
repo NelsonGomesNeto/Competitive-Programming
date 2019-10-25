@@ -8,15 +8,14 @@ const int maxN = 1e6 + 2; int n, leftLimit, rightLimit;
 char s[maxN];
 bool has[maxN];
 
-int biggestPrefix[maxN];
-void prefixFunction(char str[])
+int pi[maxN];
+void prefixFunction(char str[], int strSize)
 {
-  biggestPrefix[0] = 0;
-  for (int i = 1; str[i]; i ++)
+  pi[0] = -1;
+  for (int i = 0, j = -1; i < strSize;)
   {
-    int j = biggestPrefix[i - 1];
-    while (j > 0 && str[i] != str[j]) j = biggestPrefix[j - 1];
-    biggestPrefix[i] = j + (str[i] == str[j]);
+    while (j >= 0 && str[i] != str[j]) j = pi[j];
+    pi[++ i] = ++ j;
   }
 }
 
@@ -27,14 +26,14 @@ int main()
     getchar();
     n = strlen(s);
 
-    prefixFunction(s);
+    prefixFunction(s, n);
     memset(has, false, sizeof(has));
     for (int i = 1; i < n - 1; i ++)
-      has[biggestPrefix[i]] = true;
+      has[pi[i + 1]] = true;
 
-    int k = biggestPrefix[n - 1];
+    int k = pi[n];
     if (k && !has[k])
-      k = biggestPrefix[k - 1];
+      k = pi[k];
 
     if (k == 0) printf("Just a legend\n");
     else
