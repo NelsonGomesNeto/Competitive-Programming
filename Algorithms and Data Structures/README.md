@@ -174,6 +174,7 @@
   * [Distance in Tree](https://codeforces.com/problemset/problem/161/D) (Awesome DP on Tree)
   * [Serval and Rooted Tree](https://codeforces.com/contest/1153/problem/D) (Very interesting use of recursion (no DP actually needed))
   * [Paint the Tree](https://codeforces.com/contest/1241/problem/E) (NICE DP on Tree, sorting needed to choose the k best choices)
+  * [Appleman and Tree](https://codeforces.com/problemset/problem/461/B) (Amazing DP on Tree, also count the number of *valid* ways with 0 black vertices and use that to count the number of ways with 1 black vertices)
 
 ## Bitmask
 * #### Problems
