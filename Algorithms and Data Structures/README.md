@@ -218,6 +218,7 @@
   * [Petya and Divisors](https://codeforces.com/problemset/problem/111/B) (Nice, divisibility problem; don't bother about prime numbers; answer the query and update something ;))
   * [Matrix](https://codeforces.com/contest/364/problem/A) (NICE, try to factor the sum into the multiplication of two parts)
   * [Good Sequences](https://codeforces.com/contest/264/problem/B) (AWESOME, Number Theory + DP problem)
+  * [Soldier and Number Game](https://codeforces.com/problemset/problem/546/D) (Requires a *very* optimized primeFactorization, do it while constructing the sieve)
 
 # Geometry
 * #### Problems
