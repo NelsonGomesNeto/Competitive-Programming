@@ -199,6 +199,7 @@
   * [Born This Way](https://codeforces.com/contest/1148/problem/B) (Interesting easy binary search problem, I like to use my own lower bound)
   * [Save the Nature](https://codeforces.com/contest/1241/problem/C) (Awesome binary search for guessing the answer and greedy testing)
   * [Minimizing Difference](https://codeforces.com/contest/1244/problem/E) (AWESOME ternary search inside binary search)
+  * [Gluttony](https://atcoder.jp/contests/abc144/tasks/abc144_e) (Interesting easy binary search + greedy problem)
 
 # Math
 * #### Problems
