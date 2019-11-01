@@ -122,6 +122,7 @@
   * [Mania de Par](https://www.urionlinejudge.com.br/judge/en/problems/view/1931) (Remember, Dijkstra is a DP algorithm)
   * [Distruibição de Camisas](https://thehuxley.com/problem/676) (Very interesting Floyd-Warshall + all permutations problems)
   * [Greg and Graph](https://codeforces.com/contest/295/problem/B) (MIND BLOWING Floyd-Warhsall problem, adding vertices while running Floyd, same complexity)
+  * [Missile Silos](https://codeforces.com/problemset/problem/144/D) (Very interesting Dijkstra problem, remember that missiles are place only at the shortest distant positions)
   * [HackerEarth ShortestPath](https://www.hackerearth.com/pt-br/practice/algorithms/graphs/shortest-path-algorithms/practice-problems/?sort_by=solved) (There are some interesting problems ^~^)
 
 # Dynamic Programming (DP)
