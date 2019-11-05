@@ -144,9 +144,10 @@
 * #### Problems
   * [10755 - Garbage Heap](https://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=1696) (Maximum subarray sum, easy to think: O(n^6), mind blowing accSum: O(n^5); both pass very easily though)
 
-## Digit DP
+## Digit-DP
 * #### Problems
   * [Enigma](https://www.urionlinejudge.com.br/judge/en/problems/view/2699) (Pure + mod of bigInteger)
+  * [Daniel and Spring Cleaning](https://codeforces.com/contest/1245/problem/F) (Very interesting digit-DP using binary representation)
 
 ## Precalculation
 * #### Problems
