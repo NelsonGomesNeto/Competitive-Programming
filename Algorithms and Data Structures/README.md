@@ -177,13 +177,17 @@
   * [Serval and Rooted Tree](https://codeforces.com/contest/1153/problem/D) (Very interesting use of recursion (no DP actually needed))
   * [Paint the Tree](https://codeforces.com/contest/1241/problem/E) (NICE DP on Tree, sorting needed to choose the k best choices)
   * [Appleman and Tree](https://codeforces.com/problemset/problem/461/B) (Amazing DP on Tree, also count the number of *valid* ways with 0 black vertices and use that to count the number of ways with 1 black vertices)
-  * [Fork in the Road](https://atcoder.jp/contests/abc144/tasks/abc144_f) (Awesome Expected Value problem, dp on the expected value then test for each vertex (removing a sigle edge))
 
 ## Bitmask
 * #### Problems
   * [Moovie Mooving](http://www.usaco.org/index.php?page=viewproblem2&cpid=515) (Amazing bitmask dp problem)
   * [Guard Mark](http://www.usaco.org/index.php?page=viewproblem2&cpid=494) (Mind blowing bitmask dp + greedy problem)
   * [Yet Another Substring Reverse](https://codeforces.com/contest/1234/problem/F) (AWESOME bitmask dp)
+
+## Expected Value
+* #### Problems
+  * [Fork in the Road](https://atcoder.jp/contests/abc144/tasks/abc144_f) (Awesome Expected Value problem, dp on the expected value then test for each vertex (removing a sigle edge))
+  * [Hyakugoku and Ladders](https://codeforces.com/contest/1245/problem/E) (AMAZING expected value problem, moving until the end is straightforward and you can emulate the end)
 
 ## Advanced Optimizations
 * #### Problems
