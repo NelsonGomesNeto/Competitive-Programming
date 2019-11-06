@@ -169,6 +169,7 @@
   * [Beautiful Array](https://codeforces.com/contest/1155/problem/D) (Very beautiful knapsack problem)
   * [Neko and Aki's Prank](https://codeforces.com/contest/1152/problem/D) (Interesting knapsack using parenthesis balancement idea)
   * [Dima and Hares](https://codeforces.com/contest/358/problem/D) (Interesting knapsack where information is needed in the next steps)
+  * [Yet Another Division Into Teams](https://codeforces.com/contest/1256/problem/E) (Very interesting problem, notice that teams may have size 3, 4 or 5 only)
 
 ## Tree
 * #### Problems
