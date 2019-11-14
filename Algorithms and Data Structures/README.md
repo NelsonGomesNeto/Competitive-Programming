@@ -226,6 +226,7 @@
   * [Matrix](https://codeforces.com/contest/364/problem/A) (NICE, try to factor the sum into the multiplication of two parts)
   * [Good Sequences](https://codeforces.com/contest/264/problem/B) (AWESOME, Number Theory + DP problem)
   * [Soldier and Number Game](https://codeforces.com/problemset/problem/546/D) (Requires a *very* optimized primeFactorization, do it while constructing the sieve)
+  * [Fedya and Maths](https://codeforces.com/contest/456/problem/B) (Very interesting number theory problem, decompose the exponentials)
 
 # Geometry
 * #### Problems
