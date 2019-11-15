@@ -272,6 +272,7 @@
   * [Pattern Find](https://www.spoj.com/problems/NAJPF/) (Straightforward KMP problem)
   * [Password](https://codeforces.com/contest/126/problem/B) (Interesting prefix function problem)
   * [MUH and Cube Walls](https://codeforces.com/problemset/problem/471/D) (Interesting easy KMP problem)
+  * [Gluing Pictures](https://matcomgrader.com/problem/9641/gluing-pictures/) (Awesome Suffix Array problem, beautiful binary search (Suffix Automaton and Suffix Tree may be more direct))
 
 # Etc
 * #### Problems
