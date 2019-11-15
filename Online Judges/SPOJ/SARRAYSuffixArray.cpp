@@ -4,7 +4,7 @@
 #define ldouble long double
 using namespace std;
 
-const int maxN = 1e6; int n;
+const int maxN = 1e5; int n;
 char s[maxN + 1];
 
 const int alphabet = 256;
@@ -65,10 +65,11 @@ vector<int> buildSuffixArray(string str)
 int main()
 {
   scanf("%s", s);
-  vector<int> sa = buildSuffixArray(string(s));
+  n = strlen(s);
 
-  // for (int i = 0; i < sa.size(); i ++)
-  //   printf("%d %s\n", sa[i], s+sa[i]);
+  vector<int> sa = buildSuffixArray(string(s));
+  for (int i: sa)
+    printf("%d\n", i);
 
   return 0;
 }
