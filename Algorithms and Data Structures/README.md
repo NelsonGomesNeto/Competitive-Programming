@@ -200,6 +200,7 @@
   * [Guardians of the Lunatics](https://www.hackerrank.com/contests/ioi-2014-practice-contest-2/challenges/guardians-lunatics-ioi14/problem) (Very interesting easy case of Divide and Conquer DP optimization)
   * [Branch Assignment](https://icpc.kattis.com/problems/branch) (AMAZING Divide and Conquer DP optimization)
   * [Lannister Army](https://www.spoj.com/problems/LARMY/) (Interesting Divide and Conquer DP optimization (time limit is very strict, precalculate the getCost))
+  * [Make Them Similar](https://codeforces.com/contest/1257/problem/F) (Very interesting Meet In The Middle problem, also need to normalize)
 
 # Search
 * #### Problems
