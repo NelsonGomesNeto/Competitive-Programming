@@ -233,6 +233,7 @@
   * [Good Sequences](https://codeforces.com/contest/264/problem/B) (AWESOME, Number Theory + DP problem)
   * [Soldier and Number Game](https://codeforces.com/problemset/problem/546/D) (Requires a *very* optimized primeFactorization, do it while constructing the sieve)
   * [Fedya and Maths](https://codeforces.com/contest/456/problem/B) (Very interesting number theory problem, decompose the exponentials)
+  * [Sereja and the Arrangement of Numbers](https://codeforces.com/contest/367/problem/C) (Amazing problem to remind Eulerian Cycle and Eulerian Path)
 
 # Geometry
 * #### Problems
