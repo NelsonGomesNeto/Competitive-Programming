@@ -43,6 +43,7 @@
   * [Marathon](http://www.usaco.org/index.php?page=viewproblem2&cpid=495) (MIND BLOWING, store: full, cutLeft, cutMid, cutRight, lo, hi; and merge stuff)
   * [Kaori, Asuna e Kirito](https://thehuxley.com/problem/1857) (AMAZING, segment tree's node is a array 32 ints)
   * [Culture Code](https://codeforces.com/contest/1197/problem/E) (Interesting use of segment tree to apply a greedy strategy)
+  * [Enemy is weak](https://codeforces.com/problemset/problem/61/E) (MIND BLOWING inversion count problem)
 
 ## Segment Tree with Lazy Propagation :star:
 * #### Problems
