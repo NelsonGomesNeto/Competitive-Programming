@@ -131,6 +131,7 @@
 * #### Problems
   * [Ciel the Commander](https://codeforces.com/problemset/problem/321/C) (Pure Centroid Decomposition)
   * [Xenia and Tree](https://codeforces.com/contest/342/problem/E) (Mind blowing Centroid Decomposition + LCA problem)
+  * [Query on a tree V](https://www.spoj.com/problems/QTREE5/) (Same as above, but with harder update)
 
 # Dynamic Programming (DP)
 ## Longest Common Sequence (LCS)
