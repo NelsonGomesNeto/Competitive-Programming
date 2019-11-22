@@ -120,7 +120,7 @@
   * [The perfect XOR](https://www.hackerearth.com/pt-br/practice/algorithms/graphs/articulation-points-and-bridges/practice-problems/algorithm/question-5-34/) (Very interesting tarjan (articulation points) problem)
   * [Optical Fiber](https://www.urionlinejudge.com.br/judge/en/problems/view/2941) (Interesting MST problem)
   * [Mania de Par](https://www.urionlinejudge.com.br/judge/en/problems/view/1931) (Remember, Dijkstra is a DP algorithm)
-  * [Distruibição de Camisas](https://thehuxley.com/problem/676) (Very interesting Floyd-Warshall + all permutations problems)
+  * [Distruibição de Camisas](https://thehuxley.com/problem/676) (Very interesting Floyd-Warshall + all permutations problems; can also be done with all bitmasks + MST (BEAUTIFUL))
   * [Greg and Graph](https://codeforces.com/contest/295/problem/B) (MIND BLOWING Floyd-Warhsall problem, adding vertices while running Floyd, same complexity)
   * [Missile Silos](https://codeforces.com/problemset/problem/144/D) (Very interesting Dijkstra problem, remember that missiles are place only at the shortest distant positions)
   * [Book of Evil](https://codeforces.com/contest/337/problem/D) (Awesome bfs problem, find diameter and run BFS on vertices from diameter path)
