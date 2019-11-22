@@ -99,6 +99,7 @@
   * [Company](https://codeforces.com/contest/1062/problem/E) (MIND BLOWING "in and out" + LCA problem, look for the border vertices)
 
 # Graph
+## Shortest Path, MST, Traversal, Topological Sort, ...
 * #### Problems
   * [Shipping](https://thehuxley.com/problem/1997) (Very pure Dijkstra)
   * [Zak Galou](https://www.urionlinejudge.com.br/judge/pt/problems/view/1409) (Coin change DP + Dijkstra)
@@ -125,6 +126,10 @@
   * [Missile Silos](https://codeforces.com/problemset/problem/144/D) (Very interesting Dijkstra problem, remember that missiles are place only at the shortest distant positions)
   * [Book of Evil](https://codeforces.com/contest/337/problem/D) (Awesome bfs problem, find diameter and run BFS on vertices from diameter path)
   * [HackerEarth ShortestPath](https://www.hackerearth.com/pt-br/practice/algorithms/graphs/shortest-path-algorithms/practice-problems/?sort_by=solved) (There are some interesting problems ^~^)
+
+## Centroid Decomposition
+* #### Problems
+  * [Ciel the Commander](https://codeforces.com/problemset/problem/321/C) (Pure Centroid Decomposition)
 
 # Dynamic Programming (DP)
 ## Longest Common Sequence (LCS)
