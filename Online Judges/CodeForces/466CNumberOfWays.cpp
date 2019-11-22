@@ -1,55 +1,44 @@
 #include <bits/stdc++.h>
-#define DEBUG if(0)
+#define DEBUG if(1)
 #define lli long long int
+#define ldouble long double
+using namespace std;
 
-void printArray(lli a[], int size)
-{
-  for (int i = 0; i < size; i ++)
-    printf("%lld ", a[i]);
-  printf("\n");
-}
+const int maxN = 5e5; int n;
+lli a[maxN]; int r[maxN];
 
 int main()
 {
-  int n; scanf("%d", &n);
-  lli a[n], s = 0;
-  for (int i = 0; i < n; i ++)
+  while (scanf("%d", &n) != EOF)
   {
-    scanf("%lld", &a[i]);
-    s += a[i];
-  }
-  DEBUG printArray(a, n);
-
-  if (s % 3)
-    printf("0\n");
-  else
-  {
-    lli ways = 0; lli sum = s / 3;
-    DEBUG printf("Target sum: %lld\n", sum);
-
-    lli ap[n]; memset(ap, 0, sizeof(ap));
-    s = a[0]; ap[0] = a[0] == sum;
-    for (int i = 1; i < n - 2; i ++)
+    lli s = 0;
+    for (int i = 0; i < n; i ++)
     {
+      scanf("%lld", &a[i]);
       s += a[i];
-      ap[i] = (s == sum);
     }
-    DEBUG printArray(ap, n);
 
-    lli cp[n]; memset(cp, 0, sizeof(cp));
-    s = a[n - 1]; cp[n - 1] = a[n - 1] == sum;
-    for (int i = n - 2; i > 1; i --)
+    if (s % 3LL != 0)
+      printf("0\n");
+    else
     {
-      s += a[i];
-      cp[i] = cp[i + 1] + (s == sum);
+      lli c = 0;
+      for (int i = n - 1; i >= 0; i --)
+      {
+        c += a[i];
+        r[i] = (i < n - 1 ? r[i + 1] : 0) + (c == s / 3LL);
+      }
+
+      lli ans = 0;
+      c = a[0];
+      for (int i = 1; i < n - 1; i ++)
+      {
+        if (c == s / 3LL)
+          ans += r[i + 1];
+        c += a[i];
+      }
+      printf("%lld\n", ans);
     }
-    DEBUG printArray(cp, n);
-
-    lli total = 0;
-    for (int i = 0; i < n - 2; i ++)
-      if (ap[i]) total += cp[i + 2];
-    printf("%lld\n", total);
   }
-
-  return(0);
+  return 0;
 }
