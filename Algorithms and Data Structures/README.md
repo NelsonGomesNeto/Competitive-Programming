@@ -105,7 +105,6 @@
   * [Galactic Taxes](https://www.urionlinejudge.com.br/judge/pt/problems/view/2011) (Ternary Search + Dijkstra)
   * [796 - Critical Links](https://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=737) (Pure bridge detection)
   * [Series of Tubes](https://www.urionlinejudge.com.br/judge/es/problems/view/2899) (Interesting bridge detection)
-  * [Edges contraction](https://thehuxley.com/problem/1050) (Interesting DSU problem)
   * [Dima and Bacteria](https://codeforces.com/contest/400/problem/D) (Very interesting bfs/dsu + FloydWarshall problem)
   * [Rota Crítica](https://br.spoj.com/problems/ROTA/) (Ad-hoc dfs problem)
   * [Lonely Island](https://www.hackerearth.com/pt-br/practice/algorithms/graphs/topological-sort/practice-problems/algorithm/lonelyisland-49054110/description/) (Very interesting topological sort problem)
@@ -264,11 +263,13 @@
 ## DSU
 * #### Problems
   * [0-1-Tree](https://codeforces.com/contest/1156/problem/D) (Amazing DSU + combinatorics problem)
+  * [Edges contraction](https://thehuxley.com/problem/1050) (Interesting DSU problem)
   * [Quantity of String](https://codeforces.com/contest/151/problem/D) (Very interesting use of DSU on palindromes)
   * [Raman's Problem](https://www.hackerearth.com/pt-br/practice/data-structures/disjoint-data-strutures/basics-of-disjoint-data-structures/practice-problems/algorithm/ramans-problem/) (Very nice DSU + combinatorics problem)
   * [Monk missing home](https://www.hackerearth.com/pt-br/practice/data-structures/disjoint-data-strutures/basics-of-disjoint-data-structures/practice-problems/algorithm/monk-missing-home-code-monk/description/) (Needs a very interesting modification on merge function)
   * [City and Campers 2](https://www.hackerearth.com/pt-br/practice/data-structures/disjoint-data-strutures/basics-of-disjoint-data-structures/practice-problems/algorithm/city-and-campers-2/) (Needs a quite hard implementation on DSU's merge; do the first one before)
   * [Classic task](https://www.hackerearth.com/pt-br/practice/data-structures/disjoint-data-strutures/basics-of-disjoint-data-structures/practice-problems/algorithm/classic-task-39656dbf/description/) (MIND BLOWING use of binary lifting idea, it's AMAZING)
+  * [Harmonious Graph](https://codeforces.com/contest/1253/problem/D) (Remind that DSU can be used to store lot's of interesting informations such as minimum and maximum vertex)
   * [HackerEarth DSU Problems](https://www.hackerearth.com/pt-br/practice/data-structures/disjoint-data-strutures/basics-of-disjoint-data-structures/practice-problems/) (There are some interesting problems)
 
 # String
