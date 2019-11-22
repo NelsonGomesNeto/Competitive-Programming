@@ -1,0 +1,1 @@
+Pascal's Tringle(line, column) = choose(line, column)
