@@ -236,6 +236,7 @@
   * [Soldier and Number Game](https://codeforces.com/problemset/problem/546/D) (Requires a *very* optimized primeFactorization, do it while constructing the sieve)
   * [Fedya and Maths](https://codeforces.com/contest/456/problem/B) (Very interesting number theory problem, decompose the exponentials)
   * [Sereja and the Arrangement of Numbers](https://codeforces.com/contest/367/problem/C) (Amazing problem to remind Eulerian Cycle and Eulerian Path)
+  * [Knight](https://atcoder.jp/contests/abc145/tasks/abc145_d) (Very interesting problem, a wild unexpected Pascal's Triangle appears)
 
 # Geometry
 * #### Problems
