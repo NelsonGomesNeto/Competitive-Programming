@@ -20,19 +20,10 @@ int getSubtreeSize(int u, int prv = -1)
 }
 int getCentroid(int u, int nodes, int prv = -1)
 {
-  bool validCentroid = nodes - subtree[u] <= (nodes >> 1);
-  int heaviestChild = -1;
   for (int v: tree[u])
-    if (v != prv && !inCentroidTree[v])
-    {
-      if (subtree[v] > (nodes >> 1))
-        validCentroid = false;
-      if (heaviestChild == -1 || (subtree[v] > subtree[heaviestChild]))
-        heaviestChild = v;
-    }
-  if (validCentroid)
-    return u;
-  return getCentroid(heaviestChild, nodes, u);
+    if (v != prv && !inCentroidTree[v] && subtree[v] > (nodes >> 1))
+      return getCentroid(v, nodes, u);
+  return u;
 }
 int centroidDecomposition(int u = 0, int prv = -1)
 {
@@ -123,11 +114,6 @@ int main()
     for (int i = 0; i < n; i ++)
       tree[i].clear(), centroidTree[i].clear(), closest[i] = maxN;
 
-    for (int i = 0; i < n - 1; i ++)
-      tree[i].push_back(i + 1), tree[i + 1].push_back(i);
-    centroidRoot = centroidDecomposition();
-    printTree(centroidTree, centroidRoot);
-
     for (int i = 0; i < n; i ++)
       tree[i].clear();
     for (int i = 0; i < n - 1; i ++)
@@ -135,6 +121,8 @@ int main()
       int u, v; scanf("%d %d", &u, &v); u --, v --;
       tree[u].push_back(v), tree[v].push_back(u);
     }
+    centroidRoot = centroidDecomposition();
+    DEBUG printTree(centroidTree, centroidRoot);
     buildLCA();
 
     update(0, 0);
