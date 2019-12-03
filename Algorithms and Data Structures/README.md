@@ -171,6 +171,7 @@
   * [The Brand New Function](https://codeforces.com/contest/243/problem/A) ("accumulated max position", quite interesting)
   * [Sweets Eating](https://codeforces.com/contest/1253/problem/C) (Very interesting grouping and accumulated sum)
   * [Mike and Feet](https://codeforces.com/contest/547/problem/B) (Amazing subproblem: max(j), where a(j) > a(i) and j < i; can be done with stack or dp; NICE)
+  * [Count Good Substrings](https://codeforces.com/contest/451/problem/D) (Very interesting accumulated sum, be cautious with parity)
 
 ## Knapsack
 * #### Problems
@@ -292,3 +293,4 @@
 * #### Problems
   * [Balé](http://olimpiada.ic.unicamp.br/pratique/p1/2011/f2/bale/) (Easy inversion count problem)
   * [Little Elephant and Cards](https://codeforces.com/problemset/problem/204/B) (Interesting easy map problem, can be done using coordinate compression)
+  * [Código](https://neps.academy/problem/44) (Intersting set problem)
