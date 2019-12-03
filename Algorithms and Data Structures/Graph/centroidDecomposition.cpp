@@ -20,19 +20,10 @@ int getSubtreeSize(int u, int prv = -1)
 }
 int getCentroid(int u, int nodes, int prv = -1)
 {
-  bool validCentroid = nodes - subtree[u] <= (nodes >> 1);
-  int heaviestChild = -1;
   for (int v: tree[u])
-    if (v != prv && !inCentroidTree[v])
-    {
-      if (subtree[v] > (nodes >> 1))
-        validCentroid = false;
-      if (heaviestChild == -1 || (subtree[v] > subtree[heaviestChild]))
-        heaviestChild = v;
-    }
-  if (validCentroid)
-    return u;
-  return getCentroid(heaviestChild, nodes, u);
+    if (v != prv && !inCentroidTree[v] && subtree[v] > (nodes >> 1))
+      return getCentroid(v, nodes, u);
+  return u;
 }
 int centroidDecomposition(int u = 0, int prv = -1)
 {
@@ -66,6 +57,7 @@ int main()
     int u, v; scanf("%d %d", &u, &v);
     tree[u].push_back(v), tree[v].push_back(u);
   }
+  printTree(tree, 0);
 
   centroidRoot = centroidDecomposition();
   printf("Centroid root: %d\n", centroidRoot + 1);
