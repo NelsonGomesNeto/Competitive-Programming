@@ -1,6 +1,6 @@
 import os
 from random import random, randint, shuffle
-os.system("g++ 2980BatalhaDeElementos.cpp -o ./test")
+os.system("g++ 2980BatalhaDeFluxos.cpp -o ./test")
 
 testCases = int(input())
 for t in range(1, testCases + 1):
