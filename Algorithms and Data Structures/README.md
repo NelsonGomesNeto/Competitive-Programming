@@ -196,6 +196,7 @@
   * [Moovie Mooving](http://www.usaco.org/index.php?page=viewproblem2&cpid=515) (Amazing bitmask dp problem)
   * [Guard Mark](http://www.usaco.org/index.php?page=viewproblem2&cpid=494) (Mind blowing bitmask dp + greedy problem)
   * [Yet Another Substring Reverse](https://codeforces.com/contest/1234/problem/F) (AWESOME bitmask dp)
+  * [Tree and Constraints](https://atcoder.jp/contests/abc152/tasks/abc152_f) (AWESOME bitmask dp)
 
 ## Expected Value
 * #### Problems
@@ -247,6 +248,7 @@
   * [Fedya and Maths](https://codeforces.com/contest/456/problem/B) (Very interesting number theory problem, decompose the exponentials)
   * [Sereja and the Arrangement of Numbers](https://codeforces.com/contest/367/problem/C) (Amazing problem to remind Eulerian Cycle and Eulerian Path)
   * [Knight](https://atcoder.jp/contests/abc145/tasks/abc145_d) (Very interesting problem, a wild unexpected Pascal's Triangle appears)
+  * [Flatten](https://atcoder.jp/contests/abc152/tasks/abc152_e) (Amazing modular lcm problem, build lcm using prime factorization)
 
 # Geometry
 * #### Problems
