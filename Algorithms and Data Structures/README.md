@@ -125,6 +125,7 @@
   * [Greg and Graph](https://codeforces.com/contest/295/problem/B) (MIND BLOWING Floyd-Warhsall problem, adding vertices while running Floyd, same complexity)
   * [Missile Silos](https://codeforces.com/problemset/problem/144/D) (Very interesting Dijkstra problem, remember that missiles are place only at the shortest distant positions)
   * [Book of Evil](https://codeforces.com/contest/337/problem/D) (Awesome bfs problem, find diameter and run BFS on vertices from diameter path)
+  * [Tree Paths on a Tree](https://codeforces.com/contest/1294/problem/F) (AMAZING bfs problem, find diameter and store the vertices on it's path to something ;3)
   * [HackerEarth ShortestPath](https://www.hackerearth.com/pt-br/practice/algorithms/graphs/shortest-path-algorithms/practice-problems/?sort_by=solved) (There are some interesting problems ^~^)
 
 ## Centroid Decomposition
