@@ -148,6 +148,7 @@
 * #### Problems:
   * [357 - Let Me Count The Ways](https://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=293) (Very pure)
   * [The Values You Can Make](https://codeforces.com/contest/687/problem/C) (Incredible bitmask problem)
+  * [Crested Ibis vs Monster](https://atcoder.jp/contests/abc153/tasks/abc153_e) (Awesome, Bottom-Up ftw, cheapest way to hit H)
 
 ## Maximum subarray
 * #### Problems
