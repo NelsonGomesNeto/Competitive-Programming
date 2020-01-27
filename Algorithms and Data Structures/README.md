@@ -208,6 +208,7 @@
 ## Just DP ㄟ(≧◇≦)ㄏ
 * #### Problems
   * [Fabricating Sculptures](https://matcomgrader.com/problem/9639/fabricating-sculptures/) (Very interesting way of thinking)
+  * [Tournament](https://codeforces.com/contest/1260/problem/E) (Amazing dp)
 
 ## Advanced Optimizations
 * #### Problems
