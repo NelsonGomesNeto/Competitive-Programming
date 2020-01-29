@@ -185,6 +185,7 @@
   * [Dima and Hares](https://codeforces.com/contest/358/problem/D) (Interesting knapsack where information is needed in the next steps)
   * [Yet Another Division Into Teams](https://codeforces.com/contest/1256/problem/E) (Very interesting problem, notice that teams may have size 3, 4 or 5 only)
   * [Large Knapsack](https://www.spoj.com/problems/LKS/) (Interesting Knapsack optimization for big budget)
+  * [Two Bracket Sequences](https://codeforces.com/contest/1272/problem/F) (Interesting string dp very similar to knapsack ^~^)
 
 ## Tree
 * #### Problems
