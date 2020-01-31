@@ -213,6 +213,7 @@
   * [Fabricating Sculptures](https://matcomgrader.com/problem/9639/fabricating-sculptures/) (Very interesting way of thinking)
   * [Tournament](https://codeforces.com/contest/1260/problem/E) (Amazing dp)
   * [Dr. Evil Underscores](https://codeforces.com/contest/1285/problem/D) (Mind blowing dp with binary search)
+  * [Two Arrays](https://codeforces.com/contest/1288/problem/C) (Amazing dp, optimize memo size, N x M memo is possible and beautiful)
 
 ## Advanced Optimizations
 * #### Problems
