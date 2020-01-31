@@ -201,6 +201,7 @@
   * [Guard Mark](http://www.usaco.org/index.php?page=viewproblem2&cpid=494) (Mind blowing bitmask dp + greedy problem)
   * [Yet Another Substring Reverse](https://codeforces.com/contest/1234/problem/F) (AWESOME bitmask dp)
   * [Tree and Constraints](https://atcoder.jp/contests/abc152/tasks/abc152_f) (AWESOME bitmask dp)
+  * [Minimax Problem](https://codeforces.com/contest/1288/problem/D) (Mind blowing binary search + bitmask dp problem)
 
 ## Expected Value
 * #### Problems
