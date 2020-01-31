@@ -212,6 +212,7 @@
 * #### Problems
   * [Fabricating Sculptures](https://matcomgrader.com/problem/9639/fabricating-sculptures/) (Very interesting way of thinking)
   * [Tournament](https://codeforces.com/contest/1260/problem/E) (Amazing dp)
+  * [Dr. Evil Underscores](https://codeforces.com/contest/1285/problem/D) (Mind blowing dp with binary search)
 
 ## Advanced Optimizations
 * #### Problems
