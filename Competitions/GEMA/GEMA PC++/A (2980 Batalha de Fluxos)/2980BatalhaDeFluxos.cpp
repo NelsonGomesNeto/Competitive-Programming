@@ -4,14 +4,15 @@
 #define ldouble long double
 using namespace std;
 
-const int maxN = 100, maxTurns = 1e3; int n;
+const int maxN = 100; int n;
+const lli maxTurns = 1e14;
 struct Card
 {
-  int health, power;
-  list<int> reachable;
+  lli health, power;
+  vector<int> reachable;
   void read()
   {
-    scanf("%d %d", &health, &power);
+    scanf("%lld %lld", &health, &power);
     int k; scanf("%d", &k);
     for (int i = 0; i < k; i ++)
     {
@@ -20,15 +21,16 @@ struct Card
     }
   }
 };
-Card cards[2][maxN]; int healthSum[2];
+Card cards[2][maxN]; lli healthSum[2];
 
-const int maxV = 201 + 1, inf = 1e9;
+const int maxV = 201 + 1;
+const lli inf = 1e16;
 int source = 0, sink, vertices;
 int level[maxV], ptr[maxV];
 // source (0) -> Cards (1 : n) -[power]> Cards (n + 1 : 2*n) -[health]> sink (2*n + 1)
-struct Edge { int to, back, flow, capacity; };
+struct Edge { int to, back; lli flow, capacity; };
 vector<Edge> graph[maxV];
-void addEdge(int u, int v, int f)
+void addEdge(int u, int v, lli f)
 {
   graph[u].push_back({v, (int) graph[v].size(), f, f});
   graph[v].push_back({u, (int) graph[u].size() - 1, 0, 0});
@@ -47,7 +49,7 @@ bool bfs()
   }
   return level[sink] != -1;
 }
-int dfs(int u = source, int flow = inf)
+lli dfs(int u = source, lli flow = inf)
 {
   if (u == sink || !flow) return flow;
   for (int &p = ptr[u]; p < graph[u].size(); p ++)
@@ -55,7 +57,7 @@ int dfs(int u = source, int flow = inf)
     Edge &e = graph[u][p];
     if (e.flow && level[e.to] == level[u] + 1)
     {
-      int delivered = dfs(e.to, min(e.flow, flow));
+      lli delivered = dfs(e.to, min(e.flow, flow));
       e.flow -= delivered;
       graph[e.to][e.back].flow += delivered;
       if (delivered) return delivered;
@@ -63,9 +65,9 @@ int dfs(int u = source, int flow = inf)
   }
   return 0;
 }
-int dinic()
+lli dinic()
 {
-  int maxFlow = 0, flow;
+  lli maxFlow = 0, flow;
   while (bfs())
   {
     memset(ptr, 0, sizeof(ptr));
@@ -74,7 +76,7 @@ int dinic()
   return maxFlow;
 }
 
-int can(int player, int turns)
+int can(int player, lli turns)
 {
   for (int i = 0; i < vertices; i ++) graph[i].clear();
   for (int i = 0; i < n; i ++) addEdge(source, 1 + i, turns * cards[player][i].power);
@@ -85,9 +87,9 @@ int can(int player, int turns)
   return dinic() == healthSum[1 - player];
 }
 
-int binarySearch(int player)
+lli binarySearch(int player)
 {
-  int lo = 1, hi = maxTurns;
+  lli lo = 1, hi = maxTurns;
   while (lo < hi)
   {
     int mid = (lo + hi) >> 1;
@@ -108,9 +110,9 @@ int main()
       healthSum[i] += cards[i][j].health;
     }
 
-  int entityTurns = binarySearch(0);
-  int xTurns = binarySearch(1);
-  printf("%s wins in %d turns\n", entityTurns <= xTurns ? "Entity" : "X", min(entityTurns, xTurns));
+  lli entityTurns = binarySearch(0);
+  lli xTurns = binarySearch(1);
+  printf("%s wins in %lld turns\n", entityTurns <= xTurns ? "Entity" : "X", min(entityTurns, xTurns));
 
   return 0;
 }
