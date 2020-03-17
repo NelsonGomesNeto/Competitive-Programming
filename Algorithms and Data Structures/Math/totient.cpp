@@ -19,14 +19,24 @@ vector<pair<lli, int>> primeFactors[maxN + 1];
 lli phi(lli number)
 {
   lli ans = 1;
-  for (int i = 0, end = sqrt(number); number > 1 && primes[i] <= end; i ++)
-  {
-    if (number % primes[i]) continue;
-    // ans *= (p - 1) * p^(e - 1)
-    number /= primes[i], ans *= primes[i] - 1;
-    while (number % primes[i] == 0)
-      number /= primes[i], ans *= primes[i];
-  }
+  if (number <= maxN)
+    for (auto &p: primeFactors[number])
+    {
+      if (number % p.first) continue;
+      // ans *= (p - 1) * p^(e - 1)
+      number /= p.first, ans *= p.first - 1;
+      while (number % p.first == 0)
+        number /= p.first, ans *= p.first;
+    }
+  else
+    for (int i = 2, end = sqrt(number); number >= i && i <= end; i ++)
+    {
+      if (number % i) continue;
+      // ans *= (p - 1) * p^(e - 1)
+      number /= i, ans *= i - 1;
+      while (number % i == 0)
+        number /= i, ans *= i;
+    }
   if (number > 1) ans *= number - 1;
   return(ans);
 }
@@ -47,6 +57,10 @@ int main()
       if (i % primes[j] == 0) break;
     }
   }
+
+  lli num;
+  while (scanf("%lld", &num) != EOF)
+    printf("phi(%lld) = %lld\n", num, phi(num));
 
   return 0;
 }
