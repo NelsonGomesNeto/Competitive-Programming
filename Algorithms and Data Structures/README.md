@@ -260,6 +260,7 @@
   * [Knight](https://atcoder.jp/contests/abc145/tasks/abc145_d) (Very interesting problem, a wild unexpected Pascal's Triangle appears)
   * [Flatten](https://atcoder.jp/contests/abc152/tasks/abc152_e) (Amazing modular lcm problem, build lcm using prime factorization)
   * [XOR World](https://atcoder.jp/contests/abc121/tasks/abc121_d) (Amazing, count each bit 1's frequency, from 0 to n is easier :3)
+  * [Many Many Paths](https://atcoder.jp/contests/abc154/tasks/abc154_f) (AWESOME, Pascal's Triangle, accumulated sum, choose and summation reduction)
 
 # Geometry
 * #### Problems
