@@ -1,0 +1,11 @@
+# Combinatorics:
+  - ## n indistinguishable balls into k distinguishable bins choose(n + k - 1, k - 1):
+    - We have (k - 1) bars
+    - And n + (k - 1) abstract objects
+    - We have to choose (k - 1), of the abstract objects, to be bars
+    - Exemple: 1 ball, 3 bins
+      - All possible combinations are (0, 0, 1), (0, 1, 0), (1, 0, 0)
+      - With stars and bars, respectively: ||\*, |\*|, \*||
+      - Notice how there are 3 abstract objects
+      - And you want to "choose" 2 of them to be bars
+      - So there are choose(3, 2) = 3 ways to do so

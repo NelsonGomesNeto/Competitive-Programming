@@ -36,18 +36,23 @@ lli inv(lli x)
 {
   return modPow(x, mod - 2);
 }
-lli choose(lli nn, lli k)
+lli choose(lli nn, lli kk)
 {
-  if (nn < k) return 0;
-  if (nn < mod) return fat[nn] * invFat[k] % mod * invFat[nn - k] % mod;
+  if (nn < kk) return 0;
+  if (nn < mod) return fat[nn] * invFat[kk] % mod * invFat[nn - kk] % mod;
   lli ans = 1;
-  while (nn || k)
+  while (nn || kk)
   {
-    lli nnn = nn % mod, kk = k % mod;
-    nn /= mod, k /= mod;
-    ans = ans * choose(nnn, kk) % mod;
+    lli nnn = nn % mod, kkk = kk % mod;
+    nn /= mod, kk /= mod;
+    ans = ans * choose(nnn, kkk) % mod;
   }
   return ans;
+}
+// nn = stars, kk = bars
+lli starsAndBars(lli nn, lli kk)
+{
+  return choose(nn + kk, kk);
 }
 
 int main()
