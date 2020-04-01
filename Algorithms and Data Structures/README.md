@@ -298,6 +298,7 @@
   * [Classic task](https://www.hackerearth.com/pt-br/practice/data-structures/disjoint-data-strutures/basics-of-disjoint-data-structures/practice-problems/algorithm/classic-task-39656dbf/description/) (MIND BLOWING use of binary lifting idea, it's AMAZING)
   * [Harmonious Graph](https://codeforces.com/contest/1253/problem/D) (Remind that DSU can be used to store lot's of interesting informations such as minimum and maximum vertex)
   * [HackerEarth DSU Problems](https://www.hackerearth.com/pt-br/practice/data-structures/disjoint-data-strutures/basics-of-disjoint-data-structures/practice-problems/) (There are some interesting problems)
+  * [Friend Suggestions](https://atcoder.jp/contests/abc157/tasks/abc157_d) (VERY NICE use of DSU)
 
 # String
 * #### Problems
