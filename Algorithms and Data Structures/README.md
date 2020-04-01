@@ -262,6 +262,7 @@
   * [XOR World](https://atcoder.jp/contests/abc121/tasks/abc121_d) (Amazing, count each bit 1's frequency, from 0 to n is easier :3)
   * [Many Many Paths](https://atcoder.jp/contests/abc154/tasks/abc154_f) (AWESOME, Pascal's Triangle, accumulated sum, choose and summation reduction)
   * [Roaming](https://atcoder.jp/contests/abc156/tasks/abc156_e) (MIND BLOWING, Stars and Bars ftw, empty positions is the way)
+  * [Modularness](https://atcoder.jp/contests/abc156/tasks/abc156_f) (AWESOME, modular arithmetic problem; try to solve the opposite of what the problem asks you :3)
 
 # Geometry
 * #### Problems
