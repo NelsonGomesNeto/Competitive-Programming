@@ -269,6 +269,7 @@
   * [Confederation](https://www.urionlinejudge.com.br/judge/en/problems/view/1710) (Dividing space with planes, very nice (map))
   * [Power Transmission](https://codeforces.com/contest/1163/problem/C2) (Amazing lines and intersections problem, use ax + by = c equation)
   * [Rectangle Park](https://www.urionlinejudge.com.br/judge/en/problems/view/1938) (Amazing coordinate compression problem)
+  * [Yakininku Optimization Problem](https://atcoder.jp/contests/abc157/tasks/abc157_f) (Very interesting circle intersection problem)
 
 # Greedy
 * #### Problems

@@ -1,20 +1,22 @@
-const long double EPS = 1e-7;
+#define ldouble long double
+const double EPS = 1e-7;
 
 struct Point
 {
   double x, y;
   Point operator+(const Point &other) { return Point{x + other.x, y + other.y}; }
   Point operator-(const Point &other) { return Point{x - other.x, y - other.y}; }
-  Point operator*(const long double a) { return Point{x * a, y * a}; }
-  long double operator*(const Point &other) { return x * other.x + y * other.y; }
-  long double distance(Point &p) { return sqrt((x-p.x)*(x-p.x) + (y-p.y)*(y-p.y)); }
-  long double cross(Point &other) { return x*other.y - y*other.x; }
-  void normalize()
+  Point operator*(const double a) { return Point{x * a, y * a}; }
+  double operator*(const Point &other) { return x * other.x + y * other.y; }
+  double distance(Point &other) { return sqrt((x - other.x)*(x - other.x) + (y - other.y)*(y - other.y)); }
+  double cross(Point &other) { return x*other.y - y*other.x; }
+  Point rotate(double rad) { return Point{x * cos(rad), - y * sin(rad), x * sin(rad) + y * cos(rad)}; }
+  Point normalized()
   {
     double norm = sqrt(x*x + y*y);
-    x /= norm, y /= norm;
+    return Point{x / norm, y / norm};
   }
-  Point pointOfInterception(Point &p1, Point &p2)
+  Point pointOfIntercection(Point &p1, Point &p2)
   {
     Point v = p2 - p1, u = p1 - *this, w = p2 - *this;
     double vu = v * u, vv = v * v;
@@ -37,8 +39,19 @@ struct Point
 
 struct Circle
 {
-  Point center; long double radious;
+  Point center; double radious;
   bool contains(Point &p) { return center.distance(p) <= radious + EPS; }
+  pair<Point, Point> circleIntersections(Circle &other)
+  {
+    double d = center.distance(other.center);
+    double u = acos((other.radious*other.radious + d*d - radious*radious) / (2.0*other.radious*d));
+    Point dc = (center - other.center).normalized() * other.radious;
+    return pair<Point, Point>
+    {
+      other.center + dc.rotate(u),
+      other.center + dc.rotate(-u)
+    };
+  }
 };
 
 Circle circumCircle(Point &a, Point &b, Point &c)
@@ -46,7 +59,7 @@ Circle circumCircle(Point &a, Point &b, Point &c)
   Point u = Point{(b - a).y, (a - b).x};
   Point v = Point{(c - a).y, (a - c).x};
   Point n = (c - b) * 0.5;
-  long double t = u.cross(n) / v.cross(u);
+  double t = u.cross(n) / v.cross(u);
   Point center = ((a + c)*0.5) + v*t;
   return Circle{center, center.distance(a)};
 }
