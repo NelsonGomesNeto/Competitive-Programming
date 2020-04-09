@@ -263,6 +263,7 @@
   * [Many Many Paths](https://atcoder.jp/contests/abc154/tasks/abc154_f) (AWESOME, Pascal's Triangle, accumulated sum, choose and summation reduction)
   * [Roaming](https://atcoder.jp/contests/abc156/tasks/abc156_e) (MIND BLOWING, Stars and Bars ftw, empty positions is the way)
   * [Modularness](https://atcoder.jp/contests/abc156/tasks/abc156_f) (AWESOME, modular arithmetic problem; try to solve the opposite of what the problem asks you :3)
+  * [Divisible Substring](https://atcoder.jp/contests/abc158/tasks/abc158_e) (NICE, modular arithmetic problem; gcd(p, 10) is very important :3)
 
 # Geometry
 * #### Problems
