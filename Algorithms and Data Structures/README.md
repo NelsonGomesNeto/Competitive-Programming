@@ -310,9 +310,11 @@
   * [Password](https://codeforces.com/contest/126/problem/B) (Interesting prefix function problem)
   * [MUH and Cube Walls](https://codeforces.com/problemset/problem/471/D) (Interesting easy KMP problem)
   * [Gluing Pictures](https://matcomgrader.com/problem/9641/gluing-pictures/) (Awesome Suffix Array problem, beautiful binary search (Suffix Automaton and Suffix Tree may be more direct))
+  * [Three Substrigs](https://atcoder.jp/contests/panasonic2020/tasks/panasonic2020_e) (Awesome string match problem, think about the easy O(n^3) and try to reduce something on it to O(1) (given some precalculations :3))
 
 # Etc
 * #### Problems
   * [Balé](http://olimpiada.ic.unicamp.br/pratique/p1/2011/f2/bale/) (Easy inversion count problem)
   * [Little Elephant and Cards](https://codeforces.com/problemset/problem/204/B) (Interesting easy map problem, can be done using coordinate compression)
   * [Código](https://neps.academy/problem/44) (Intersting set problem)
+  * [String Equivalence](https://atcoder.jp/contests/panasonic2020/tasks/panasonic2020_d) (Awesome normalization problem)
