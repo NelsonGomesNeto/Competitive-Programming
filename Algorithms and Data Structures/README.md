@@ -160,6 +160,7 @@
   * [Enigma](https://www.urionlinejudge.com.br/judge/en/problems/view/2699) (Pure + mod of bigInteger)
   * [Daniel and Spring Cleaning](https://codeforces.com/contest/1245/problem/F) (Very interesting digit-DP using binary representation)
   * [Almost Everywhere Zero](https://atcoder.jp/contests/abc154/tasks/abc154_e) (Nice, couting valids below a limit)
+  * [Digits Count](https://www.urionlinejudge.com.br/judge/en/problems/view/1138) (NICE digit-DP problem)
 
 ## Precalculation
 * #### Problems
