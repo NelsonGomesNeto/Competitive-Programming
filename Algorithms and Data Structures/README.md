@@ -178,6 +178,7 @@
   * [Mike and Feet](https://codeforces.com/contest/547/problem/B) (Amazing subproblem: max(j), where a(j) > a(i) and j < i; can be done with stack or dp; NICE)
   * [Count Good Substrings](https://codeforces.com/contest/451/problem/D) (Very interesting accumulated sum, be cautious with parity)
   * [Arson In Berland Forest](https://codeforces.com/contest/1262/problem/E) (AMAZING Binary Search + accumulated sum, WOW)
+  * [Dividing Chocolate](https://atcoder.jp/contests/abc159/tasks/abc159_e) (Interesting easy matrix sum + bitmask + greedy)
 
 ## Knapsack
 * #### Problems
