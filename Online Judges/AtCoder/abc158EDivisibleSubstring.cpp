@@ -22,7 +22,7 @@ lli cnt[maxP]; int acc[maxN + 1];
     Using accumulated sum, we can build acc from right to left such that:
       acc[i] = (digit[n - 1]*10^0 + digit[n - 2]*10^1 + ... + digit[i]*10^(n - 1 - i)) % p
     With that, we can build any number:
-      int(s[i : j]) % p = (acc[i] - acc[j - 1]) / 10^(n - 1 - j) % p
+      int(s[i : j]) % p = (acc[i] - acc[j + 1]) / 10^(n - 1 - j) % p
         * iff int(s[i : j]) % p == 0
       BUT, we actually don't need to divide by 10^(n - 1 - j), since gcd(p, 10) == 1
 
