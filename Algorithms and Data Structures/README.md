@@ -189,6 +189,7 @@
   * [Yet Another Division Into Teams](https://codeforces.com/contest/1256/problem/E) (Very interesting problem, notice that teams may have size 3, 4 or 5 only)
   * [Large Knapsack](https://www.spoj.com/problems/LKS/) (Interesting Knapsack optimization for big budget)
   * [Two Bracket Sequences](https://codeforces.com/contest/1272/problem/F) (Interesting string dp very similar to knapsack ^~^)
+  * [Knapsack for All Segments](https://atcoder.jp/contests/abc159/tasks/abc159_f) (Amazing easy knapsack "with states", NICE)
 
 ## Tree
 * #### Problems
