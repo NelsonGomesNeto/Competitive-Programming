@@ -4,6 +4,10 @@
 #define ldouble long double
 using namespace std;
 
+/* Tricks with Prefix Function:
+  Biggest Palindrome in Prefix: a + '#' + rev(a)
+*/
+
 const int maxN = 1e6 + 1; int n;
 char s[maxN];
 
@@ -24,6 +28,7 @@ int main()
   n = strlen(s);
   prefixFunction(s, n);
   printf("%s\n", s);
+  printf("    "); for (int i = 0; i <= n; i ++) printf("  %c%c", s[i], i < n ? ' ' : '\n');
   for (int i = 0; i <= n; i ++) printf("%3d%c", i, i < n ? ' ' : '\n');
   for (int i = 0; i <= n; i ++) printf("%3d%c", pi[i], i < n ? ' ' : '\n');
 
