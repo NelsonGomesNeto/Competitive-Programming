@@ -287,6 +287,7 @@
   * [Bicoloured RBS](https://codeforces.com/contest/1167/problem/D) (Very interesting parenthesis balancing problem, think simple)
   * [Almost Arithmetical Progression](https://codeforces.com/contest/255/problem/C) (Amazing greedy, strongly recommended due to interesting implementation tricks)
   * [Two Contests](https://atcoder.jp/contests/agc040/tasks/agc040_b) (Amazing greedy, minR and maxL may be in the same contest or not, sort ascending and descending by something)
+  * [Same Sum Blocks](https://codeforces.com/contest/1141/problem/F2) (Mind blowing, Interval Scheduling problem)
 
 # Data Structures
 ## Trie
