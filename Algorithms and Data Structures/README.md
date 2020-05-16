@@ -243,6 +243,7 @@
   * [Save the Nature](https://codeforces.com/contest/1241/problem/C) (Awesome binary search for guessing the answer and greedy testing)
   * [Minimizing Difference](https://codeforces.com/contest/1244/problem/E) (AWESOME ternary search inside binary search)
   * [Gluttony](https://atcoder.jp/contests/abc144/tasks/abc144_e) (Interesting easy binary search + greedy problem)
+  * [11195 - Another N-Queen problem](https://onlinejudge.org/index.php?option=onlinejudge&page=show_problem&problem=2136) (Interesting backtracking + bitmasking problem)
 
 # Math
 * #### Problems
