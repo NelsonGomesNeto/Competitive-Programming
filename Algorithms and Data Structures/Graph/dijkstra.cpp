@@ -11,11 +11,12 @@ int dijkstra(int source, int target)
   cost[source] = 0; pq.push({cost[source], source});
   while (!pq.empty())
   {
-    int u = pq.top().second; pq.pop();
+    int u = pq.top().second, c = pq.top().first; pq.pop();
+    if (c > cost[u]) continue;
     for (auto v: graph[u])
-      if (cost[u] + v.second < cost[v.first])
+      if (c + v.second < cost[v.first])
       {
-        cost[v.first] = cost[u] + v.second, prv[v.first] = u;
+        cost[v.first] = c + v.second, prv[v.first] = u;
         pq.push({cost[v.first], v.first});
       }
   }
