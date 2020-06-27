@@ -1,4 +1,5 @@
 import os
+import time
 from random import randint, random
 from filecmp import cmp
 # os.system("g++ naive.cpp -o test")
@@ -23,6 +24,12 @@ for i in range(queries):
         print("U", lo, randint(-1000, 1000), file=f)
 f.close()
 
+startTime = time.time()
 os.system("time ./test < in > out")
+print("general segtree took: ", time.time() - startTime)
+
+startTime = time.time()
 os.system("time ./test2 < in > out2")
+print("iterative segtree took: ", time.time() - startTime)
+
 print("Verdict:", cmp("out", "out2"))

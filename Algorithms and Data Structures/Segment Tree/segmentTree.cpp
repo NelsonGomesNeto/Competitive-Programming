@@ -12,25 +12,28 @@ struct Data
     return Data{value + other.value};
   }
 };
-const Data nil = Data{0}; // DEFINE THE NIL DATA!!!
+
+// DON'T FORGET TO DEFINE THE NIL!!!
+template<class T>
 struct Segtree
 {
   int size;
-  vector<Data> data;
-  vector<Data> st;
-  Segtree(int size) : size(size)
+  T nil;
+  vector<T> data;
+  vector<T> st;
+  Segtree(int size, T nil) : size(size), nil(nil)
   {
     data.resize(size);
     st.resize(4*size);
   }
-  Segtree(vector<Data> &data) : size(data.size()), data(data)
+  Segtree(vector<T> &data, T nil) : size(data.size()), data(data), nil(nil)
   {
     st.resize(4*size);
     build();
   }
   void build() { build(1, 0, size - 1); }
-  Data query(int qlo, int qhi) { return query(qlo, qhi, 1, 0, size - 1); }
-  void update(int pos, Data value) { update(pos, value, 1, 0, size - 1); }
+  T query(int qlo, int qhi) { return query(qlo, qhi, 1, 0, size - 1); }
+  void update(int pos, T value) { update(pos, value, 1, 0, size - 1); }
   void build(int i, int lo, int hi)
   {
     if (lo == hi)
@@ -42,14 +45,14 @@ struct Segtree
     build(2*i, lo, mid), build(2*i + 1, mid + 1, hi);
     st[i] = st[2*i] + st[2*i + 1];
   }
-  Data query(int qlo, int qhi, int i, int lo, int hi)
+  T query(int qlo, int qhi, int i, int lo, int hi)
   {
     if (hi < qlo || lo > qhi) return nil;
     if (lo >= qlo && hi <= qhi) return st[i];
     int mid = (lo + hi) >> 1;
     return query(qlo, qhi, 2*i, lo, mid) + query(qlo, qhi, 2*i + 1, mid + 1, hi);
   }
-  void update(int pos, Data &value, int i, int lo, int hi)
+  void update(int pos, T &value, int i, int lo, int hi)
   {
     if (lo == hi)
     {
@@ -66,7 +69,7 @@ struct Segtree
 int main()
 {
   int n; scanf("%d", &n);
-  Segtree segtree(n);
+  Segtree<Data> segtree(n, Data{0});
   for (int i = 0; i < n; i ++) scanf("%d", &segtree.data[i].value);
   segtree.build();
 
