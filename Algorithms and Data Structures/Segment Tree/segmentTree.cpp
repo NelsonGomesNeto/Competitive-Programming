@@ -1,81 +1,88 @@
 #include <bits/stdc++.h>
-int segtree[4000000];
+#define DEBUG if(0)
+#define lli long long int
+#define ldouble long double
+using namespace std;
 
-void printSpacing(int depth)
+struct Data
 {
-  for (int i = 0; i < depth; i ++) printf("   ");
-}
-
-void printSegTree(int lo, int hi, int i, int depth)
-{
-  printSpacing(depth);
-  if (lo >= hi)
+  int value;
+  Data operator+(const Data &other)
   {
-    printf("[%d,%d] = %d\n", lo, hi, segtree[i]);
-    return;
+    return Data{value + other.value};
   }
-  int mid = (lo + hi) >> 1;
-  printf("[%d,%d] = %d\n", lo, hi, segtree[i]);
-  printSegTree(lo, mid, 2*i, depth + 1);
-  printSegTree(mid + 1, hi, 2*i + 1, depth + 1);
-}
-
-void build(int array[], int lo, int hi, int i)
+};
+const Data nil = Data{0}; // DEFINE THE NIL DATA!!!
+struct Segtree
 {
-  if (lo >= hi)
+  int size;
+  vector<Data> data;
+  vector<Data> st;
+  Segtree(int size) : size(size)
   {
-    segtree[i] = array[lo];
-    return;
+    data.resize(size);
+    st.resize(4*size);
   }
-  int mid = (lo + hi) >> 1;
-  build(array, lo, mid, 2*i);
-  build(array, mid + 1, hi, 2*i + 1);
-  segtree[i] = segtree[2*i] + segtree[2*i + 1];
-}
-
-int query(int qlo, int qhi, int lo, int hi, int i)
-{
-  if (lo > qhi || hi < qlo) return(0);
-  if (lo >= qlo && hi <= qhi) return(segtree[i]);
-  int mid = (lo + hi) >> 1;
-  return(query(qlo, qhi, lo, mid, 2*i) + query(qlo, qhi, mid + 1, hi, 2*i + 1));
-}
-
-void update(int array[], int pos, int value, int lo, int hi, int i)
-{
-  if (lo > pos || hi < pos) return;
-  if (lo >= hi)
+  Segtree(vector<Data> &data) : size(data.size()), data(data)
   {
-    segtree[i] += value - array[lo];
-    array[lo] = value;
-    return;
+    st.resize(4*size);
+    build();
   }
-  int mid = (lo + hi) >> 1;
-  update(array, pos, value, lo, mid, 2*i);
-  update(array, pos, value, mid + 1, hi, 2*i + 1);
-  segtree[i] = segtree[2*i] + segtree[2*i + 1];
-}
+  void build() { build(1, 0, size - 1); }
+  Data query(int qlo, int qhi) { return query(qlo, qhi, 1, 0, size - 1); }
+  void update(int pos, Data value) { update(pos, value, 1, 0, size - 1); }
+  void build(int i, int lo, int hi)
+  {
+    if (lo == hi)
+    {
+      st[i] = data[lo];
+      return;
+    }
+    int mid = (lo + hi) >> 1;
+    build(2*i, lo, mid), build(2*i + 1, mid + 1, hi);
+    st[i] = st[2*i] + st[2*i + 1];
+  }
+  Data query(int qlo, int qhi, int i, int lo, int hi)
+  {
+    if (hi < qlo || lo > qhi) return nil;
+    if (lo >= qlo && hi <= qhi) return st[i];
+    int mid = (lo + hi) >> 1;
+    return query(qlo, qhi, 2*i, lo, mid) + query(qlo, qhi, 2*i + 1, mid + 1, hi);
+  }
+  void update(int pos, Data &value, int i, int lo, int hi)
+  {
+    if (lo == hi)
+    {
+      st[i] = data[lo] = value;
+      return;
+    }
+    int mid = (lo + hi) >> 1;
+    if (pos <= mid) update(pos, value, 2*i, lo, mid);
+    else update(pos, value, 2*i + 1, mid + 1, hi);
+    st[i] = st[2*i] + st[2*i + 1];
+  }
+};
 
 int main()
 {
   int n; scanf("%d", &n);
-  int array[n]; for (int i = 0; i < n; i ++) scanf("%d", &array[i]);
-  build(array, 0, n - 1, 1);
-  // printSegTree(0, n - 1, 1, 0);
+  Segtree segtree(n);
+  for (int i = 0; i < n; i ++) scanf("%d", &segtree.data[i].value);
+  segtree.build();
 
-  char kind;
-  while (scanf("%c", &kind) != EOF)
+  char kind[2];
+  while (scanf(" %s", kind) != EOF)
   {
-    if (kind == 'Q')
+    if (kind[0] == 'Q')
     {
       int lo, hi; scanf("%d %d", &lo, &hi);
-      printf("Sum(%d, %d) = %d\n", lo, hi, query(lo, hi, 0, n - 1, 1));
+      printf("Sum(%d, %d) = %d\n", lo, hi, segtree.query(lo, hi).value);
     }
-    else if (kind == 'U')
+    else if (kind[0] == 'U')
     {
-      int pos, value; scanf("%d %d", &pos, &value); update(array, pos, value, 0, n - 1, 1);
+      int pos, value; scanf("%d %d", &pos, &value);
+      segtree.update(pos, Data{value});
       printf("Update(%d with %d)\n", pos, value);
-      // printSegTree(0, n - 1, 1, 0);
     }
   }
   return(0);

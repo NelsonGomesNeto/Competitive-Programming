@@ -1,6 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
-const int maxSize = 1e6;
+const int maxSize = 1e7;
 int n, a[maxSize], segtree[2 * maxSize];
 
 // From n to 2*n - 1: put base cases
@@ -38,11 +38,11 @@ int main()
   build();
   // printSegmentTree();
 
-  char op; int lo, hi, value;
-  while (scanf("%c %d %d", &op, &lo, &hi) != EOF)
+  char op[2]; int lo, hi, value;
+  while (scanf(" %s %d %d", op, &lo, &hi) != EOF)
   {
-    if (op == 'Q') printf("Sum(%d, %d) = %d\n", lo, hi, query(lo, hi));
-    if (op == 'U') printf("Update(%d with %d)\n", lo, hi), update(lo, hi - a[lo]);
+    if (op[0] == 'Q') printf("Sum(%d, %d) = %d\n", lo, hi, query(lo, hi));
+    if (op[0] == 'U') printf("Update(%d with %d)\n", lo, hi), update(lo, hi - a[lo]);
   }
 
   return(0);
