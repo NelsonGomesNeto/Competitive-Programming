@@ -80,10 +80,10 @@ struct Segtree
   }
 };
 
-int subtreeSize[maxN], level[maxN];
 // Each heavy path has it's own segtree
 // Each vertex belongs to a single heavy path (segtree)
-int vertexHeavyPath[maxN], vertexPos[maxN], parentHeavyPath[maxN], parentHeavyPathVertex[maxN];
+int subtreeSize[maxN], level[maxN], parent[maxN];
+int heavyPath[maxN], position[maxN];
 vector<vector<int>> heavyPaths;
 vector<Segtree<Data>> segtrees;
 
@@ -93,45 +93,43 @@ void hldPrecalculations(int u = 0, int prv = -1)
   for (int v: tree[u])
     if (v != prv)
     {
-      level[v] = level[u] + 1;
+      level[v] = level[u] + 1, parent[v] = u;
       hldPrecalculations(v, u);
       subtreeSize[u] += subtreeSize[v];
     }
 }
-// It might be much easier to build the heavy paths from bottom up
-void buildHeavyPaths(int u = 0, int prv = -1, int currentHeavyPathIndex = 0)
+void buildHeavyPaths(int u = 0, int prv = -1, int currIndex = 0)
 {
   if (heavyPaths.empty()) heavyPaths.push_back(vector<int>());
-  heavyPaths[currentHeavyPathIndex].push_back(u);
+  heavyPaths[currIndex].push_back(u);
 
   for (int v: tree[u])
-    if (v != prv && 2*subtreeSize[v] >= subtreeSize[u]) // heavy-edge
-      buildHeavyPaths(v, u, currentHeavyPathIndex);
-
-  for (int v: tree[u])
-    if (v != prv && 2*subtreeSize[v] < subtreeSize[u]) // light-edge
+    if (v != prv)
     {
-      int newHeavyPathIndex = heavyPaths.size();
-      parentHeavyPath[newHeavyPathIndex] = currentHeavyPathIndex, parentHeavyPathVertex[newHeavyPathIndex] = u;
-      heavyPaths.push_back(vector<int>());
-      buildHeavyPaths(v, u, newHeavyPathIndex);
+      if (2*subtreeSize[v] >= subtreeSize[u]) // heavy-edge
+        buildHeavyPaths(v, u, currIndex);
+      else // light-edge
+      {
+        heavyPaths.push_back(vector<int>());
+        buildHeavyPaths(v, u, heavyPaths.size() - 1);
+      }
     }
 }
 Data query(int u, int v)
 {
   Data ans = nil;
-  for (; vertexHeavyPath[u] != vertexHeavyPath[v]; u = parentHeavyPathVertex[vertexHeavyPath[u]])
+  for (; heavyPath[u] != heavyPath[v]; u = parent[heavyPaths[heavyPath[u]][0]])
   {
-    if (level[u] < level[v]) swap(u, v);
-    ans = ans + segtrees[vertexHeavyPath[u]].query(0, vertexPos[u]);
+    if (level[heavyPaths[heavyPath[u]][0]] < level[heavyPaths[heavyPath[v]][0]]) swap(u, v);
+    ans = ans + segtrees[heavyPath[u]].query(0, position[u]);
   }
   if (level[u] < level[v]) swap(u, v);
-  return ans + segtrees[vertexHeavyPath[u]].query(vertexPos[v], vertexPos[u]);
+  return ans + segtrees[heavyPath[u]].query(position[v], position[u]);
 }
 void update(int u, Data newValue)
 {
   values[u] = newValue.value;
-  segtrees[vertexHeavyPath[u]].update(vertexPos[u], newValue);
+  segtrees[heavyPath[u]].update(position[u], newValue);
 }
 
 int main()
@@ -155,15 +153,16 @@ int main()
     hldPrecalculations();
     buildHeavyPaths();
     // Build segtrees
-    for (int i = 0; i < heavyPaths.size(); i++) 
+    for (int i = 0; i < heavyPaths.size(); i++)
     {
-      vector<Data> data;
+      segtrees.push_back(Segtree(heavyPaths[i].size(), nil));
+      int j = 0;
       for (int u: heavyPaths[i])
       {
-        vertexHeavyPath[u] = i, vertexPos[u] = data.size();
-        data.push_back(Data{values[u]});
+        heavyPath[u] = i, position[u] = j;
+        segtrees[i].data[j++] = Data{values[u]};
       }
-      segtrees.push_back(Segtree(data, nil));
+      segtrees[i].build();
     }
 
     printf("Heavy Paths:\n");
