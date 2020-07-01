@@ -99,6 +99,11 @@
   * [Company](https://codeforces.com/contest/1062/problem/E) (MIND BLOWING "in and out" + LCA problem, look for the border vertices)
   * [QTREE2](https://www.spoj.com/problems/QTREE2/) (This problem is a MUST DO with Binary Lifting, at most O(lg(n)) in both queries, you can do it)
 
+# Heavy-Light Decomposition (HLD)
+* #### Problems
+  * [QTREE](https://www.spoj.com/problems/QTREE/) (First problem if you want to learn HLD)
+  * [QTREE3](https://www.spoj.com/OI/problems/QTREE3/) (You will have to submit somewhere else, but try it, it's a different mindblowing way to use HLD)
+
 # Graph
 ## Shortest Path, MST, Traversal, Topological Sort, ...
 * #### Problems
