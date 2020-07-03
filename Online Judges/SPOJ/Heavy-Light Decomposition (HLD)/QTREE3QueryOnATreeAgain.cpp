@@ -44,15 +44,16 @@ void buildHld(int u = 0, int prv = -1, int curr = 0)
 
 int query(int u)
 {
-  int hp = -1;
+  int ans = -1;
   while (u != 0)
   {
-    if (!blacks[heavyPath[u]].empty())
-      hp = heavyPath[u];
+    if (!blacks[heavyPath[u]].empty() && position[u] >= *blacks[heavyPath[u]].begin())
+      ans = heavyPaths[heavyPath[u]][*blacks[heavyPath[u]].begin()];
     u = parent[heavyPaths[heavyPath[u]][0]];
   }
-  if (hp == -1) return -1;
-  return heavyPaths[hp][*blacks[hp].begin()] + 1;
+  if (!blacks[heavyPath[u]].empty() && position[u] >= *blacks[heavyPath[u]].begin())
+    ans = heavyPaths[heavyPath[u]][*blacks[heavyPath[u]].begin()];
+  return ans == -1 ? -1 : ans + 1;
 }
 
 int main()
