@@ -103,6 +103,7 @@
 * #### Problems
   * [QTREE](https://www.spoj.com/problems/QTREE/) (First problem if you want to learn HLD)
   * [QTREE3](https://www.spoj.com/OI/problems/QTREE3/) (You will have to submit somewhere else, but try it, it's a different mindblowing way to use HLD)
+  * [Árvore Colorida](https://neps.academy/problem/777) (Very interesting HLD problem, bitmask ftw)
 
 # Graph
 ## Shortest Path, MST, Traversal, Topological Sort, ...
