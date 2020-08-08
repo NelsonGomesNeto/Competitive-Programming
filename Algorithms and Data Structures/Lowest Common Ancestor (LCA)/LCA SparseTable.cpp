@@ -47,9 +47,10 @@ void printTree(int u, int depth)
 
 int LCA(int u, int v)
 {
-  int ans = 1 << 20, lo = min(first[u], first[v]), hi = max(first[u], first[v]);
-  int qs = logdp[hi - lo + 1];
-  return(revMap[min(sparseTable[lo][qs], sparseTable[hi - (1 << qs) + 1][qs])]);
+  int lo = first[u], hi = first[v];
+  if (lo > hi) swap(lo, hi);
+  int qs = logDP[hi - lo + 1];
+  return revMap[min(sparseTable[lo][qs], sparseTable[hi - (1 << qs) + 1][qs])];
   for (int j = maxLog; j >= 0; j --)
     if (lo + (1 << j) - 1 <= hi)
     {
