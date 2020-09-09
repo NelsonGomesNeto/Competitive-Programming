@@ -21,6 +21,7 @@ struct Segtree
   T nil;
   vector<T> data;
   vector<T> st;
+  Segtree() { }
   Segtree(int size, T nil) : size(size), nil(nil)
   {
     data.resize(size);
