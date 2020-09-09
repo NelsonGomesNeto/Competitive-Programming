@@ -327,6 +327,10 @@
   * [Gluing Pictures](https://matcomgrader.com/problem/9641/gluing-pictures/) (Awesome Suffix Array problem, beautiful binary search (Suffix Automaton and Suffix Tree may be more direct))
   * [Three Substrigs](https://atcoder.jp/contests/panasonic2020/tasks/panasonic2020_e) (Awesome string match problem, think about the easy O(n^3) and try to reduce something on it to O(1) (given some precalculations :3))
 
+# Interactive
+* #### Problems
+  * [Chocolate Bunny](https://codeforces.com/contest/1407/problem/C) (Very interesting easy interactive problem)
+
 # Etc
 * #### Problems
   * [Balé](http://olimpiada.ic.unicamp.br/pratique/p1/2011/f2/bale/) (Easy inversion count problem)
