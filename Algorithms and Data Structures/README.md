@@ -188,6 +188,7 @@
   * [Arson In Berland Forest](https://codeforces.com/contest/1262/problem/E) (AMAZING Binary Search + accumulated sum, WOW)
   * [Dividing Chocolate](https://atcoder.jp/contests/abc159/tasks/abc159_e) (Interesting easy matrix sum + bitmask + greedy)
   * [Three Blocks Palindrome](https://codeforces.com/contest/1335/problem/E2) (Awesome left and right precalculation; NICE)
+  * [Discrete Centrifugal Jumps](https://codeforces.com/contest/1407/problem/D) (Stack trick to precalculate the jumps; NICE (there's also a very simple DP after tehe))
 
 ## Knapsack
 * #### Problems
