@@ -135,6 +135,7 @@
   * [Tree Paths on a Tree](https://codeforces.com/contest/1294/problem/F) (AMAZING bfs problem, find diameter and store the vertices on it's path to something ;3)
   * [Nearest Opposite Parity](https://codeforces.com/contest/1272/problem/E) (Surprising BFS + DP problem, NICE)
   * [HackerEarth ShortestPath](https://www.hackerearth.com/pt-br/practice/algorithms/graphs/shortest-path-algorithms/practice-problems/?sort_by=solved) (There are some interesting problems ^~^)
+  * [Egor in the Republic of Dagestan](https://codeforces.com/contest/1407/problem/E) (Longest shortest path?? hehe; Awesome constructive algorithm using BFS)
 
 ## Centroid Decomposition
 * #### Problems
