@@ -320,6 +320,7 @@
   * [Harmonious Graph](https://codeforces.com/contest/1253/problem/D) (Remind that DSU can be used to store lot's of interesting informations such as minimum and maximum vertex)
   * [HackerEarth DSU Problems](https://www.hackerearth.com/pt-br/practice/data-structures/disjoint-data-strutures/basics-of-disjoint-data-structures/practice-problems/) (There are some interesting problems)
   * [Friend Suggestions](https://atcoder.jp/contests/abc157/tasks/abc157_d) (VERY NICE use of DSU)
+  * [Experience](https://codeforces.com/edu/course/2/lesson/7/1/practice/contest/289390/problem/C) (Amazingly clever DSU problem, no maps, just a smart use of DSU)
 
 # String
 * #### Problems
