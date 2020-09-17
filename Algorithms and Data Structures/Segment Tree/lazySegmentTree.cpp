@@ -27,6 +27,7 @@ struct LazySegtree
   vector<T> st;
   vector<T> lazy;
   vector<int> pending;
+  LazySegtree() { }
   LazySegtree(int size, T nil) : size(size), nil(nil)
   {
     data.resize(size);

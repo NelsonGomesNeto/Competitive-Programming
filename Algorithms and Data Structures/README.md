@@ -51,6 +51,7 @@
   * [11402 - Ahoy Pirates](https://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=2397) (Set update, be careful)
   * [Acordes Intergaláticos](https://www.urionlinejudge.com.br/judge/en/problems/view/2658) (Time is very short, be careful with constants)
   * [Present](https://codeforces.com/contest/460/problem/C) ((Min, Pos) Segtree with Lazy Propagation; implementation is interesting ^~^)
+  * [Fixed Point Removal](https://codeforces.com/contest/1405/problem/E) (Awesome Lazy Segtree problem. Offline solution ftw (although I don't like it))
 
 # Lowest Common Ancestor (LCA) :star:
 * There are two main implementations of LCA, both use a Sparse Table to speed up their queries and takes O(n\*lg) to preprocess.
