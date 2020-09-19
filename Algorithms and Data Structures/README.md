@@ -283,6 +283,7 @@
   * [Modularness](https://atcoder.jp/contests/abc156/tasks/abc156_f) (AWESOME, modular arithmetic problem; try to solve the opposite of what the problem asks you :3)
   * [Divisible Substring](https://atcoder.jp/contests/abc158/tasks/abc158_e) (NICE, modular arithmetic problem; gcd(p, 10) is very important :3)
   * [Sum of gcd of Tuples (Hard)](https://atcoder.jp/contests/abc162/tasks/abc162_e) (AMAZING use of "dp"/precalculation (while building the answer); try to count how many times each gcd happens)
+  * [Three Sequences](https://codeforces.com/contest/1406/problem/D) (NICE, you will get to the idea with paper and pen; think about a rule for b and c, ...)
 
 # Geometry
 * #### Problems
