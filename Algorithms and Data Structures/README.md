@@ -335,6 +335,7 @@
 # Interactive
 * #### Problems
   * [Chocolate Bunny](https://codeforces.com/contest/1407/problem/C) (Very interesting easy interactive problem)
+  * [Deleting Numbers](https://codeforces.com/contest/1406/problem/E) (Nice mathy interactive problem, sqrt ftw)
 
 # Etc
 * #### Problems

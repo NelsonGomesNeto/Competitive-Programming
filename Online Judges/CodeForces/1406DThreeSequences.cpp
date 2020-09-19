@@ -4,9 +4,6 @@
 #define ldouble long double
 using namespace std;
 
-const int maxN = 1e5; int n, q;
-lli a[maxN];
-
 /* Tutorial:
   I will index by 1
 
@@ -64,6 +61,9 @@ lli a[maxN];
   to properly update them)
 
 */
+
+const int maxN = 1e5; int n, q;
+lli a[maxN];
 
 lli delta[maxN - 1];
 lli deltaSum = 0;
