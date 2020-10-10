@@ -291,6 +291,7 @@
   * [Power Transmission](https://codeforces.com/contest/1163/problem/C2) (Amazing lines and intersections problem, use ax + by = c equation)
   * [Rectangle Park](https://www.urionlinejudge.com.br/judge/en/problems/view/1938) (Amazing coordinate compression problem)
   * [Yakininku Optimization Problem](https://atcoder.jp/contests/abc157/tasks/abc157_f) (Very interesting circle intersection problem)
+  * [Rain of Fire](https://codeforces.com/contest/1419/problem/F) (Very interesting Geometry + Graph problem, NICE, NICE, NICE)
 
 # Greedy
 * #### Problems
