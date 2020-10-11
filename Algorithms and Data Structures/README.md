@@ -137,6 +137,7 @@
   * [Nearest Opposite Parity](https://codeforces.com/contest/1272/problem/E) (Surprising BFS + DP problem, NICE)
   * [HackerEarth ShortestPath](https://www.hackerearth.com/pt-br/practice/algorithms/graphs/shortest-path-algorithms/practice-problems/?sort_by=solved) (There are some interesting problems ^~^)
   * [Egor in the Republic of Dagestan](https://codeforces.com/contest/1407/problem/E) (Longest shortest path?? hehe; Awesome constructive algorithm using BFS)
+  * [Graph and Queries](https://codeforces.com/contest/1417/problem/F) (Mind blowing DSU + EulerTour + Segtree problem)
 
 ## Centroid Decomposition
 * #### Problems
