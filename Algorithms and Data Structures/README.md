@@ -138,6 +138,7 @@
   * [HackerEarth ShortestPath](https://www.hackerearth.com/pt-br/practice/algorithms/graphs/shortest-path-algorithms/practice-problems/?sort_by=solved) (There are some interesting problems ^~^)
   * [Egor in the Republic of Dagestan](https://codeforces.com/contest/1407/problem/E) (Longest shortest path?? hehe; Awesome constructive algorithm using BFS)
   * [Graph and Queries](https://codeforces.com/contest/1417/problem/F) (Mind blowing DSU + EulerTour + Segtree problem)
+  * [Avoid Rainbow Cycles](https://codeforces.com/contest/1408/problem/E) (Awesome use of MST; hint: bipartite graphs)
 
 ## Centroid Decomposition
 * #### Problems
