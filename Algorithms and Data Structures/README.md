@@ -347,3 +347,4 @@
   * [Little Elephant and Cards](https://codeforces.com/problemset/problem/204/B) (Interesting easy map problem, can be done using coordinate compression)
   * [Código](https://neps.academy/problem/44) (Intersting set problem)
   * [String Equivalence](https://atcoder.jp/contests/panasonic2020/tasks/panasonic2020_d) (Awesome normalization problem)
+  * [Two Different](https://codeforces.com/contest/1408/problem/F) (Clever constructive problem, aim on two different numbers, please)
