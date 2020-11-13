@@ -1,0 +1,32 @@
+4x4
+aaaa
+bbbc
+bddc
+ddcc
+
+6x6
+aaaaaa
+dbbbbb
+deeeeb
+dfffec
+dfffec
+ddcccc
+
+
+
+7x7
+aaaaaaa
+ bbbbbb
+      b
+      
+
+aaaaaaa
+gbbbbbb
+gcccccb
+gddddcc
+ggeeddd
+geeeeef
+gffffff
+
+8x8
+aaaaaaaaa
