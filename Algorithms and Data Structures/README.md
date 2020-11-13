@@ -245,6 +245,7 @@
   * [Lannister Army](https://www.spoj.com/problems/LARMY/) (Interesting Divide and Conquer DP optimization (time limit is very strict, precalculate the getCost))
   * [Make Them Similar](https://codeforces.com/contest/1257/problem/F) (Very interesting Meet In The Middle problem, also need to normalize)
   * [Charlie New PC](https://csacademy.com/ieeextreme-practice/task/charlie-new-pc/) (Amazing Meet In The Middle problem)
+  * [Frog 3](https://atcoder.jp/contests/dp/tasks/dp_z) (BEAUTIFUL Convex Hull Trick)
 
 # Search
 * #### Problems
