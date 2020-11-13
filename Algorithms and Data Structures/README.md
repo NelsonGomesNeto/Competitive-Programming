@@ -156,6 +156,7 @@
 ## Longest Incresing Sequence (LIS)
 * #### Problems:
   * [Smider Pan](https://www.urionlinejudge.com.br/judge/en/problems/view/2943) (Pure LIS problem, n² is enough, but learn the nlg)
+  * [Flowers](https://atcoder.jp/contests/dp/tasks/dp_q) (MIND BLOWING LIS, reduce the n² DP version to n*lg)
 
 ## Coin change
 * #### Problems:
