@@ -238,6 +238,10 @@
   * [Two Arrays](https://codeforces.com/contest/1288/problem/C) (Amazing dp, optimize memo size, N x M memo is possible and beautiful)
   * [Removing Robots](https://atcoder.jp/contests/abc158/tasks/abc158_f) (Mind blowing bottom-up DP, will need accumulated sum and segtree to precalculate some stuff :3)
 
+## Partition DP
+* #### Problems
+  * [Clear the String](https://codeforces.com/contest/1132/problem/F) (Interesting Partition DP)
+
 ## Advanced Optimizations
 * #### Problems
   * [Ciel and Gondolas](https://codeforces.com/contest/321/problem/E) (Very interesting Divide and Conquer DP optimization (USE FAST IO, read as char and convert to int))
