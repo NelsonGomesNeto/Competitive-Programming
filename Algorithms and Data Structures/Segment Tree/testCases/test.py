@@ -7,13 +7,13 @@ os.system("g++ ./../segmentTree.cpp -o test -std=c++17 -O2 -w")
 os.system("g++ ./../iterativeSegmentTree.cpp -o test2 -std=c++17 -O2 -w")
 
 f = open("in", "w")
-arraySize = int(input())
+arraySize = int(1e7)
 array = []
 for i in range(arraySize): array += [randint(-1000, 1000)]
 print(arraySize, file=f)
 print(*array, file=f)
 
-queries = int(input())
+queries = int(1e7)
 for i in range(queries):
     kind = randint(0, 1)
     lo = randint(0, arraySize - 1)

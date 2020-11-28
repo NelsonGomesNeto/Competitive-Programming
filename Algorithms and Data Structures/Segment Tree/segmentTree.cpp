@@ -12,6 +12,7 @@ struct Data
     return Data{value + other.value};
   }
 };
+const Data nil = Data{0};
 
 // DON'T FORGET TO DEFINE THE NIL!!!
 template<class T>
@@ -66,11 +67,12 @@ struct Segtree
     st[i] = st[2*i] + st[2*i + 1];
   }
 };
+Segtree<Data> segtree;
 
 int main()
 {
   int n; scanf("%d", &n);
-  Segtree<Data> segtree(n, Data{0});
+  segtree = Segtree<Data>(n, nil);
   for (int i = 0; i < n; i ++) scanf("%d", &segtree.data[i].value);
   segtree.build();
 

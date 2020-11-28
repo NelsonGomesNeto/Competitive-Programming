@@ -1,49 +1,82 @@
 #include <bits/stdc++.h>
+#define DEBUG if(0)
+#define lli long long int
+#define ldouble long double
 using namespace std;
-const int maxSize = 1e7;
-int n, a[maxSize], segtree[2 * maxSize];
 
-// From n to 2*n - 1: put base cases
-// From 0 to n - 1: put other nodes
-
-void printSegmentTree()
+struct Data
 {
-  for (int i = 0; i < 2*n; i ++) printf("%d%c", segtree[i], i < 2*n - 1 ? ' ' : '\n');
-}
+  int value;
+  Data operator+(const Data &other)
+  {
+    return Data{value + other.value};
+  }
+};
+const Data nil = Data{0};
 
-void build()
+template<class T>
+struct Segtree
 {
-  for (int i = 0; i < n; i ++) segtree[n + i] = a[i]; // leafs
-  for (int i = n - 1; i > 0; i --) segtree[i] = segtree[2*i] + segtree[2*i + 1];
-}
-
-int query(int lo, int hi)
-{
-  int value = 0;
-  for (lo += n, hi += n + 1; lo < hi; lo >>= 1, hi >>= 1)
-    value += (lo & 1 ? segtree[lo ++] : 0) + (hi & 1 ? segtree[-- hi] : 0);
-  return(value);
-}
-
-void update(int position, int diff)
-{
-  for (int i = position + n; i; i >>= 1) segtree[i] += diff;
-  a[position] += diff;
-}
+  int size;
+  T nil;
+  vector<T> data;
+  vector<T> st;
+  Segtree() { }
+  Segtree(int size, T nil) : size(size), nil(nil)
+  {
+    data.resize(size);
+    st.resize(2*size);
+  }
+  Segtree(vector<T> &data, T nil) : size(data.size()), data(data), nil(nil)
+  {
+    st.resize(2*size);
+    build();
+  }
+  void build()
+  {
+    for (int i = 0; i < size; i++) st[size + i] = data[i];
+    for (int i = size - 1; i; i--) st[i] = st[2*i] + st[2*i + 1];
+  }
+  T query(int lo, int hi)
+  {
+    T ans = nil;
+    for (lo += size, hi += size + 1; lo < hi; lo >>= 1, hi >>= 1)
+    {
+      if (lo & 1) ans = ans + st[lo++];
+      if (hi & 1) ans = ans + st[--hi];
+    }
+    return ans;
+  }
+  void update(int pos, T value)
+  {
+    st[pos + size] = data[pos] = value;
+    for (int i = (pos + size) >> 1; i; i >>= 1)
+      st[i] = st[2*i] + st[2*i + 1];
+  }
+};
+Segtree<Data> segtree;
 
 int main()
 {
-  scanf("%d", &n);
-  for (int i = 0; i < n; i ++) scanf("%d", &a[i]);
-  build();
-  // printSegmentTree();
+  int n; scanf("%d", &n);
+  segtree = Segtree<Data>(n, nil);
+  for (int i = 0; i < n; i ++) scanf("%d", &segtree.data[i].value);
+  segtree.build();
 
-  char op[2]; int lo, hi, value;
-  while (scanf(" %s %d %d", op, &lo, &hi) != EOF)
+  char kind[2];
+  while (scanf(" %s", kind) != EOF)
   {
-    if (op[0] == 'Q') printf("Sum(%d, %d) = %d\n", lo, hi, query(lo, hi));
-    if (op[0] == 'U') printf("Update(%d with %d)\n", lo, hi), update(lo, hi - a[lo]);
+    if (kind[0] == 'Q')
+    {
+      int lo, hi; scanf("%d %d", &lo, &hi);
+      printf("Sum(%d, %d) = %d\n", lo, hi, segtree.query(lo, hi).value);
+    }
+    else if (kind[0] == 'U')
+    {
+      int pos, value; scanf("%d %d", &pos, &value);
+      segtree.update(pos, Data{value});
+      printf("Update(%d with %d)\n", pos, value);
+    }
   }
-
-  return(0);
+  return 0;
 }
