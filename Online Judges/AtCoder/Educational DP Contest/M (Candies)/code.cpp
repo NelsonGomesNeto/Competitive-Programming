@@ -62,10 +62,10 @@ int main()
     for (int i = 0; i < n; i++)
       scanf("%d", &a[i]);
 
-    // memset(memo, -1, sizeof(memo));
-    // memset(pmemo, -1, sizeof(pmemo));
+    memset(memo, -1, sizeof(memo));
+    memset(pmemo, -1, sizeof(pmemo));
     // lli ans = solve();
-    lli ans = solve2();
+    lli ans = solve();
     printf("%lld\n", ans);
   }
   return 0;
