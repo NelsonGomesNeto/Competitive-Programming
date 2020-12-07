@@ -174,6 +174,7 @@
   * [Daniel and Spring Cleaning](https://codeforces.com/contest/1245/problem/F) (Very interesting digit-DP using binary representation)
   * [Almost Everywhere Zero](https://atcoder.jp/contests/abc154/tasks/abc154_e) (Nice, couting valids below a limit)
   * [Digits Count](https://www.urionlinejudge.com.br/judge/en/problems/view/1138) (NICE digit-DP problem)
+  * [Coincidence](https://atcoder.jp/contests/abc138/tasks/abc138_f) (MIND BLOWING, XOR/mod part is a bit hard, but the DigitDP part is worth it)
 
 ## Precalculation
 * #### Problems
