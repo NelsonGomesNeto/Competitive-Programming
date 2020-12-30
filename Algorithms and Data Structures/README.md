@@ -105,6 +105,7 @@
   * [QTREE](https://www.spoj.com/problems/QTREE/) (First problem if you want to learn HLD)
   * [QTREE3](https://www.spoj.com/OI/problems/QTREE3/) (You will have to submit somewhere else, but try it, it's a different mindblowing way to use HLD)
   * [Árvore Colorida](https://neps.academy/problem/777) (Very interesting HLD problem, bitmask ftw)
+  * [Water Tree](https://codeforces.com/contest/343/problem/D) (MIND BLOWING HLD problem, you can do without subtree query and update; but to learn that is marvelous)
 
 # Graph
 ## Shortest Path, MST, Traversal, Topological Sort, ...

@@ -6,17 +6,13 @@ using namespace std;
 
 struct Data
 {
-  int value;
+  int fillTimestamp, emptyTimestamp;
   Data operator+(const Data &other)
   {
-    return Data{value + other.value};
-  }
-  Data operator*(const int other)
-  {
-    return Data{value * other};
+    return Data{max(fillTimestamp, other.fillTimestamp), max(emptyTimestamp, other.emptyTimestamp)};
   }
 };
-const Data nil = Data{0};
+const Data nil = Data{-1, -1};
 
 // DON'T FORGET TO DEFINE THE NIL!!!
 template<class T>
@@ -31,10 +27,10 @@ struct LazySegtree
   LazySegtree() { }
   LazySegtree(int size, T nil) : size(size), nil(nil)
   {
-    data.resize(size);
-    st.resize(4*size);
-    lazy.resize(4*size);
-    pending.resize(4*size);
+    data.resize(size, nil);
+    st.resize(4*size, nil);
+    lazy.resize(4*size, nil);
+    pending.resize(4*size, 0);
   }
   LazySegtree(vector<T> &data, T nil) : size(data.size()), data(data), nil(nil)
   {
@@ -61,10 +57,11 @@ struct LazySegtree
   {
     if (pending[i])
     {
-      st[i] = lazy[i] * (hi - lo + 1);
+      st[i] = st[i] + lazy[i];
       if (lo != hi)
       {
-        lazy[2*i] = lazy[2*i + 1] = lazy[i];
+        lazy[2*i] = lazy[2*i] + lazy[i];
+        lazy[2*i + 1] = lazy[2*i + 1] + lazy[i];
         pending[2*i] = pending[2*i + 1] = pending[i];
       }
       lazy[i] = nil, pending[i] = 0;
@@ -194,19 +191,8 @@ struct HeavyLightDecomposition
 };
 HeavyLightDecomposition<Data> hld;
 
-const int maxN = 1e5;
-int n;
+const int maxN = 5e5; int n, q;
 vector<vector<int>> tree;
-int values[maxN];
-
-void printTree(int u = 0, int prv = -1, int depth = 0)
-{
-  for (int i = 0; i < depth; i++) printf("   ");
-  printf("%d\n", u);
-  for (int v: tree[u])
-    if (v != prv)
-      printTree(v, u, depth + 1);
-}
 
 int main()
 {
@@ -214,46 +200,42 @@ int main()
   {
     tree.clear();
     tree.resize(n);
-    for (int i = 0; i < n; i++) scanf("%d", &values[i]);
-
-    for (int i = 0; i < n - 1; i++)
+    for (int i = 1; i < n; i++)
     {
-      int u, v; scanf("%d %d", &u, &v);
+      int u, v; scanf("%d %d", &u, &v); u--, v--;
       tree[u].push_back(v), tree[v].push_back(u);
     }
 
     hld = HeavyLightDecomposition<Data>(tree, nil);
     hld.build();
     for (int u = 0; u < n; u++)
-      hld.segtree.data[hld.position[u]] = Data{values[u]};
+      hld.segtree.data[hld.position[u]] = nil;
     hld.segtree.build();
 
-    printf("Tree:\n");
-    printTree();
-
-    printf("Heavy Paths:\n");
-    for (int i = 0; i < hld.heavyPaths.size(); i++)
-    {
-      printf("\t");
-      for (int j = 0; j < hld.heavyPaths[i].size(); j++)
-        printf("%d%c", hld.heavyPaths[i][j], j < hld.heavyPaths[i].size() - 1 ? ' ' : '\n');
+    DEBUG {
+      printf("Heavy Paths:\n");
+      for (int i = 0; i < hld.heavyPaths.size(); i++)
+      {
+        printf("\t");
+        for (int j = 0; j < hld.heavyPaths[i].size(); j++)
+          printf("%d%c", hld.heavyPaths[i][j], j < hld.heavyPaths[i].size() - 1 ? ' ' : '\n');
+      }
+      printf("\n");
     }
 
-    printf("Queries:\n");
-    int q; scanf("%d", &q);
-    while (q--)
+    scanf("%d", &q);
+    for (int qq = 1; qq <= q; qq++)
     {
-      char op; scanf(" %c", &op);
-      if (op == 'Q')
+      int op, u; scanf("%d %d", &op, &u); u--;
+      DEBUG printf("\t%d %d\n", op, u + 1);
+      if (op == 1) // to fill
+        hld.updateSubtree(u, Data{qq, -1});
+      else if (op == 2) // to empty
+        hld.updatePath(u, 0, Data{-1, qq});
+      else // is full?
       {
-        int u, v; scanf("%d %d", &u, &v);
-        printf("\tsumPath(%d, %d) = %d\n", u, v, hld.queryPath(u, v).value);
-      }
-      else
-      {
-        int u, value; scanf("%d %d", &u, &value);
-        printf("\tupdate node %d's value from %d to %d\n", u, values[u], value);
-        hld.updateNode(u, Data{value});
+        Data ans = hld.queryPath(u, u);
+        printf("%d\n", ans.fillTimestamp > ans.emptyTimestamp);
       }
     }
   }
