@@ -15,6 +15,7 @@
   * [No Prime Sum](https://csacademy.com/contest/archive/task/no-prime-sum) (Interesting Minimum Vertex Cover problem, split into odd and even numbers to apply MVC)
   * [HackerEarth Problem Package](https://www.hackerearth.com/pt-br/practice/algorithms/graphs/maximum-flow/practice-problems/)
   * [UVA Problem Package](https://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&category=685)
+  * [Zebraness](https://atcoder.jp/contests/abc193/tasks/abc193_f) (AMAZING MaxFlow problem, though I don't know how to extract the optimal choice, only the value of it :/)
 
 ## Min Cost Flow :star:
 * #### minCostFlow with successive shortest paths.
@@ -297,6 +298,7 @@
   * [Divisible Substring](https://atcoder.jp/contests/abc158/tasks/abc158_e) (NICE, modular arithmetic problem; gcd(p, 10) is very important :3)
   * [Sum of gcd of Tuples (Hard)](https://atcoder.jp/contests/abc162/tasks/abc162_e) (AMAZING use of "dp"/precalculation (while building the answer); try to count how many times each gcd happens)
   * [Three Sequences](https://codeforces.com/contest/1406/problem/D) (NICE, you will get to the idea with paper and pen; think about a rule for b and c, ...)
+  * [Oversleeping](https://atcoder.jp/contests/abc193/tasks/abc193_e) (AWESOME, model it as a diophantine equations)
 
 # Geometry
 * #### Problems
