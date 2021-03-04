@@ -142,6 +142,7 @@
   * [Graph and Queries](https://codeforces.com/contest/1417/problem/F) (Mind blowing DSU + EulerTour + Segtree problem)
   * [Avoid Rainbow Cycles](https://codeforces.com/contest/1408/problem/E) (Awesome use of MST; hint: bipartite graphs)
   * [Jaime's greedy delivery](https://codeforces.com/gym/102890/problem/J) (Awesome multiple BFSs + DP)
+  * [Fib-tree](https://codeforces.com/contest/1491/problem/E) (NICE simple traversal problem)
 
 ## Centroid Decomposition
 * #### Problems
