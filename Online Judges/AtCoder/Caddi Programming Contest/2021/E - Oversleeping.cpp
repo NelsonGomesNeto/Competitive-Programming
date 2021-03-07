@@ -5,9 +5,9 @@
 using namespace std;
 
 /*
-(2x + 2y)n + x <= t < (2x + 2y)n + x + y
+(2x + 2y)n + x <= t < (2x + 2y)n + x + y || em B
   range = y (max 500)
-(p + q)n + p <= t < (p + q)(n + 1)
+(p + q)n + p <= t < (p + q)(n + 1) || acordado
   range = q (max 500)
 
 try all combinations of mod (500^2)
@@ -20,8 +20,17 @@ t - (p + q)n - p == remQ
 t - (p + q)n = remQ + p
 t = remQ + p + (p + q)n2
 
+remQ + p + (p + q)*(y0 + k*(a/g)) >= 0
+(p + q)*k*(a/g) >= -(remQ + p + (p + q)*y0)
+k >= -(remQ + p + (p + q)*y0) / ((p + q)*(a/g))
+k >= -((remQ + p) / (p + q) + y0) / (a/g)
+
 remQ + p + (p + q)n2 = remY + x + (2x + 2y)n1
 (p + q)n2 - (2x + 2y)n1 = remY + x - remQ - p
+
+a*x + b*y = c
+
+x0, y0, g
 
 */
 
@@ -87,6 +96,7 @@ lli findMinSolution(lli remY, lli remQ)
     t2 = inf;
     for (lli kk = k - 2; kk <= k + 2; kk++)
     {
+      // k >= -((remQ + p) / (p + q) + y0) / (a/g)
       lli aux = remQ + p + (p + q)*(y0 + kk * (a / g));
       if (aux >= 0)
         t2 = min(t2, aux);

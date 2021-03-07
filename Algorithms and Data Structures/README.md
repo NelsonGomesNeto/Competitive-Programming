@@ -181,6 +181,7 @@
   * [Almost Everywhere Zero](https://atcoder.jp/contests/abc154/tasks/abc154_e) (Nice, couting valids below a limit)
   * [Digits Count](https://www.urionlinejudge.com.br/judge/en/problems/view/1138) (NICE digit-DP problem)
   * [Coincidence](https://atcoder.jp/contests/abc138/tasks/abc138_f) (MIND BLOWING, XOR/mod part is a bit hard, but the DigitDP part is worth it)
+  * [Digits Paradise in Hexadecimal](https://atcoder.jp/contests/abc194/tasks/abc194_f) (NICE NICE NICE, trust the simple DigitDP)
 
 ## Precalculation
 * #### Problems

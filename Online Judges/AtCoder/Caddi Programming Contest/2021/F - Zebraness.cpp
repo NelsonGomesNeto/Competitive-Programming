@@ -21,7 +21,7 @@ using namespace std;
     3 - if c[i][j] == c[i + 2][j] and c[i + 1][j] == '?':
       We lose 0 points
     4 - if c[i][j] != c[i + 2][j] and c[i + 1][j] == '?':
-      No matter the choice for c[i + 1][j], we lose 1 point.
+      No matter the choice for c[i + 1][j], we lose 1 point
 
   We can generify these cases:
     5 - if c[i][j] == c[i + k][j] and c[i + 1 : i + k - 1][j] == '?':
@@ -44,6 +44,7 @@ using namespace std;
       B -> W or W -> B
     k == 3 (will lose 1 point if):
       B -> B or W -> W
+    ...
 
     It would be very useful if we could manipulate these cases such that all
     of them where B -> W or W -> B.
