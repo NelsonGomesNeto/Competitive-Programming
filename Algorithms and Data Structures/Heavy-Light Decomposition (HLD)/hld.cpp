@@ -178,7 +178,6 @@ struct HeavyLightDecomposition
   }
   void updatePath(int u, int v, T newValue)
   {
-    T ans = nil;
     for (; heavyPath[u] != heavyPath[v]; u = parent[head[u]])
     {
       if (level[head[u]] < level[head[v]]) swap(u, v);

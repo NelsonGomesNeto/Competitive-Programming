@@ -107,6 +107,7 @@
   * [QTREE3](https://www.spoj.com/OI/problems/QTREE3/) (You will have to submit somewhere else, but try it, it's a different mindblowing way to use HLD)
   * [Árvore Colorida](https://neps.academy/problem/777) (Very interesting HLD problem, bitmask ftw)
   * [Water Tree](https://codeforces.com/contest/343/problem/D) (MIND BLOWING HLD problem, you can do without subtree query and update; but to learn that is marvelous)
+  * [Pairs of Paths](https://codeforces.com/contest/1486/problem/F) (AWESOME HLD problem, it's possible to do without HLD, but it's interesting to use HLD with values on edges)
 
 # Graph
 ## Shortest Path, MST, Traversal, Topological Sort, ...
@@ -143,6 +144,7 @@
   * [Avoid Rainbow Cycles](https://codeforces.com/contest/1408/problem/E) (Awesome use of MST; hint: bipartite graphs)
   * [Jaime's greedy delivery](https://codeforces.com/gym/102890/problem/J) (Awesome multiple BFSs + DP)
   * [Fib-tree](https://codeforces.com/contest/1491/problem/E) (NICE simple traversal problem)
+  * [Paired Payment](https://codeforces.com/contest/1486/problem/E) (NICE Dijkstra with states problem)
 
 ## Centroid Decomposition
 * #### Problems
