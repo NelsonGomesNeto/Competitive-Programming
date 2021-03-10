@@ -78,6 +78,56 @@ Segtree<Data> segtree;
 
 const int maxN = 1500000; int n, m;
 int a[maxN];
+int cnt[maxN + 1];
+
+// set<int> zeros;
+// void setUpdate(int value, int delta)
+// {
+//   if (delta == 1)
+//   {
+//     if (cnt[value] == 0)
+//       zeros.erase(value);
+//   }
+//   else
+//   {
+//     if (cnt[value] == 1)
+//       zeros.insert(value);
+//   }
+//   cnt[value] += delta;
+// }
+
+priority_queue<int, vector<int>, greater<int>> zeros;
+bool removed[maxN + 1];
+void priorityQueueUpdate(int value, int delta)
+{
+  if (delta == 1)
+  {
+    if (cnt[value] == 0)
+      removed[value] = true;
+  }
+  else
+  {
+    if (cnt[value] == 1)
+      zeros.push(value);
+  }
+  cnt[value] += delta;
+}
+int priorityQueueQuery()
+{
+  while (true)
+  {
+    int ans = zeros.top();
+
+    if (removed[ans])
+    {
+      removed[ans] = false;
+      zeros.pop();
+    }
+    else
+      return ans;
+  }
+  return -1;
+}
 
 int main()
 {
@@ -88,18 +138,53 @@ int main()
       scanf("%d", &a[i]);
 
     int ans = 1e9;
+
+    // Segtree solution
+    // for (int i = 0; i <= maxN; i++)
+    //   segtree.data[i] = Data{0, i};
+    // segtree.build();
+    // for (int i = 0; i < m; i++)
+    //   segtree.update(a[i], Data{1, 0});
+
+    // for (int i = 0; i + m - 1 < n; i++)
+    // {
+    //   // [i : i + m - 1]
+    //   ans = min(ans, segtree.query(0, maxN).value);
+    //   segtree.update(a[i], Data{-1, 0});
+    //   if (i + m < n) segtree.update(a[i + m], Data{1, 0});
+    // }
+
+    // Set solution
+    // for (int i = 0; i <= maxN; i++)
+    //   zeros.insert(i);
+    // memset(cnt, 0, sizeof(cnt));
+    // for (int i = 0; i < m; i++)
+    //   setUpdate(a[i], 1);
+
+    // for (int i = 0; i + m - 1 < n; i++)
+    // {
+    //   // [i : i + m - 1]
+    //   ans = min(ans, *zeros.begin());
+    //   setUpdate(a[i], -1);
+    //   if (i + m < n) setUpdate(a[i + m], 1);
+    // }
+
+    // Priority Queue solution
+    while (!zeros.empty())
+      zeros.pop();
     for (int i = 0; i <= maxN; i++)
-      segtree.data[i] = Data{0, i};
-    segtree.build();
+      zeros.push(i);
+    memset(cnt, 0, sizeof(cnt));
+    memset(removed, false, sizeof(removed));
     for (int i = 0; i < m; i++)
-      segtree.update(a[i], Data{1, 0});
+      priorityQueueUpdate(a[i], 1);
 
     for (int i = 0; i + m - 1 < n; i++)
     {
       // [i : i + m - 1]
-      ans = min(ans, segtree.query(0, maxN).value);
-      segtree.update(a[i], Data{-1, 0});
-      if (i + m < n) segtree.update(a[i + m], Data{1, 0});
+      ans = min(ans, priorityQueueQuery());
+      priorityQueueUpdate(a[i], -1);
+      if (i + m < n) priorityQueueUpdate(a[i + m], 1);
     }
     printf("%d\n", ans);
   }
