@@ -303,6 +303,7 @@
   * [Sum of gcd of Tuples (Hard)](https://atcoder.jp/contests/abc162/tasks/abc162_e) (AMAZING use of "dp"/precalculation (while building the answer); try to count how many times each gcd happens)
   * [Three Sequences](https://codeforces.com/contest/1406/problem/D) (NICE, you will get to the idea with paper and pen; think about a rule for b and c, ...)
   * [Oversleeping](https://atcoder.jp/contests/abc193/tasks/abc193_e) (AWESOME, model it as a diophantine equations)
+  * [Coprime Present](https://atcoder.jp/contests/abc195/tasks/abc195_f) (NICE, gcd(x, y) = gcd(x - y, y) if x > y, beautiful)
 
 # Geometry
 * #### Problems
