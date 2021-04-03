@@ -9,6 +9,10 @@ bool gcdTable[maxDelta][maxDelta];
 
 lli a, b;
 vector<lli> divisibleBy2And3[2][2];
+// 0 0 - (n % 2 != 0) e (n % 3 != 0)
+// 0 1 - (n % 2 != 0) e (n % 3 == 0)
+// 1 0 - (n % 2 == 0) e (n % 3 != 0)
+// 1 1 - (n % 2 == 0) e (n % 3 == 0)
 deque<lli> curr;
 lli solve2()
 {

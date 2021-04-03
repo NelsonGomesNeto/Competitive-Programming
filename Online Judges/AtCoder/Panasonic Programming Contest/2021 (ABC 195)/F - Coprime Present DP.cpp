@@ -6,7 +6,7 @@ using namespace std;
 
 /*
   if x > y:
-    gcd(x, y) = gcd(x - y, x)
+    gcd(x, y) = gcd(x - y, y)
 
   So, if a pair of numbers isn't coprime (gcd(x, y) != 1):
     Their gcd is bounded by x - y
