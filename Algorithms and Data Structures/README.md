@@ -231,6 +231,7 @@
   * [Yet Another Substring Reverse](https://codeforces.com/contest/1234/problem/F) (AWESOME bitmask dp)
   * [Tree and Constraints](https://atcoder.jp/contests/abc152/tasks/abc152_f) (AWESOME bitmask dp)
   * [Minimax Problem](https://codeforces.com/contest/1288/problem/D) (Mind blowing binary search + bitmask dp problem)
+  * [Coprime Present](https://atcoder.jp/contests/abc195/tasks/abc195_f) (NICE, gcd(x, y) = gcd(x - y, y) if x > y, beautiful bitmask DP problem)
 
 ## Expected Value
 * #### Problems
@@ -303,7 +304,6 @@
   * [Sum of gcd of Tuples (Hard)](https://atcoder.jp/contests/abc162/tasks/abc162_e) (AMAZING use of "dp"/precalculation (while building the answer); try to count how many times each gcd happens)
   * [Three Sequences](https://codeforces.com/contest/1406/problem/D) (NICE, you will get to the idea with paper and pen; think about a rule for b and c, ...)
   * [Oversleeping](https://atcoder.jp/contests/abc193/tasks/abc193_e) (AWESOME, model it as a diophantine equations)
-  * [Coprime Present](https://atcoder.jp/contests/abc195/tasks/abc195_f) (NICE, gcd(x, y) = gcd(x - y, y) if x > y, beautiful)
 
 # Geometry
 * #### Problems
@@ -352,6 +352,13 @@
   * [MUH and Cube Walls](https://codeforces.com/problemset/problem/471/D) (Interesting easy KMP problem)
   * [Gluing Pictures](https://matcomgrader.com/problem/9641/gluing-pictures/) (Awesome Suffix Array problem, beautiful binary search (Suffix Automaton and Suffix Tree may be more direct))
   * [Three Substrigs](https://atcoder.jp/contests/panasonic2020/tasks/panasonic2020_e) (Awesome string match problem, think about the easy O(n^3) and try to reduce something on it to O(1) (given some precalculations :3))
+
+
+
+
+# Fast Fourier Transform (FFT)
+* #### Problems:
+  * [Substring 2](https://atcoder.jp/contests/abc196/tasks/abc196_f) (Straightforward String Matching with FFT)
 
 # Interactive
 * #### Problems
