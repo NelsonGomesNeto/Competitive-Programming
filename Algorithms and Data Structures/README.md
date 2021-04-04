@@ -364,6 +364,7 @@
 * #### Problems
   * [Chocolate Bunny](https://codeforces.com/contest/1407/problem/C) (Very interesting easy interactive problem)
   * [Deleting Numbers](https://codeforces.com/contest/1406/problem/E) (Nice mathy interactive problem, sqrt ftw)
+  * [Median Sort](https://codingcompetitions.withgoogle.com/codejam/round/000000000043580a/00000000006d1284) (Awesome interactive sorting problem, InsertionSort + TernarySearch or QuickSort ftw)
 
 # Etc
 * #### Problems
