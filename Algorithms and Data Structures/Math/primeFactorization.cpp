@@ -4,14 +4,14 @@
 #define ldouble long double
 using namespace std;
 
-const int maxN = 1e6;
-bool notPrime[maxN + 1];
+const int maxX = 1e6;
+bool notPrime[maxX + 1];
 vector<int> primes;
-vector<pair<lli, int>> primeFactors[maxN + 1];
+vector<pair<lli, int>> primeFactors[maxX + 1];
 
 vector<pair<lli, int>> getPrimeFactors(lli num)
 {
-  if (num <= maxN) return primeFactors[num];
+  if (num <= maxX) return primeFactors[num];
   vector<pair<lli, int>> pf;
   for (lli i: primes)
   {
@@ -31,10 +31,10 @@ vector<pair<lli, int>> getPrimeFactors(lli num)
 int main()
 {
   notPrime[0] = notPrime[1] = true;
-  for (int i = 2; i <= maxN; i ++)
+  for (int i = 2; i <= maxX; i ++)
   {
     if (!notPrime[i]) primes.push_back(i), primeFactors[i].push_back({i, 1});
-    for (int j = 0; i*primes[j] <= maxN; j ++)
+    for (int j = 0; i*primes[j] <= maxX; j ++)
     {
       notPrime[i*primes[j]] = true;
       int p = 0, num = i * primes[j];
@@ -44,7 +44,7 @@ int main()
       if (i % primes[j] == 0) break;
     }
   }
-  for (int i = 1; i <= maxN; i ++)
+  for (int i = 1; i <= maxX; i ++)
     if (primeFactors[i] != getPrimeFactors(i))
       printf("Failed %d\n", i);
 

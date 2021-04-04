@@ -18,10 +18,10 @@ using namespace std;
     (0-indexed)
 */
 
-const int maxN = 1e6 + 1;
+const int maxX = 1e6 + 1;
 const lli mod = 1e9 + 7; // could be two as well
 
-lli fat[maxN], invFat[maxN];
+lli fat[maxX], invFat[maxX];
 lli modPow(lli x, lli y)
 {
   lli ans = 1;
@@ -58,9 +58,9 @@ lli starsAndBars(lli nn, lli kk)
 int main()
 {
   fat[0] = 1;
-  for (lli i = 1; i < maxN; i++)
+  for (lli i = 1; i < maxX; i++)
     fat[i] = i * fat[i - 1] % mod;
-  for (int i = 0; i < maxN; i++)
+  for (int i = 0; i < maxX; i++)
     invFat[i] = inv(fat[i]);
 
   return 0;
