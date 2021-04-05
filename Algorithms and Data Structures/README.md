@@ -215,7 +215,7 @@
   * [Two Bracket Sequences](https://codeforces.com/contest/1272/problem/F) (Interesting string dp very similar to knapsack ^~^)
   * [Knapsack for All Segments](https://atcoder.jp/contests/abc159/tasks/abc159_f) (Amazing easy knapsack "with states", NICE)
 
-## Tree
+## Tree DP
 * #### Problems
   * [Valera and Elections](https://codeforces.com/contest/369/problem/C) (Easy but beautiful DP on Tree)
   * [Distance in Tree](https://codeforces.com/problemset/problem/161/D) (Awesome DP on Tree)
@@ -223,6 +223,7 @@
   * [Paint the Tree](https://codeforces.com/contest/1241/problem/E) (NICE DP on Tree, sorting needed to choose the k best choices)
   * [Appleman and Tree](https://codeforces.com/problemset/problem/461/B) (Amazing DP on Tree, also count the number of *valid* ways with 0 black vertices and use that to count the number of ways with 1 black vertices)
   * [Distributing Integers](https://atcoder.jp/contests/abc160/tasks/abc160_f) (Mind blowing combinatorics and DP on Tree with AWESOME re-rooting)
+  * [Christmas Game](https://codeforces.com/contest/1498/problem/F) (NICE NICE NICE Nim Game + Tree DP)
 
 ## Bitmask
 * #### Problems
