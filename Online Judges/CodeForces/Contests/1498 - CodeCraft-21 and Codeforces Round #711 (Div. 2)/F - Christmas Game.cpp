@@ -16,10 +16,10 @@ using namespace std;
         we move a coin from (even -> odd), the other player will always be able to move
         a coin from (odd -> even). So even depths moves are always bad.
       * So, we only need to consider the coins at odd depths
-    * ans[i] = xorSumForRoot(i) != 0
+    * ans[i] = oddXorSumForRoot(i) != 0
 
   We can generalize that for any k with useful(depth) = floor(depth / k) is odd.
-  Now we just need to calculate the xorSumForEachRoot using this useful function.
+  Now we just need to calculate the oddXorSumForEachRoot using this useful function.
 
   We can do that with Tree DP and rerooting:
   * Choose a root
