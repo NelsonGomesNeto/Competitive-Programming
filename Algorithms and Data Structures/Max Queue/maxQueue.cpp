@@ -15,9 +15,9 @@ struct MinMaxQueue
   }
   void push(T x)
   {
-    while (!maxdq.empty() && maxdq.back() < x)
+    while (!maxdq.empty() && x > maxdq.back())
       maxdq.pop_back();
-    while (!mindq.empty() && mindq.back() > x)
+    while (!mindq.empty() && x < mindq.back())
       mindq.pop_back();
     q.push(x), maxdq.push_back(x), mindq.push_back(x);
   }
@@ -28,9 +28,9 @@ struct MinMaxQueue
   {
     if (q.empty())
       return;
-    if (!maxdq.empty() && maxdq.front() == q.front())
+    if (q.front() == maxdq.front())
       maxdq.pop_front();
-    if (!mindq.empty() && mindq.front() == q.front())
+    if (q.front() == mindq.front())
       mindq.pop_front();
     q.pop();
   }
