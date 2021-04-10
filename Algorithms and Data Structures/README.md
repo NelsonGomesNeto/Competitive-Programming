@@ -262,6 +262,7 @@
   * [Charlie New PC](https://csacademy.com/ieeextreme-practice/task/charlie-new-pc/) (Amazing Meet In The Middle problem)
   * [Frog 3](https://atcoder.jp/contests/dp/tasks/dp_z) (BEAUTIFUL Convex Hull Trick)
   * [Pictures with Kittens (hard version)](https://codeforces.com/contest/1077/problem/F2) (AMAZING Max Queue, do O(n\*x\*k) and remove k with Max Queue; it might be useful to reduce with SegTree first, but it won't pass)
+  * [Square-free division(hard version)](https://codeforces.com/contest/1497/problem/E2) (MIND BLOWING, greedy precalc to maximize something and then traverse with DP using that precalc, BEAUTIFUL)
 
 # Search
 * #### Problems
