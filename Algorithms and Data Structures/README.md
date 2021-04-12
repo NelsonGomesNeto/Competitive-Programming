@@ -263,6 +263,7 @@
   * [Frog 3](https://atcoder.jp/contests/dp/tasks/dp_z) (BEAUTIFUL Convex Hull Trick)
   * [Pictures with Kittens (hard version)](https://codeforces.com/contest/1077/problem/F2) (AMAZING Max Queue, do O(n\*x\*k) and remove k with Max Queue; it might be useful to reduce with SegTree first, but it won't pass)
   * [Square-free division(hard version)](https://codeforces.com/contest/1497/problem/E2) (MIND BLOWING, greedy precalc to maximize something and then traverse with DP using that precalc, BEAUTIFUL)
+  * [Skyline Photo](https://codeforces.com/contest/1484/problem/E) (BEAUTIFUL, DP + (SegmentTree or Stacks), LOVELY)
 
 # Search
 * #### Problems
@@ -354,9 +355,6 @@
   * [MUH and Cube Walls](https://codeforces.com/problemset/problem/471/D) (Interesting easy KMP problem)
   * [Gluing Pictures](https://matcomgrader.com/problem/9641/gluing-pictures/) (Awesome Suffix Array problem, beautiful binary search (Suffix Automaton and Suffix Tree may be more direct))
   * [Three Substrigs](https://atcoder.jp/contests/panasonic2020/tasks/panasonic2020_e) (Awesome string match problem, think about the easy O(n^3) and try to reduce something on it to O(1) (given some precalculations :3))
-
-
-
 
 # Fast Fourier Transform (FFT)
 * #### Problems:
