@@ -18,7 +18,7 @@ void prefixFunction(char str[], int strSize)
   for (int i = 0, j = -1; i < strSize;)
   {
     while (j >= 0 && str[i] != str[j]) j = pi[j];
-    pi[++ i] = ++ j;
+    pi[++i] = ++ j;
   }
 }
 

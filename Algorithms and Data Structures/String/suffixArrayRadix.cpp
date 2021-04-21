@@ -64,11 +64,14 @@ vector<int> buildSuffixArray(string str)
 
 int main()
 {
-  scanf("%s", s);
-  vector<int> sa = buildSuffixArray(string(s));
+  while (~scanf(" %s", s))
+  {
+    vector<int> sa = buildSuffixArray(string(s));
 
-  // for (int i = 0; i < sa.size(); i ++)
-  //   printf("%d %s\n", sa[i], s+sa[i]);
+    for (int i = 0; i < sa.size(); i ++)
+      printf("%d %s\n", sa[i], s+sa[i]);
+    printf("---------------\n");
+  }
 
   return 0;
 }
