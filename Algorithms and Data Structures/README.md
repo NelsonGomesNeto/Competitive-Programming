@@ -54,6 +54,14 @@
   * [Present](https://codeforces.com/contest/460/problem/C) ((Min, Pos) Segtree with Lazy Propagation; implementation is interesting ^~^)
   * [Fixed Point Removal](https://codeforces.com/contest/1405/problem/E) (Awesome Lazy Segtree problem. Offline solution ftw (although I don't like it))
 
+## Persistent Segment Tree :star:
+* #### Problems:
+  * [Codeforces' list of problems](https://codeforces.com/blog/entry/56880) (Many nice problems)
+  * [Make Versions in Segment Tree](https://www.spoj.com/problems/PSEGTREE/) (Pure straight Persistent Segment Tree)
+  * [K-th Number](https://www.spoj.com/problems/MKTHNUM/) (K-th number on sorted range, basic application of Persistent Segment Tree)
+  * [K-Query Online](https://www.spoj.com/problems/KQUERYO/) (# of elements greater than k in range, basic application of Persistent Segment Tree)
+  * [Cut and Stick](https://codeforces.com/contest/1514/problem/D) (Awesome use of Persistent Segment Tree, actually there are MANY ways to solve this problem)
+
 # Lowest Common Ancestor (LCA) :star:
 * There are two main implementations of LCA, both use a Sparse Table to speed up their queries and takes O(n\*lg) to preprocess.
 * Eulerian Tour (O(1) queries):
@@ -264,6 +272,7 @@
   * [Pictures with Kittens (hard version)](https://codeforces.com/contest/1077/problem/F2) (AMAZING Max Queue, do O(n\*x\*k) and remove k with Max Queue; it might be useful to reduce with SegTree first, but it won't pass)
   * [Square-free division(hard version)](https://codeforces.com/contest/1497/problem/E2) (MIND BLOWING, greedy precalc to maximize something and then traverse with DP using that precalc, BEAUTIFUL)
   * [Skyline Photo](https://codeforces.com/contest/1484/problem/E) (BEAUTIFUL, DP + (SegmentTree or Stacks), LOVELY)
+  * [Phoenix and Computers](https://codeforces.com/contest/1515/problem/E) (MIND BLOWING, n^2, try to view on computers as segments)
 
 # Search
 * #### Problems
