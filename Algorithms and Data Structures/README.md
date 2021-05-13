@@ -316,6 +316,7 @@
   * [Sum of gcd of Tuples (Hard)](https://atcoder.jp/contests/abc162/tasks/abc162_e) (AMAZING use of "dp"/precalculation (while building the answer); try to count how many times each gcd happens)
   * [Three Sequences](https://codeforces.com/contest/1406/problem/D) (NICE, you will get to the idea with paper and pen; think about a rule for b and c, ...)
   * [Oversleeping](https://atcoder.jp/contests/abc193/tasks/abc193_e) (AWESOME, model it as a diophantine equations)
+  * [Graph Smoothing](https://atcoder.jp/contests/abc199/tasks/abc199_f) (MIND BLOWING, expected value, matrix exponentiation and graphs)
 
 # Geometry
 * #### Problems
