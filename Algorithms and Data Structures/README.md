@@ -35,6 +35,7 @@
   * [Ciel and Duel](https://codeforces.com/contest/321/problem/B) (*maxCostFlow* haha, an additional if is needed though)
   * [Almost Permutation](https://codeforces.com/problemset/problem/863/F) (Multiple connections between two vertices: interesting math trick)
   * [UVA Problem Package](https://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&category=808)
+  * [Armchairs](https://codeforces.com/contest/1525/problem/D) (Very interesting MinCostFlow problem, minimize the amount of edges and boyah)
 
 # Segment Tree :star:
 ## Segment Tree without Lazy Propagation :star:
