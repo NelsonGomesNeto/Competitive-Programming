@@ -1,26 +1,43 @@
 #include <bits/stdc++.h>
 using namespace std;
 const int maxVertices = 1e3, inf = 1e9;
-vector<pair<int, int>> graph[maxVertices];
-int cost[maxVertices], prv[maxVertices];
 
-int dijkstra(int source, int target)
+struct Edge
 {
-  for (int i = 0; i < maxVertices; i ++) cost[i] = inf;
-  priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
-  cost[source] = 0; pq.push({cost[source], source});
+  int from, to, d;
+};
+vector<Edge> graph[maxVertices];
+void addEdge(int u, int v, int c, bool undirected = false)
+{
+  graph[u].push_back(Edge{u, v, c});
+  graph[v].push_back(Edge{v, u, c});
+}
+
+struct State
+{
+  int u, d;
+  bool operator<(const State &other) const { return d > other.d; }
+};
+
+int dist[maxVertices], prv[maxVertices];
+void dijkstra(int source)
+{
+  for (int i = 0; i < maxVertices; i ++) dist[i] = inf;
+  priority_queue<State> pq;
+  pq.push(State{source, dist[source] = 0});
+
   while (!pq.empty())
   {
-    int u = pq.top().second, c = pq.top().first; pq.pop();
-    if (c > cost[u]) continue;
-    for (auto v: graph[u])
-      if (c + v.second < cost[v.first])
+    int u = pq.top().u, d = pq.top().d; pq.pop();
+    if (d > dist[u]) continue;
+
+    for (auto &e: graph[u])
+      if (d + e.d < dist[e.to])
       {
-        cost[v.first] = c + v.second, prv[v.first] = u;
-        pq.push({cost[v.first], v.first});
+        dist[e.to] = d + e.d, prv[e.to] = u;
+        pq.push(State{e.to, dist[e.to]});
       }
   }
-  return(cost[target]);
 }
 
 int main()
@@ -30,11 +47,15 @@ int main()
   for (int i = 0; i < m; i ++)
   {
     scanf("%d %d %d", &u, &v, &c); u --, v --;
-    graph[u].push_back({v, c});
-    graph[v].push_back({u, c});
+    addEdge(u, v, c, true);
   }
-  printf("%d\n", dijkstra(0, n - 1));
+
+  dijkstra(0);
+
+  printf("%d\n", dist[n - 1]);
   for (int i = 0; i < n; i ++) printf("%3d%c", i, i < n - 1 ? ' ' : '\n');
+  for (int i = 0; i < n; i ++) printf("%3d%c", dist[i], i < n - 1 ? ' ' : '\n');
   for (int i = 0; i < n; i ++) printf("%3d%c", prv[i], i < n - 1 ? ' ' : '\n');
-  return(0);
+
+  return 0;
 }
