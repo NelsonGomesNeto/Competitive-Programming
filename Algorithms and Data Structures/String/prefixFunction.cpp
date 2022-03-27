@@ -8,26 +8,30 @@ using namespace std;
   Biggest Palindrome in Prefix: a + '#' + rev(a)
 */
 
-const int maxN = 1e6 + 1; int n;
-char s[maxN];
+const int maxN = 1e6; int n;
+char ss[maxN + 1];
+string s;
 
-int pi[maxN];
-void prefixFunction(char str[], int strSize)
+vector<int> prefixFunction(string &s)
 {
+  vector<int> pi(s.size() + 1);
   pi[0] = -1;
-  for (int i = 0, j = -1; i < strSize;)
+  for (int i = 0, j = -1; i < s.size();)
   {
-    while (j >= 0 && str[i] != str[j]) j = pi[j];
-    pi[++i] = ++ j;
+    while (j >= 0 && s[i] != s[j]) j = pi[j];
+    pi[++i] = ++j;
   }
+  return pi;
 }
 
 int main()
 {
-  scanf("%s", s);
-  n = strlen(s);
-  prefixFunction(s, n);
-  printf("%s\n", s);
+  scanf("%s", ss);
+  s = string(ss);
+  n = s.size();
+
+  vector<int> pi = prefixFunction(s);
+  printf("%s\n", s.c_str());
   printf("    "); for (int i = 0; i <= n; i ++) printf("  %c%c", s[i], i < n ? ' ' : '\n');
   for (int i = 0; i <= n; i ++) printf("%3d%c", i, i < n ? ' ' : '\n');
   for (int i = 0; i <= n; i ++) printf("%3d%c", pi[i], i < n ? ' ' : '\n');
