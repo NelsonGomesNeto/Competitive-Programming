@@ -20,7 +20,7 @@
 ## Min Cost Flow :star:
 * #### minCostFlow with successive shortest paths.
   * ##### Shortest path algorithms (ordered by the fastest first):
-    Always use *Dijkstra with Potentials*, unless the graph has negative edges at the first step; in these cases, use *SPFA*
+    Prefer *Dijkstra with Potentials*, unless the graph has negative edges at the first step; in these cases, use *SPFA*. *SPFA* might be faster sometimes.
     * Dijkstra with Potentials O(|E| + |V|log|V|): The intuition behind is that it calculates to difference in cost instead of the actual cost of each step; therefore, it won't have negative costs. It's identical to an ordinary Dijkstra, except that "cost[v] = cost[u] + graph[u][v]", you will have "cost[v] = cost[u] + graph[u][v] + potentials[u] - potentials[v]" and after running dijkstra, you will need to add the costs to the potentials.
     * SPFA O(|V||E|) but usually O(|E|): Kind of a mix between bellmanFord and dijkstra, but doesn't uses a priority queue, so it works perfectly even with negative costs.
     * bellmanFord O(|V||E|): It's very straight forward, but it's dangerous to use it here, although will work mostly.
