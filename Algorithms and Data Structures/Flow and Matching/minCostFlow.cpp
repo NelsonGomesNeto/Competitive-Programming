@@ -1,43 +1,37 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-template<typename T>
-struct Edge { int to, back; T flow, capacity, cost; };
+template<typename T, typename G>
+struct Edge { int to, back; G flow; T cost; };
 
-template<typename T>
+template<typename T, typename G>
 struct MinCostFlow
 {
-  int source, sink, vertices; T inf;
+  int source, sink, vertices; G infFlow; T infCost;
   vector<int> prevVertex, prevEdge;
-  vector<T> cost, minFlow;
-  vector<vector<Edge<T>>> graph;
+  vector<T> cost;
+  vector<vector<Edge<T, G>>> graph;
 
   vector<bool> inqueue; // needed for SPFA
-  vector<int> potentials; vector<bool> visited; // needed for Dijkstra with Potentials
-  // Dijkstra with Potentials is faster then SPFA
-  // But can't be used if there are negative edges at the start
+
+  vector<T> potentials; vector<bool> visited; // needed for Dijkstra with Potentials
 
   MinCostFlow() {}
-  MinCostFlow(int vertices, int source, int sink, T inf) : vertices(vertices), source(source), sink(sink), inf(inf)
+  MinCostFlow(int vertices, int source, int sink, G infFlow = numeric_limits<G>::max(), T infCost = numeric_limits<T>::max())
+    : vertices(vertices), source(source), sink(sink), infFlow(infFlow), infCost(infCost)
   {
-    graph.resize(vertices, vector<Edge<T>>());
+    graph.resize(vertices, vector<Edge<T, G>>());
     prevVertex.resize(vertices), prevEdge.resize(vertices);
-    cost.resize(vertices), minFlow.resize(vertices);
+    cost.resize(vertices);
 
     inqueue.resize(vertices);
+
     potentials.resize(vertices), visited.resize(vertices);
   }
-
-  void addEdge(int u, int v, int f, T c)
+  void addEdge(int u, int v, G f, T c)
   {
-    graph[u].push_back({v, (int)graph[v].size(), f, f, c});
-    graph[v].push_back({u, (int)graph[u].size() - 1, 0, 0, -c});
-  }
-
-  void shortestPathInit()
-  {
-    fill(cost.begin(), cost.end(), inf);
-    fill(minFlow.begin(), minFlow.end(), inf);
+    graph[u].push_back({v, (int)graph[v].size(), f, c});
+    graph[v].push_back({u, (int)graph[u].size() - 1, 0, -c});
   }
 
   void printGraph()
@@ -58,87 +52,97 @@ struct MinCostFlow
     }
   }
 
-  bool SPFA()
+  bool bellmanFord() // slow
   {
-    fill(inqueue.begin(), inqueue.end(), 0);
-    shortestPathInit();
-    deque<int> q; q.push_back(source); cost[source] = 0;
-    while (!q.empty())
-    {
-      int u = q.front(); q.pop_front(); inqueue[u] = 0;
-      for (int j = 0; j < graph[u].size(); j ++)
-      {
-        auto& e = graph[u][j]; int newCost = cost[u] + e.cost;
-        if (e.flow && newCost < cost[e.to])
-        {
-          if (!inqueue[e.to]) inqueue[e.to] = 1, q.push_back(e.to);
-          cost[e.to] = newCost;
-          minFlow[e.to] = min(minFlow[u], e.flow);
-          prevVertex[e.to] = u, prevEdge[e.to] = j;
-        }
-      }
-    }
-    return cost[sink] != inf;
-  }
-
-  bool dijkstraWithPotentials()
-  {
-    fill(visited.begin(), visited.end(), false);
-    shortestPathInit();
-    priority_queue<pair<T, int>> q;
-    q.push({0, source}); cost[source] = 0;
-    while (!q.empty())
-    {
-      int u = q.top().second; q.pop();
-      if (visited[u]) continue;
-      visited[u] = true;
-      for (int j = 0; j < graph[u].size(); j ++)
-      {
-        auto& e = graph[u][j]; T newCost = cost[u] + e.cost + potentials[u] - potentials[e.to];
-        if (e.flow && newCost < cost[e.to])
-        {
-          cost[e.to] = newCost;
-          minFlow[e.to] = min(minFlow[u], e.flow);
-          prevVertex[e.to] = u, prevEdge[e.to] = j;
-          q.push({-cost[e.to], e.to});
-        }
-      }
-    }
-    for (int i = 0; i < vertices; i ++) potentials[i] += cost[i];
-    return cost[sink] != inf;
-  }
-
-  bool bellmanFord()
-  {
-    shortestPathInit();
+    fill(cost.begin(), cost.end(), infCost);
     cost[source] = 0;
-    for (int i = 0, done = 0; i < vertices - 1; i ++, done = 0)
+    for (int i = 0, done = 0; i < vertices - 1; i++, done = 0)
     {
-      for (int u = 0; u < vertices; u ++)
-        for (int j = 0; j < graph[u].size(); j ++)
+      for (int u = 0; u < vertices; u++)
+      {
+        if (cost[u] == infCost) continue;
+        int j = 0;
+        for (const auto& e: graph[u])
         {
-          auto& e = graph[u][j];
-          if (e.flow && cost[u] + e.cost < cost[e.to])
+          T newCost = cost[u] + e.cost;
+          if (e.flow && newCost < cost[e.to])
           {
-            cost[e.to] = cost[u] + e.cost;
+            cost[e.to] = newCost;
             prevVertex[e.to] = u, prevEdge[e.to] = j;
-            minFlow[e.to] = min(minFlow[u], e.flow);
             done = 1;
           }
+          ++j;
         }
+      }
       if (!done) break;
     }
-    return cost[sink] != inf;
+    return cost[sink] != infCost;
   }
-
-  pair<T, T> minCostFlow()
+  bool dijkstraWithPotentials() // fast
+  {
+    fill(visited.begin(), visited.end(), false);
+    fill(cost.begin(), cost.end(), infCost);
+    priority_queue<pair<T, int>> pq;
+    pq.push({0, source}); cost[source] = 0;
+    while (!pq.empty())
+    {
+      int u = pq.top().second; pq.pop();
+      if (visited[u]) continue;
+      visited[u] = true;
+      int j = 0;
+      for (const auto& e: graph[u])
+      {
+        T newCost = cost[u] + e.cost + potentials[u] - potentials[e.to];
+        if (e.flow && newCost < cost[e.to])
+        {
+          cost[e.to] = newCost;
+          prevVertex[e.to] = u, prevEdge[e.to] = j;
+          pq.push({-cost[e.to], e.to});
+        }
+        ++j;
+      }
+    }
+    if (cost[sink] == infCost)
+      return false;
+    for (int i = 0; i < vertices; i++)
+      potentials[i] += cost[i];
+    return true;
+  }
+  bool SPFA() // fastest
+  {
+    fill(inqueue.begin(), inqueue.end(), false);
+    fill(cost.begin(), cost.end(), infCost);
+    queue<int> q; q.push(source); cost[source] = 0;
+    while (!q.empty())
+    {
+      int u = q.front(); q.pop(); inqueue[u] = false;
+      int j = 0;
+      for (const auto& e: graph[u])
+      {
+        T newCost = cost[u] + e.cost;
+        if (e.flow && newCost < cost[e.to])
+        {
+          if (!inqueue[e.to]) inqueue[e.to] = true, q.push(e.to);
+          cost[e.to] = newCost;
+          prevVertex[e.to] = u, prevEdge[e.to] = j;
+        }
+        ++j;
+      }
+    }
+    return cost[sink] != infCost;
+  }
+  pair<T, G> minCostFlow()
   {
     fill(potentials.begin(), potentials.end(), 0);
-
-    T minCost = 0, totalFlow = 0;
-    while (dijkstraWithPotentials())
+    T minCost = 0; G totalFlow = 0;
+    while (bellmanFord())
     {
-      T flow = minFlow[sink];
+      G flow = infFlow;
+      for (int v = sink; v != source; v = prevVertex[v])
+      {
+        auto& e = graph[prevVertex[v]][prevEdge[v]];
+        flow = min(flow, e.flow);
+      }
       totalFlow += flow;
       for (int v = sink; v != source; v = prevVertex[v])
       {
@@ -155,7 +159,7 @@ struct MinCostFlow
 int main()
 {
   int n, m; scanf("%d %d", &n, &m);
-  MinCostFlow<int> mcf(n, 0, n - 1, 1e7);
+  MinCostFlow<int, int> mcf(n, 0, n - 1);
 
   int u, v, f, c;
   for (int i = 0; i < m; i ++)

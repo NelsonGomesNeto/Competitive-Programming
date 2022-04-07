@@ -2,7 +2,7 @@
 using namespace std;
 
 template<typename T>
-struct Edge { int to, back; T flow, capacity; };
+struct Edge { int to, back; T flow; };
 
 template<typename T>
 struct Dinic
@@ -12,7 +12,7 @@ struct Dinic
   vector<vector<Edge<T>>> graph;
 
   Dinic() { }
-  Dinic(int vertices, int source, int sink, T inf) : vertices(vertices), source(source), sink(sink), inf(inf)
+  Dinic(int vertices, int source, int sink, T inf = numeric_limits<T>::max()) : vertices(vertices), source(source), sink(sink), inf(inf)
   {
     graph.resize(vertices, vector<Edge<T>>());
     level.resize(vertices);
@@ -21,8 +21,8 @@ struct Dinic
 
   void addEdge(int u, int v, T f)
   {
-    graph[u].push_back({v, (int)graph[v].size(), f, f});
-    graph[v].push_back({u, (int)graph[u].size() - 1, 0, 0});
+    graph[u].push_back({v, (int)graph[v].size(), f});
+    graph[v].push_back({u, (int)graph[u].size() - 1, 0});
   }
 
   bool bfs()
@@ -72,6 +72,7 @@ struct Dinic
     return maxFlow;
   }
 };
+Dinic<int> dinic;
 
 const int maxVertices = 1e5; int n, m;
 
@@ -79,7 +80,7 @@ int main()
 {
   int n, m; scanf("%d %d", &n, &m);
 
-  Dinic<int> dinic(n, 0, n - 1, 1e8);
+  dinic = Dinic<int>(n, 0, n - 1);
 
   int u, v, f;
   for (int i = 0; i < m; i ++)
