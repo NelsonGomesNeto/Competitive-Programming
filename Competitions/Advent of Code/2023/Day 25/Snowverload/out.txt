@@ -1,0 +1,50 @@
+bvb -> cmg rhn xhk hfx ntq cmg hfx ntq rhn xhk
+cmg -> bvb qnr nvd lhk bvb rzs lhk nvd qnr rzs
+frs -> rsh qnr lhk lsr lhk lsr qnr rsh
+hfx -> bvb xhk rhn bvb pzl ntq ntq pzl rhn xhk
+jqt -> rhn xhk nvd ntq ntq nvd rhn xhk
+lhk -> cmg frs cmg nvd lsr frs lsr nvd
+lsr -> frs lhk rsh pzl lhk rzs frs pzl rsh rzs
+ntq -> bvb hfx jqt jqt hfx bvb xhk xhk
+nvd -> cmg jqt lhk jqt cmg pzl qnr lhk pzl qnr
+pzl -> hfx lsr nvd rsh lsr hfx nvd rsh
+qnr -> cmg frs nvd cmg nvd rzs frs rzs
+rhn -> bvb hfx jqt jqt xhk bvb hfx xhk
+rsh -> frs lsr pzl frs pzl lsr rzs rzs
+rzs -> cmg lsr qnr rsh qnr cmg lsr rsh
+xhk -> bvb hfx jqt ntq rhn jqt hfx rhn bvb ntq
+
+bvb,cmg=27
+hfx,pzl=15
+jqt,nvd=12
+cmg,qnr=12
+cmg,rzs=11
+cmg,lhk=10
+frs,rsh=9
+nvd,pzl=8
+pzl,rsh=7
+frs,qnr=7
+bvb,rhn=7
+lsr,pzl=6
+hfx,xhk=6
+cmg,nvd=6
+bvb,ntq=6
+bvb,hfx=6
+lhk,nvd=5
+lhk,lsr=5
+hfx,rhn=5
+hfx,ntq=5
+bvb,xhk=5
+jqt,rhn=4
+rsh,rzs=3
+nvd,qnr=3
+lsr,rzs=2
+jqt,xhk=2
+jqt,ntq=2
+frs,lsr=2
+frs,lhk=2
+rhn,xhk=1
+qnr,rzs=1
+ntq,xhk=1
+lsr,rsh=1
+ans: 54
