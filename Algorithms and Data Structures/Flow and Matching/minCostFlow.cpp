@@ -1,26 +1,26 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-template<typename T, typename G>
-struct Edge { int to, back; G flow; T cost; };
+template<typename Cost, typename Flow>
+struct Edge { int to, back; Flow flow; Cost cost; };
 
-template<typename T, typename G>
+template<typename Cost, typename Flow>
 struct MinCostFlow
 {
-  int source, sink, vertices; G infFlow; T infCost;
+  int source, sink, vertices; Flow infFlow; Cost infCost;
   vector<int> prevVertex, prevEdge;
-  vector<T> cost;
-  vector<vector<Edge<T, G>>> graph;
+  vector<Cost> cost;
+  vector<vector<Edge<Cost, Flow>>> graph;
 
   vector<bool> inqueue; // needed for SPFA
 
-  vector<T> potentials; vector<bool> visited; // needed for Dijkstra with Potentials
+  vector<Cost> potentials; vector<bool> visited; // needed for Dijkstra with Potentials
 
   MinCostFlow() {}
-  MinCostFlow(int vertices, int source, int sink, G infFlow = numeric_limits<G>::max(), T infCost = numeric_limits<T>::max())
+  MinCostFlow(int vertices, int source, int sink, Flow infFlow = numeric_limits<Flow>::max(), Cost infCost = numeric_limits<Cost>::max())
     : vertices(vertices), source(source), sink(sink), infFlow(infFlow), infCost(infCost)
   {
-    graph.resize(vertices, vector<Edge<T, G>>());
+    graph.resize(vertices, vector<Edge<Cost, Flow>>());
     prevVertex.resize(vertices), prevEdge.resize(vertices);
     cost.resize(vertices);
 
@@ -28,13 +28,13 @@ struct MinCostFlow
 
     potentials.resize(vertices), visited.resize(vertices);
   }
-  void addEdge(int u, int v, G f, T c)
+  void addEdge(int u, int v, Flow f, Cost c)
   {
     graph[u].push_back({v, (int)graph[v].size(), f, c});
     graph[v].push_back({u, (int)graph[u].size() - 1, 0, -c});
   }
 
-  void printGraph()
+  void printFlowraph()
   {
     printf("\ncost: %3d\n", cost[sink]);
     for (int v = sink, totalCost = 0; v != source; v = prevVertex[v])
@@ -64,7 +64,7 @@ struct MinCostFlow
         int j = 0;
         for (const auto& e: graph[u])
         {
-          T newCost = cost[u] + e.cost;
+          Cost newCost = cost[u] + e.cost;
           if (e.flow && newCost < cost[e.to])
           {
             cost[e.to] = newCost;
@@ -82,7 +82,7 @@ struct MinCostFlow
   {
     fill(visited.begin(), visited.end(), false);
     fill(cost.begin(), cost.end(), infCost);
-    priority_queue<pair<T, int>> pq;
+    priority_queue<pair<Cost, int>> pq;
     pq.push({0, source}); cost[source] = 0;
     while (!pq.empty())
     {
@@ -92,7 +92,7 @@ struct MinCostFlow
       int j = 0;
       for (const auto& e: graph[u])
       {
-        T newCost = cost[u] + e.cost + potentials[u] - potentials[e.to];
+        Cost newCost = cost[u] + e.cost + potentials[u] - potentials[e.to];
         if (e.flow && newCost < cost[e.to])
         {
           cost[e.to] = newCost;
@@ -119,7 +119,7 @@ struct MinCostFlow
       int j = 0;
       for (const auto& e: graph[u])
       {
-        T newCost = cost[u] + e.cost;
+        Cost newCost = cost[u] + e.cost;
         if (e.flow && newCost < cost[e.to])
         {
           if (!inqueue[e.to]) inqueue[e.to] = true, q.push(e.to);
@@ -131,13 +131,13 @@ struct MinCostFlow
     }
     return cost[sink] != infCost;
   }
-  pair<T, G> minCostFlow()
+  pair<Cost, Flow> minCostFlow()
   {
     fill(potentials.begin(), potentials.end(), 0);
-    T minCost = 0; G totalFlow = 0;
+    Cost minCost = 0; Flow totalFlow = 0;
     while (bellmanFord())
     {
-      G flow = infFlow;
+      Flow flow = infFlow;
       for (int v = sink; v != source; v = prevVertex[v])
       {
         auto& e = graph[prevVertex[v]][prevEdge[v]];

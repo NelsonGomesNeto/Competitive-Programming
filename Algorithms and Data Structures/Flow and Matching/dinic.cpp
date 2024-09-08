@@ -1,25 +1,25 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-template<typename T>
-struct Edge { int to, back; T flow; };
+template<typename Flow>
+struct Edge { int to, back; Flow flow; };
 
-template<typename T>
+template<typename Flow>
 struct Dinic
 {
-  int source, sink, vertices; T inf;
+  int source, sink, vertices; Flow inf;
   vector<int> level, ptr;
-  vector<vector<Edge<T>>> graph;
+  vector<vector<Edge<Flow>>> graph;
 
   Dinic() { }
-  Dinic(int vertices, int source, int sink, T inf = numeric_limits<T>::max()) : vertices(vertices), source(source), sink(sink), inf(inf)
+  Dinic(int vertices, int source, int sink, Flow inf = numeric_limits<Flow>::max()) : vertices(vertices), source(source), sink(sink), inf(inf)
   {
-    graph.resize(vertices, vector<Edge<T>>());
+    graph.resize(vertices, vector<Edge<Flow>>());
     level.resize(vertices);
     ptr.resize(vertices);
   }
 
-  void addEdge(int u, int v, T f)
+  void addEdge(int u, int v, Flow f)
   {
     graph[u].push_back({v, (int)graph[v].size(), f});
     graph[v].push_back({u, (int)graph[u].size() - 1, 0});
@@ -40,7 +40,7 @@ struct Dinic
     return level[sink] != -1;
   }
 
-  T dfs(int u, T flow)
+  Flow dfs(int u, Flow flow)
   {
     if (u == sink || flow == 0)
       return flow;
@@ -50,7 +50,7 @@ struct Dinic
       auto &e = graph[u][p];
       if (e.flow && level[u] == level[e.to] - 1)
       {
-        T delivered = dfs(e.to, min(flow, e.flow));
+        Flow delivered = dfs(e.to, min(flow, e.flow));
         e.flow -= delivered;
         graph[e.to][e.back].flow += delivered;
         if (delivered)
@@ -60,9 +60,9 @@ struct Dinic
     return 0;
   }
 
-  T flow()
+  Flow flow()
   {
-    T maxFlow = 0, flow;
+    Flow maxFlow = 0, flow;
     while (bfs())
     {
       fill(ptr.begin(), ptr.end(), 0);

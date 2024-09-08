@@ -16,6 +16,7 @@ struct Data
     return Data{value * other};
   }
 };
+const Data nil = {0};
 
 // DON'T FORGET TO DEFINE THE NIL!!!
 template<class T>

@@ -10,8 +10,28 @@ void printAns(int pos)
   printf("    ^\n");
 }
 
+int binarySearch(int target, int lo = 0, int hi = n - 1, bool upperBound = false)
+{
+  while (lo < hi)
+  {
+    int mid = (lo + hi + upperBound) >> 1;
+    if (upperBound)
+    {
+      if (a[mid] <= target) lo = mid;
+      else hi = mid - 1;
+    }
+    else
+    {
+      if (a[mid] >= target) hi = mid;
+      else lo = mid + 1;
+    }
+  }
+  return lo;
+}
+
 int lowerBound(int lo, int hi, int target)
 {
+  return binarySearch(target, lo, hi, false);
   if (lo >= hi) return(lo);
   int mid = (lo + hi) >> 1;
   if (target <= a[mid]) return(lowerBound(lo, mid, target));
@@ -20,6 +40,7 @@ int lowerBound(int lo, int hi, int target)
 
 int upperBound(int lo, int hi, int target)
 {
+  return binarySearch(target, lo, hi, true);
   if (lo >= hi) return(lo);
   int mid = ((lo + hi) >> 1) + ((lo + hi) & 1);
   if (target < a[mid]) return(upperBound(lo, mid - 1, target));

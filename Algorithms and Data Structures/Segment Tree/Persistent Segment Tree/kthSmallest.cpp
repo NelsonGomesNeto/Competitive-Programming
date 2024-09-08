@@ -5,7 +5,7 @@
 using namespace std;
 
 /*
-  version[i] -> range[1 : i] (add an null update just to ensure (lo - 1) >= 0)
+  version[i] -> range[1 : i]
   value[i] -> seg.data[i] + 1
 */
 

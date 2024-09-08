@@ -13,7 +13,7 @@ vector<int> prefixFunction(string &s)
   }
   return pi;
 }
-vector<int> kmpSearch(string &s, string &sub, vector<int> &pi)
+vector<int> kmpSearch(string &s, string &sub, vector<int> &pi /* prefixFunction(sub) */)
 {
   vector<int> occurrences;
   for (int i = 0, j = 0; i < s.size();)
