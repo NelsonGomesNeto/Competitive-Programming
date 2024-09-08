@@ -88,6 +88,7 @@ build
 *ans[0-9]
 *ans[0-9].txt
 *.zip
+to_be_deleted.txt
 
 # binaries
 naive

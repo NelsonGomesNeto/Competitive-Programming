@@ -17,7 +17,6 @@ ALLOWLISTED_EXTENSIONS = [
     'zig',
     'rb',
     'md',
-    'ppm',
     'py2',
     'py3',
     'java',
@@ -25,6 +24,9 @@ ALLOWLISTED_EXTENSIONS = [
     'bf',
     'pptx',
     'png',
+    'jpeg',
+    'jpg',
+    'gif'
 ]
 
 def is_allowlisted_root(root: str) -> bool:
@@ -40,19 +42,17 @@ def is_allowlisted_file(file_path: str) -> bool:
 
 size_and_file = []
 for root, dirs, files in os.walk('./'):
-    if len(dirs) != 0:
-        continue
     if is_allowlisted_root(root):
         continue
 
     for f in files:
         file_path = os.path.join(root, f)
         file_size = os.path.getsize(file_path)
-        if is_allowlisted_file(file_path):
-            continue
         # Ignore files without extensions
         # if file_path.split('/')[-1].find('.') == -1:
         #     continue
+        if is_allowlisted_file(file_path):
+            continue
         if file_size < 10000:
             continue
         size_and_file.append((file_size, file_path))
@@ -64,6 +64,8 @@ with open('utils/to_be_deleted.txt', 'w') as to_be_deleted:
 
 response = input('Are you ABSOLUTELY SURE? (say "YES, PLEASE"):\n')
 if response != "YES, PLEASE":
+    print("Yes, sir, nothing was deleted")
     exit(0)
+print("NUKING UNWANTED FILES")
 for (_, file_path) in size_and_file:
     os.remove(file_path)
