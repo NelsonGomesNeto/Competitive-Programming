@@ -17,7 +17,7 @@ lli solve(int i = 0)
 
   ans = inf;
   for (int j = i + 1; j < n; j++)
-    ans = min(ans, solve(j) + (h[i] - h[j])*(h[j] - h[i]) + c);
+    ans = min(ans, solve(j) + (h[j] - h[i])*(h[j] - h[i]) + c);
   return ans;
 }
 
@@ -70,8 +70,6 @@ lli solve2()
   memo[0] = 0;
   liChaoTree = LiChaoTree(maxX);
   liChaoTree.addLine(Line{-2*h[0], h[0]*h[0] + memo[0]});
-  // memo[1] = (h[1] - h[0])*(h[1] - h[0]) + c;
-  // liChaoTree.addLine(Line{-2*h[1], h[1]*h[1] + memo[1]});
 
   // lines.push_back(Line{-2*h[0], h[0]*h[0] + memo[0]});
   for (int i = 1; i < n; i++)
@@ -83,7 +81,6 @@ lli solve2()
     // }
     memo[i] = liChaoTree.get(h[i]);
     memo[i] += h[i]*h[i] + c;
-    // lines.push_back(Line{-2*h[i], h[i]*h[i] + memo[i]});
     liChaoTree.addLine(Line{-2*h[i], h[i]*h[i] + memo[i]});
   }
   return memo[n - 1];
@@ -96,6 +93,7 @@ int main()
     for (int i = 0; i < n; i++)
       scanf("%lld", &h[i]);
 
+    memset(memo, -1, sizeof(memo));
     lli ans = solve2();
     printf("%lld\n", ans);
   }
