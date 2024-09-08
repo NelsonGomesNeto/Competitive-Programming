@@ -7,7 +7,7 @@ def compileCode(solver):
     extension = solver.split('.')
     extension = extension[len(extension) - 1]
     if (extension == "cpp"):
-        os.system("g++ \"%s\" -o test -std=c++14 -O2" % solver)
+        os.system("g++ \"%s\" -o test -std=c++17 -O2" % solver)
     elif (extension == "c"):
         os.system("gcc \"%s\" -o test -O2" % solver)
 

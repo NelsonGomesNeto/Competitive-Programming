@@ -24,9 +24,14 @@ int main()
     if (allBack) printf("*\n");
     else
     {
+      bool first = true;
       for (int i = 0; i < n; i ++)
         if (!returned[i])
-          printf("%d ", i + 1);
+        {
+          if (first) printf("%d");
+          else printf("%d ", i + 1);
+          first = false;
+        }
       printf("\n");
     }
   }

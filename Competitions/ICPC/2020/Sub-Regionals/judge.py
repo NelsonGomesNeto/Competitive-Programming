@@ -35,7 +35,8 @@ for test in sorted(testCases, key=lambda x: int(x.split('_')[1])):
     color = green if verdict == "Accepted" else red if verdict == "Wrong Answer" else blue
     if verdict != "Accepted":
         accepted = False
-        # os.system("cat %s" % (outputPath + test))
+        os.system("cat %s" % (outputPath + test))
+        os.system("cat auxOut")
 
     print("%3d" % int(test.split("_")[1]), " - Verdict: ", color, verdict, reset, " | time: ", round(executionTime, 4), sep="")
 

@@ -1,0 +1,24 @@
+O Alfredo está estudando um problema no mestrado chamado de Minimum Broadcast Time (MBT). Este problema foi provado ser NP-Completo, ou seja, ainda não é conhecido um algoritmo que resolva o de maneira rápida (polinomial).
+
+O problema pode ser exposto da seguinte maneira, imagine que um dispositivo possue uma mensagem a ser transferida aos demais dispositivos.
+Todos os dispositivos devem receber a mensagem no menor tempo (discretizado) possível.
+No entanto, há algumas limitações.
+Cada dispositivo só pode de realizar uma transferência por vez aos seus vizinhos imediatos. Quando um dispositivo recebe a mensagem, ele também fica responsável por enviar a mensagem para seus respectivos vizinhos imediatos. 
+Essa rede pode ser modelada como um grafo não direcionado $G = (V,E)$, sendo os dispositivos os vértices e as conexões entre eles as arestas, onde $E \subset V \times V$. Além disso o dispositivo inicial é denotado como $v_0$.
+
+Para um grafo qualquer o problema é NP-Completo. No entanto, Alfredo tem um pressentimento que quando o grafo é uma árvore, o problema pode ser resolvido polinomialmente. Porém, como o Alfredo se aposentou do mundo da maratona, ele está enferrujado e você prometeu ajudar ele.
+
+Dado uma árvore e o vértice fonte, informe o MBT dela.  
+
+Entrada:
+
+A primeira linha contém dois inteiros V e r, a quantidade de vértices e a raiz da árvore (vértice fonte), respectivamente. Será descrito mais V - 1 linhas com dois inteiros u e w, descrevendo uma aresta.
+
+Limites:
+
+- 1 <= V <= 1000
+- 1 <= r <= V
+
+Saída:
+
+Uma única linha com o valor do MBT. 

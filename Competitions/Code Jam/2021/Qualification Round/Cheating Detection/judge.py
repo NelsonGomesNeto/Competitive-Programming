@@ -3,10 +3,10 @@ import os
 
 code = sys.argv[1]
 test_folder = sys.argv[2]
-# os.system("g++ %s -o test -std=c++17" % code)
+os.system("g++ %s -o test -std=c++17" % code)
 
-# os.system("./test < %s/in > my" % test_folder)
-os.system("python3 agra.py < %s/in > my" % test_folder)
+os.system("./test < %s/in > my" % test_folder)
+# os.system("python3 agra.py < %s/in > my" % test_folder)
 
 f = open("my", "r")
 my = f.readlines()

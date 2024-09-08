@@ -46,7 +46,7 @@ double eval(double a)
 }
 double ternarySearch(double lo, double hi)
 {
-  lo -= eps, hi += eps;
+  // lo -= eps, hi += eps;
   while (abs(hi - lo) > eps)
   {
     double midlo = (2*lo + hi) / 3, midhi = (lo + 2*hi) / 3;
@@ -57,7 +57,7 @@ double ternarySearch(double lo, double hi)
   }
   // printf("%lf %lf - %lf %lf\n", lo, hi, eval(lo), eval(hi));
   return eval((lo + hi) / 2);
-  return min(eval(lo), eval(hi));
+  // return min(eval(lo), eval(hi));
 }
 
 int main()
@@ -78,12 +78,7 @@ int main()
       }
     }
 
-    // double ans = 1e18;
-    // int t = 8;
-    // for (double a = 0; a < 2*pi; a += 2*pi / t)
-    //   ans = min(ans, ternarySearch(a, a + 2*pi/t));
-
-    double ans = min(ternarySearch(0, pi), ternarySearch(0, 2*pi));
+    double ans = ternarySearch(-2*pi, 2*pi);
     printf("%.2lf\n", ans);
   }
   return 0;
