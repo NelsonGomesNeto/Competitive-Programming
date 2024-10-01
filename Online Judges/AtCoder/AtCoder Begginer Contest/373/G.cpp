@@ -16,8 +16,8 @@ So, we can model this problem as a MinCostFlow and find the permutation that
 minimizes the size of the segments.
 LOVE IT.
 
-Flow graph model:
-source (0) -[1, 0]> p (1 : n) -[1, dist]> q (1 + n : 2*n) -[1, 0]> sink (2*n +
+Flow graph model (vertex -[cost, flow]> vertex):
+source (0) -[0, 1]> p (1 : n) -[dist, 1]> q (1 + n : 2*n) -[0, 1]> sink (2*n +
 1)
 */
 
