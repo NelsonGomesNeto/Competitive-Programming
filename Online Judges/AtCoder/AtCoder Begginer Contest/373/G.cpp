@@ -1,4 +1,25 @@
 #include <bits/stdc++.h>
+#define DEBUG if (0)
+#define lli long long int
+#define ldouble long double
+
+/*
+We can prove that if at least one solution exists, one of them will minimize:
+  sum(dist(p_i, q_ri))
+
+  Proof idea:
+  If a pair of segments u, v intersects, then switching to any other pair of
+  segments with those points will minimize the distance and reduce the number of
+  intersections.
+
+So, we can model this problem as a MinCostFlow and find the permutation that
+minimizes the size of the segments.
+LOVE IT.
+
+Flow graph model:
+source (0) -[1, 0]> p (1 : n) -[1, dist]> q (1 + n : 2*n) -[1, 0]> sink (2*n +
+1)
+*/
 
 template <typename Cost, typename Flow>
 struct Edge {
@@ -155,23 +176,65 @@ struct MinCostFlow {
   }
 };
 
-int main() {
-  std::ios_base::sync_with_stdio(false);
-  std::cin.tie(NULL);
-
-  int n, m;
-  std::cin >> n >> m;
-  MinCostFlow<int, int> mcf(n, 0, n - 1);
-
-  int u, v, c, f;
-  for (int i = 0; i < m; ++i) {
-    std::cin >> u >> v >> c >> f;
-    mcf.AddEdge(u, v, c, f);
+struct Point {
+  int x, y;
+  ldouble Dist(const Point& other) const {
+    return std::sqrt((x - other.x) * (x - other.x) +
+                     (y - other.y) * (y - other.y));
   }
+};
 
-  const auto [cost, flow] = mcf.FindMinCostFlow();
-  std::cout << cost << " " << flow << "\n";
-  mcf.PrintFlowGraph();
+struct TestCase {
+  int n;
+  std::vector<Point> a, b;
+  std::vector<int> ans;
 
+  bool Solve() {
+    if (!(std::cin >> n)) return false;
+
+    a.resize(n), b.resize(n);
+    for (Point& p : a) std::cin >> p.x >> p.y;
+    for (Point& p : b) std::cin >> p.x >> p.y;
+
+    MinCostFlow<ldouble, int> mcf(2 * n + 2, 0, 2 * n + 1);
+    for (int i = 0; i < n; ++i) mcf.AddEdge(mcf.source, 1 + i, 0, 1);
+    for (int i = 0; i < n; ++i) {
+      for (int j = 0; j < n; ++j) {
+        mcf.AddEdge(1 + i, 1 + n + j, a[i].Dist(b[j]), 1);
+      }
+    }
+    for (int i = 0; i < n; ++i) mcf.AddEdge(1 + n + i, mcf.sink, 0, 1);
+
+    const auto [flow, cost] = mcf.FindMinCostFlow();
+
+    if (flow < n) {
+      std::cout << "-1\n";
+      return true;
+    }
+
+    ans.resize(n);
+    for (int i = 0; i < n; ++i) {
+      for (const auto& e : mcf.graph[1 + i]) {
+        if (e.flow) continue;
+        ans[i] = (e.to - 1 - n) + 1;
+        break;
+      }
+    }
+
+    for (int i = 0; i < n; ++i) {
+      if (i) std::cout << " ";
+      std::cout << ans[i];
+    }
+    std::cout << "\n";
+
+    return true;
+  }
+};
+TestCase test_case;
+
+int main() {
+  do {
+    test_case = TestCase{};
+  } while (test_case.Solve());
   return 0;
 }
