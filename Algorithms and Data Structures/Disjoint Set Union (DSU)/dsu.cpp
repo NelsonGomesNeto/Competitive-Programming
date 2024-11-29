@@ -1,54 +1,52 @@
 #include <bits/stdc++.h>
-#define DEBUG if(0)
+#define DEBUG if (0)
 #define lli long long int
 #define ldouble long double
-using namespace std;
 
-struct DSU
-{
+struct DSU {
   int size;
-  vector<int> parents;
-  DSU() { parents.clear(); }
-  DSU(int sz) : size(sz) { init(); }
-  void init() { parents.resize(size, -1); }
-  int root(int u) { return parents[u] < 0 ? u : parents[u] = root(parents[u]); }
-  void merge(int u, int v)
-  {
-    u = root(u), v = root(v);
+  std::vector<int> parents;
+  DSU() : size(0) { parents.clear(); }
+  DSU(const int sz) : size(sz) { Init(); }
+  void Init() { parents.resize(size, -1); }
+  int Root(const int u) {
+    return parents[u] < 0 ? u : parents[u] = Root(parents[u]);
+  }
+  void Merge(int u, int v) {
+    u = Root(u), v = Root(v);
     if (u == v) return;
-    if (parents[u] > parents[v]) swap(u, v);
+    if (parents[u] > parents[v]) std::swap(u, v);
     parents[u] += parents[v];
     parents[v] = u;
   }
-  int setSize(int u) { return -parents[root(u)]; }
-  bool sameSet(int u, int v) { return root(u) == root(v); }
+  int SetSize(const int u) { return -parents[Root(u)]; }
+  bool SameSet(const int u, const int v) { return Root(u) == Root(v); }
 };
 DSU dsu;
 
-int main()
-{
+int main() {
   int n, q;
-  while (scanf("%d %d", &n, &q) != EOF)
-  {
+  while (scanf("%d %d", &n, &q) != EOF) {
     dsu = DSU(n);
-    for (int i = 0; i < q; i++)
-    {
-      char op; scanf(" %c", &op);
-      if (op == 'U')
-      {
-        int u, v; scanf("%d %d", &u, &v); u--, v--;
-        dsu.merge(u, v);
+    for (int i = 0; i < q; i++) {
+      char op;
+      scanf(" %c", &op);
+      if (op == 'U') {
+        int u, v;
+        scanf("%d %d", &u, &v);
+        u--, v--;
+        dsu.Merge(u, v);
         printf("Merged %d, %d\n", u + 1, v + 1);
-      }
-      else if (op == 'S')
-      {
-        int u; scanf("%d", &u); u--;
-        printf("%d setSize: %d\n", u + 1, dsu.setSize(u));
-      }
-      else
-      {
-        int u, v; scanf("%d %d", &u, &v); u--, v--;
-        printf("sameSet(%d, %d): %d\n", u + 1, v + 1, dsu.sameSet(u, v));
+      } else if (op == 'S') {
+        int u;
+        scanf("%d", &u);
+        u--;
+        printf("%d setSize: %d\n", u + 1, dsu.SetSize(u));
+      } else {
+        int u, v;
+        scanf("%d %d", &u, &v);
+        u--, v--;
+        printf("sameSet(%d, %d): %d\n", u + 1, v + 1, dsu.SameSet(u, v));
       }
     }
   }
