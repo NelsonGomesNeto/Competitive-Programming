@@ -212,6 +212,7 @@
   * [Three Blocks Palindrome](https://codeforces.com/contest/1335/problem/E2) (Awesome left and right precalculation; NICE)
   * [Discrete Centrifugal Jumps](https://codeforces.com/contest/1407/problem/D) (Stack trick to precalculate the jumps; NICE (there's also a very simple DP after tehe))
   * [Searchlights](https://codeforces.com/contest/1408/problem/D) (Very accumulated maximum, focus on rx <= sx and ry <= sy hehe)
+  * [Altas Aventuras](https://thehuxley.com/problem/190) (Incredibly tricky precomputation. You MUST experiment with the problem BEFORE trying to solve it because we need to reframe the problem to see the precomputation.)
 
 ## Knapsack
 * #### Problems
@@ -260,6 +261,27 @@
 ## Partition DP
 * #### Problems
   * [Clear the String](https://codeforces.com/contest/1132/problem/F) (Interesting Partition DP)
+
+## Lagrangian Relaxation (Aliens Trick)
+On problem where you need to make up to `k` choices, the immediate DP is often
+O(n*k) (position, current_choices). With Lagrangian Relaxation, you can reduce
+that to O(n*lg(k)).
+### Intuition:
+Let `f(x)` be the optimal answer for `x` choices. Let `L(y) = v(y) - y*c(y)`,
+where `L(y)` is the optimal answer if every choice has penalty `y` and `v(y)` is
+the sum for that penalty. So, you can binary search for the **smallest** penalty
+such that `c(y) >= k`. Finally, `ans = L(y) + y*c(y)` (we simply remove the
+penalty). Note that this works even if `c(y)` is greater than `k` because the
+optimal answer for `k` is in the same line as `c(y)` (slope `y`), so removing
+the penalty will fix the answer automatically \o/.
+
+This **only** works if `f(x)` is **concave or convex** and is the reason why the
+slope part works. Please consider reading the full proof at
+https://usaco.guide/adv/lagrange?lang=cpp.
+
+* #### Problems
+  * [Feast](https://oj.uz/problem/view/NOI19_feast) (Very direct aplication of Lagrangian Relaxation)
+  * [New Year and Handle Change](https://codeforces.com/contest/1279/problem/F) (Direct application, but needs bottom-up)
 
 ## Advanced Optimizations
 * #### Problems
@@ -370,6 +392,7 @@
 # Fast Fourier Transform (FFT)
 * #### Problems:
   * [Substring 2](https://atcoder.jp/contests/abc196/tasks/abc196_f) (Straightforward String Matching with FFT)
+  * [Permutation Concatenation](https://atcoder.jp/contests/abc390/tasks/abc390_g) (Heavy math manipulation to use NTT)
 
 # Interactive
 * #### Problems
