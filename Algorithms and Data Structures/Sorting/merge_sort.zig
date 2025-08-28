@@ -2,15 +2,21 @@ const std = @import("std");
 var gpa = std.heap.GeneralPurposeAllocator(.{}){};
 const allocator = gpa.allocator();
 
-pub fn print(comptime format: []const u8, args: anytype) void {
-    // const writer = std.io.getStdOut().writer();
-    // writer.print(format, args) catch unreachable;
+var stdout_buffer: [4096]u8 = undefined;
+var stdout_writer = std.fs.File.stdout().writer(&stdout_buffer);
+const stdout = &stdout_writer.interface;
 
-    const stdout = std.io.getStdOut();
-    var bw = std.io.bufferedWriter(stdout.writer());
-    const writer = bw.writer();
-    writer.print(format, args) catch unreachable;
-    bw.flush() catch unreachable;
+var stdin_buffer: [4096]u8 = undefined;
+var stdin_reader = std.fs.File.stdin().reader(&stdin_buffer);
+const stdin = &stdin_reader.interface;
+
+pub fn print(comptime format: []const u8, args: anytype) void {
+    // const output = std.fmt.allocPrint(allocator, format, args) catch unreachable;
+    // defer allocator.free(output);
+    // std.fs.File.stdout().writeAll(output) catch unreachable;
+
+    stdout.print(format, args) catch unreachable;
+    stdout.flush() catch unreachable;
 }
 
 pub fn parseInt(comptime T: type, string: []const u8) T {
@@ -38,10 +44,9 @@ pub fn printElapsedTime(
 pub fn readArray() ![]i32 {
     var timer = try std.time.Timer.start();
 
-    const stdin = std.io.getStdIn().reader();
-    const input_string = try stdin.readAllAlloc(
+    const input_string = try stdin.allocRemaining(
         allocator,
-        std.math.maxInt(usize),
+        .unlimited,
     );
     defer allocator.free(input_string);
     printElapsedTime(&timer, "input_string read");
