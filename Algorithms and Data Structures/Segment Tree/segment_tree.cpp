@@ -7,18 +7,18 @@ struct Data {
   int value;
   Data Merge(const Data& other) const { return Data{value + other.value}; }
 };
-const Data nil = Data{0};
-
 // DON'T FORGET TO DEFINE THE NIL!!!
+const Data kNil = Data{0};
+
 template <class T>
 struct SegmentTree {
   int size;
   std::vector<T> data;
   std::vector<T> st;
   T nil;
-  SegmentTree() {}
+  SegmentTree() : SegmentTree(/*size=*/0, nil) {}
   SegmentTree(const int size_, const T nil_) : size(size_), nil(nil_) {
-    data.resize(size);
+    data.resize(size, nil);
     st.resize(4 * size);
   }
   SegmentTree(const std::vector<T>& data_, const T nil_)
@@ -69,7 +69,7 @@ SegmentTree<Data> segtree;
 int main() {
   int n;
   std::cin >> n;
-  segtree = SegmentTree<Data>(n, nil);
+  segtree = SegmentTree<Data>(n, kNil);
   for (int i = 0; i < n; i++) std::cin >> segtree.data[i].value;
   segtree.Build();
 
