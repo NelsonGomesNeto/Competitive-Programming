@@ -109,6 +109,7 @@
   * [Linhas de Metrô](https://www.urionlinejudge.com.br/judge/en/problems/view/2887) (Clever LCA problem, look for combinations of paths, AMAZING)
   * [Company](https://codeforces.com/contest/1062/problem/E) (MIND BLOWING "in and out" + LCA problem, look for the border vertices)
   * [QTREE2](https://www.spoj.com/problems/QTREE2/) (This problem is a MUST DO with Binary Lifting, at most O(lg(n)) in both queries, you can do it)
+  * [Heavy Buckets](https://atcoder.jp/contests/abc438/tasks/abc438_e) (Forget about LCA, this is PURE Binary Lifting! And you don't even need to build trees or care about cycles!)
 
 # Heavy-Light Decomposition (HLD)
 * #### Problems
