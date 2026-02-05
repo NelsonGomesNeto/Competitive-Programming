@@ -104,13 +104,13 @@ pub fn mergeWithTemp(
         }
     }
     @memcpy(array[alo .. bhi + 1], tmp[alo .. bhi + 1]);
+    // @memmove(array[alo .. bhi + 1], tmp[alo .. bhi + 1]);
     // std.mem.copyForwards(T, array[alo .. bhi + 1], tmp[alo .. bhi + 1]);
     // for (alo..bhi + 1) |l| {
     //     array[l] = tmp[l];
     // }
 }
 
-// TODO: try iterative mergeSort!
 pub fn mergeSortInternal(comptime T: type, array: []T, tmp: []T) void {
     if (array.len <= 1) return;
 
@@ -128,6 +128,33 @@ pub fn mergeSort(comptime T: type, array: []T) void {
     mergeSortInternal(T, array, tmp);
 }
 
+pub fn iterativeMergeSort(comptime T: type, array: []T) void {
+    const tmp = allocator.alloc(T, array.len) catch unreachable;
+    defer allocator.free(tmp);
+
+    var block_size: usize = 2;
+    while (block_size < array.len) : (block_size <<= 1) {
+        var lo: usize = 0;
+        while (lo < array.len) : (lo += block_size) {
+            if (lo + block_size > array.len) {
+                var j = lo + 1;
+                const mid = while (j < array.len) : (j += 1) {
+                    if (array[j - 1] > array[j]) break j - 1;
+                } else array.len;
+                if (mid == array.len) continue;
+                mergeWithTemp(T, array, tmp, lo, mid, mid + 1, array.len - 1);
+            } else {
+                const hi = @min(lo + block_size, array.len) - 1;
+                const mid = (lo + hi) >> 1;
+                mergeWithTemp(T, array, tmp, lo, mid, mid + 1, hi);
+            }
+        }
+    }
+    const hi = array.len - 1;
+    const mid = (block_size >> 1) - 1;
+    mergeWithTemp(T, array, tmp, 0, mid, mid + 1, hi);
+}
+
 pub fn stdSort(comptime T: type, array: []T) void {
     std.mem.sort(T, array, {}, std.sort.asc(T));
 }
@@ -137,7 +164,7 @@ const kExecutions = 30;
 pub fn SortFn(comptime T: type) type {
     return struct {
         name: []const u8,
-        function: *const fn (comptime T: type, array: []T) void,
+        function: *const fn ([]T) void,
 
         const Self = @This();
 
@@ -156,7 +183,7 @@ pub fn SortFn(comptime T: type) type {
             for (0..kExecutions) |_| {
                 @memcpy(array, original_array);
                 var timer = try std.time.Timer.start();
-                self.function(T, array);
+                self.function(array);
                 average_time += timer.read();
             }
             average_time /= kExecutions;
@@ -169,11 +196,15 @@ pub fn SortFn(comptime T: type) type {
 pub fn sortFn(
     comptime T: type,
     comptime name: []const u8,
-    comptime function: *const fn (comptime T: type, array: []T) void,
+    comptime function: *const fn (comptime type, []T) void,
 ) SortFn(T) {
     return .{
         .name = name,
-        .function = function,
+        .function = struct {
+            fn wrapper(array: []T) void {
+                return function(T, array);
+            }
+        }.wrapper,
     };
 }
 
@@ -192,11 +223,16 @@ pub fn main() !void {
         ),
         sortFn(
             i32,
+            "IterativeMergeSort",
+            iterativeMergeSort,
+        ),
+        sortFn(
+            i32,
             "StdSort",
             stdSort,
         ),
     };
-    inline for (sort_functions) |sort_function| {
+    for (sort_functions) |sort_function| {
         try sort_function.evaluate(array);
     }
 }
