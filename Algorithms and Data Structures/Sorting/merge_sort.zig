@@ -166,8 +166,21 @@ pub fn SortFn(comptime T: type) type {
     return struct {
         name: []const u8,
         function: *const fn ([]T) void,
-
         const Self = @This();
+
+        pub fn init(
+            comptime name: []const u8,
+            comptime function: *const fn (comptime type, []T) void,
+        ) SortFn(T) {
+            return .{
+                .name = name,
+                .function = struct {
+                    fn wrapper(array: []T) void {
+                        return function(T, array);
+                    }
+                }.wrapper,
+            };
+        }
 
         pub fn evaluate(self: *const Self, original_array: []const T) !void {
             const description = try std.fmt.allocPrint(
@@ -194,20 +207,6 @@ pub fn SortFn(comptime T: type) type {
         }
     };
 }
-pub fn sortFn(
-    comptime T: type,
-    comptime name: []const u8,
-    comptime function: *const fn (comptime type, []T) void,
-) SortFn(T) {
-    return .{
-        .name = name,
-        .function = struct {
-            fn wrapper(array: []T) void {
-                return function(T, array);
-            }
-        }.wrapper,
-    };
-}
 
 pub fn main() !void {
     defer std.debug.assert(gpa.deinit() == .ok);
@@ -217,18 +216,15 @@ pub fn main() !void {
     print("array: {any}\n", .{array[0..5]});
 
     const sort_functions = [_]SortFn(i32){
-        sortFn(
-            i32,
+        SortFn(i32).init(
             "MergeSort",
             mergeSort,
         ),
-        sortFn(
-            i32,
+        SortFn(i32).init(
             "IterativeMergeSort",
             iterativeMergeSort,
         ),
-        sortFn(
-            i32,
+        SortFn(i32).init(
             "StdSort",
             stdSort,
         ),
