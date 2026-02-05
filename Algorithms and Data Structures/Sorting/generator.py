@@ -1,6 +1,6 @@
 from random import randint
 
-N = int(1e3)
+N = int(1e7)
 print(N)
-a = [randint(0, N) for _ in range(N)]
+a = [randint(0, int(9)) for _ in range(N)]
 print(*a)

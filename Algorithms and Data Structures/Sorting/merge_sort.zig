@@ -50,6 +50,7 @@ pub fn readArray() ![]i32 {
     );
     defer allocator.free(input_string);
     printElapsedTime(&timer, "input_string read");
+    timer.reset();
 
     var lines_it = std.mem.tokenizeScalar(u8, input_string, '\n');
 
@@ -57,8 +58,8 @@ pub fn readArray() ![]i32 {
     const array = try allocator.alloc(i32, n);
 
     var value_it = std.mem.tokenizeScalar(u8, lines_it.next().?, ' ');
-    for (0..n) |i| {
-        array[i] = parseInt(i32, value_it.next().?);
+    for (array) |*val| {
+        val.* = parseInt(i32, value_it.next().?);
     }
     printElapsedTime(&timer, "array read");
 
