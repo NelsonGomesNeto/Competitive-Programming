@@ -3,6 +3,19 @@
 #define lli long long int
 #define ldouble long double
 
+/*
+Problem:
+Given `n` numbers, process `q` queries.
+Every query asks to find the yth missing number >= x.
+
+Solution:
+Using accumulated sums, we can answer each query with 2 binary searches.
+1. Find the "missing range" which contains `x`;
+2. Find the first "missing range" which had `y` elements after `x`.
+It's a bit convoluted and has a couple corner cases. But it's an interesting
+problem to think about.
+*/
+
 struct TestCase {
   int n, q;
   std::vector<int> a;
@@ -31,17 +44,20 @@ struct TestCase {
   }
   int FindRangePos(int lo, const int x, const int y) {
     const Range& start_range = missing_ranges[lo];
-    const int bigger_than_x_inside_start_range = start_range.hi - x + 1;
+    const int bigger_than_x_inside_start_range =
+        start_range.hi - std::max(x, start_range.lo) + 1;
     int hi = (int)missing_ranges.size() - 1;
     while (lo < hi) {
       const int mid = (lo + hi) >> 1;
       const Range& r = missing_ranges[mid];
-      const int reachable =
-          start_range.lo == r.lo
-              ? r.Size() - 1
-              : r.before_acc - start_range.before_acc +
-                    (r.Size() - 1 - bigger_than_x_inside_start_range);
-      if (reachable >= y)
+      const int cnt =
+          bigger_than_x_inside_start_range +
+          (start_range.lo == r.lo
+               ? 0
+               : (r.Size() + (r.before_acc - start_range.before_acc -
+                              start_range.Size())));
+      DEBUG { std::println("\t\t{} | {} | cnt {}", mid, r.ToString(), cnt); }
+      if (cnt > y)
         hi = mid;
       else
         lo = mid + 1;
@@ -49,27 +65,39 @@ struct TestCase {
     return lo;
   }
   int YthSmallestAtLeastX(const int x, const int y) {
+    DEBUG {
+      std::println("\tx {} y {}", x, y);
+      std::fflush(stdout);
+    }
     const int start_range_pos = FindStartRangePos(x);
     const Range& start_range = missing_ranges[start_range_pos];
-    std::println("\t{} {} | {} || {}", x, y, start_range_pos,
-                 start_range.ToString());
-    std::fflush(stdout);
+    DEBUG {
+      std::println("\t{} | start_range {}", start_range_pos,
+                   start_range.ToString());
+      std::fflush(stdout);
+    }
     assert(start_range.hi >= x);
-    const int range_pos = FindRangePos(start_range_pos, x, y);
-    const Range& target_range = missing_ranges[range_pos];
-    std::println("\t{} {} | {} || {}", x, y, range_pos,
-                 target_range.ToString());
-    std::fflush(stdout);
-    // assert(target_range.before_acc - start_range.before_acc +
-    //            target_range.Size() - 1 >=
-    //        y);
-    const int before = (target_range.before_acc - start_range.before_acc) -
-                       (start_range.hi - x + 1);
-    const int offset = start_range.lo == target_range.lo
-                           ? (x > start_range.lo ? y + (x - start_range.lo) : 0)
-                           : (y - before - 1);
-    std::println("\tbefore {} | offset {}", before, offset);
-    const int ans = target_range.lo + offset;
+    const int target_range_pos = FindRangePos(start_range_pos, x, y);
+    const Range& target_range = missing_ranges[target_range_pos];
+    DEBUG {
+      std::println("\t{} | target_range {}", target_range_pos,
+                   target_range.ToString());
+      std::fflush(stdout);
+    }
+    const int before =
+        start_range_pos == target_range_pos
+            ? 0
+            : (start_range.hi - std::max(x, start_range.lo) + 1) +
+                  (target_range.before_acc - start_range.before_acc -
+                   start_range.Size());
+    const int offset = y - before;
+    DEBUG {
+      std::println("\tbefore {} | offset {}", before, offset);
+      std::fflush(stdout);
+    }
+    const int ans = start_range_pos == target_range_pos && x >= target_range.lo
+                        ? x + offset
+                        : target_range.lo + offset;
     return ans;
   }
 
@@ -89,21 +117,38 @@ struct TestCase {
     missing_ranges.emplace_back(a.back() + 1, std::numeric_limits<int>::max(),
                                 0);
 
-    int sum = 0;
     for (int i = 1; i < (int)missing_ranges.size(); ++i) {
       missing_ranges[i].before_acc =
           missing_ranges[i - 1].before_acc + missing_ranges[i - 1].Size();
     }
 
-    for (const auto& mr : missing_ranges) {
+    DEBUG for (const auto& mr : missing_ranges) {
       std::println("{}", mr.ToString());
     }
+
+    // std::vector<int> missing_numbers;
+    // for (const auto& mr : missing_ranges) {
+    //   for (int i = mr.lo; i <= std::min(60, mr.hi); ++i) {
+    //     missing_numbers.push_back(i);
+    //   }
+    // }
+    // for (int x = 1; x < 20; ++x) {
+    //   for (int y = 1; y < 20; ++y) {
+    //     const int ans = YthSmallestAtLeastX(x, y - 1);
+    //     const int cor = [&]() {
+    //       auto it = std::ranges::lower_bound(missing_numbers, x);
+    //       return *std::next(it, y - 1);
+    //     }();
+    //     if (ans != cor) {
+    //       std::println("{} {} | ans {} cor {}", x, y, ans, cor);
+    //     }
+    //   }
+    // }
 
     for (int qi = 0; qi < q; ++qi) {
       int x, y;
       std::cin >> x >> y;
-      --y;
-      const int ans = YthSmallestAtLeastX(x, y);
+      const int ans = YthSmallestAtLeastX(x, y - 1);
       std::println("{}", ans);
     }
 
