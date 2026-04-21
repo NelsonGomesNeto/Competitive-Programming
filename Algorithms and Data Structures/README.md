@@ -381,6 +381,13 @@ https://usaco.guide/adv/lagrange?lang=cpp.
   * [HackerEarth DSU Problems](https://www.hackerearth.com/pt-br/practice/data-structures/disjoint-data-strutures/basics-of-disjoint-data-structures/practice-problems/) (There are some interesting problems)
   * [Friend Suggestions](https://atcoder.jp/contests/abc157/tasks/abc157_d) (VERY NICE use of DSU)
   * [Experience](https://codeforces.com/edu/course/2/lesson/7/1/practice/contest/289390/problem/C) (Amazingly clever DSU problem, no maps, just a smart use of DSU)
+  * [Sum of Subarray Minimums](https://leetcode.com/problems/sum-of-subarray-minimums/description/) (Clever DSU problem)
+
+## Stacks
+* Great resource to learn Monotonic Stacks: https://usaco.guide/gold/stacks.
+* #### Problems
+  * [Nearest Smaller Values](https://cses.fi/problemset/result/16970673/) (Awesome problem to learn monotonic stacks! \o/)
+  * [Sum of Subarray Minimums](https://leetcode.com/problems/sum-of-subarray-minimums/description/) (Great next step for monotic stacks! \o/)
 
 # String
 * #### Problems
