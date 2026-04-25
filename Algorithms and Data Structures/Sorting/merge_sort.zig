@@ -7,10 +7,6 @@ var stdin_buffer: [4096]u8 = undefined;
 var stdin: *std.Io.Reader = undefined;
 
 pub fn print(comptime format: []const u8, args: anytype) void {
-    // const output = std.fmt.allocPrint(allocator, format, args) catch unreachable;
-    // defer allocator.free(output);
-    // std.fs.File.stdout().writeAll(output) catch unreachable;
-
     stdout.print(format, args) catch unreachable;
     stdout.flush() catch unreachable;
 }
@@ -319,21 +315,21 @@ pub fn main(init: std.process.Init) !void {
     defer gpa.free(array);
     print("array[0:4] (size = {d}): {any}\n", .{ array.len, array[0..5] });
 
-    // const sort_functions = [_]SortFn(i32){
-    //     SortFn(i32).init(
-    //         "MergeSort",
-    //         mergeSort,
-    //     ),
-    //     SortFn(i32).init(
-    //         "IterativeMergeSort",
-    //         iterativeMergeSort,
-    //     ),
-    //     SortFn(i32).init(
-    //         "StdSort",
-    //         stdSort,
-    //     ),
-    // };
-    // for (sort_functions) |sort_function| {
-    //     try sort_function.evaluate(io, gpa, array);
-    // }
+    const sort_functions = [_]SortFn(i32){
+        SortFn(i32).init(
+            "MergeSort",
+            mergeSort,
+        ),
+        SortFn(i32).init(
+            "IterativeMergeSort",
+            iterativeMergeSort,
+        ),
+        SortFn(i32).init(
+            "StdSort",
+            stdSort,
+        ),
+    };
+    for (sort_functions) |sort_function| {
+        try sort_function.evaluate(io, gpa, array);
+    }
 }
