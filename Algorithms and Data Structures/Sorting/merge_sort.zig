@@ -67,23 +67,23 @@ pub fn readArray(
     start_time = clock.now(io);
 
     // Manual parsing: ~0ms + ~80ms
-    // var it: usize = 0;
-    // const bp = std.mem.findScalar(u8, input_string, '\n').?;
-    // const n = parseInt(usize, input_string[it..bp]);
-    // it = bp + 1;
-    // printElapsedTime(
-    //     std.Io.Timestamp.untilNow(start_time, io, clock),
-    //     "n read",
-    // );
-    // const array = try allocator.alloc(i32, n);
-    // for (array) |*val| {
-    //     // naiveFindScalarPos -> ~80ms
-    //     const dp = naiveFindScalarPos(u8, input_string, it, ' ') orelse naiveFindScalarPos(u8, input_string, it, '\n').?;
-    //     // std.mem.findScalarPos -> ~105ms
-    //     // const dp = std.mem.findScalarPos(u8, input_string, it, ' ') orelse std.mem.findScalarPos(u8, input_string, it, '\n').?;
-    //     val.* = fastParseInt(input_string[it..dp]);
-    //     it = dp + 1;
-    // }
+    var it: usize = 0;
+    const bp = std.mem.findScalar(u8, input_string, '\n').?;
+    const n = parseInt(usize, input_string[it..bp]);
+    it = bp + 1;
+    printElapsedTime(
+        std.Io.Timestamp.untilNow(start_time, io, clock),
+        "n read",
+    );
+    const array = try allocator.alloc(i32, n);
+    for (array) |*val| {
+        // naiveFindScalarPos -> ~80ms
+        const dp = naiveFindScalarPos(u8, input_string, it, ' ') orelse naiveFindScalarPos(u8, input_string, it, '\n').?;
+        // std.mem.findScalarPos -> ~105ms
+        // const dp = std.mem.findScalarPos(u8, input_string, it, ' ') orelse std.mem.findScalarPos(u8, input_string, it, '\n').?;
+        val.* = fastParseInt(input_string[it..dp]);
+        it = dp + 1;
+    }
 
     // Semi manual parsing: ~0ms + ~100ms
     // const bp = std.mem.findScalar(u8, input_string, '\n').?;
@@ -100,19 +100,19 @@ pub fn readArray(
     // }
 
     // Full tokenization: ~20ms + ~100ms
-    var lines_it = std.mem.tokenizeScalar(u8, input_string, '\n');
-    const n = parseInt(usize, lines_it.next().?);
-    const array_str = lines_it.next().?;
-    var value_it = std.mem.tokenizeScalar(u8, array_str, ' ');
-    printElapsedTime(
-        std.Io.Timestamp.untilNow(start_time, io, clock),
-        "n read",
-    );
-    const array = try allocator.alloc(i32, n);
-    for (array) |*val| {
-        // val.* = parseInt(i32, value_it.next().?);
-        val.* = fastParseInt(value_it.next().?);
-    }
+    // var lines_it = std.mem.tokenizeScalar(u8, input_string, '\n');
+    // const n = parseInt(usize, lines_it.next().?);
+    // const array_str = lines_it.next().?;
+    // var value_it = std.mem.tokenizeScalar(u8, array_str, ' ');
+    // printElapsedTime(
+    //     std.Io.Timestamp.untilNow(start_time, io, clock),
+    //     "n read",
+    // );
+    // const array = try allocator.alloc(i32, n);
+    // for (array) |*val| {
+    //     // val.* = parseInt(i32, value_it.next().?);
+    //     val.* = fastParseInt(value_it.next().?);
+    // }
 
     printElapsedTime(
         std.Io.Timestamp.untilNow(start_time, io, clock),
@@ -168,7 +168,11 @@ pub fn mergeWithTemp(
     // }
 }
 
-pub fn mergeSortInternal(comptime T: type, array: []T, tmp: []T) void {
+pub fn mergeSortInternal(
+    comptime T: type,
+    array: []T,
+    tmp: []T,
+) void {
     if (array.len <= 1) return;
 
     const mid = array.len >> 1;
@@ -181,6 +185,7 @@ pub fn mergeSortInternal(comptime T: type, array: []T, tmp: []T) void {
 
 pub fn mergeSort(
     comptime T: type,
+    _: std.Io,
     allocator: std.mem.Allocator,
     array: []T,
 ) void {
@@ -189,8 +194,52 @@ pub fn mergeSort(
     mergeSortInternal(T, array, tmp);
 }
 
+pub fn mergeSortInternalAsync(
+    comptime T: type,
+    io: std.Io,
+    array: []T,
+    tmp: []T,
+) void {
+    if (array.len <= 1) return;
+
+    const mid = array.len >> 1;
+
+    if (array.len >= 1000) {
+        const mergeSortInternalAsyncWrapper = struct {
+            fn wrapper(wio: std.Io, warray: []T, wtmp: []T) void {
+                return mergeSortInternalAsync(T, wio, warray, wtmp);
+            }
+        }.wrapper;
+        var left_future = io.async(
+            mergeSortInternalAsyncWrapper,
+            .{ io, array[0..mid], tmp[0..mid] },
+        );
+        defer left_future.cancel(io);
+        mergeSortInternalAsync(T, io, array[mid..], tmp[mid..]);
+        left_future.await(io);
+    } else {
+        mergeSortInternalAsync(T, io, array[0..mid], tmp[0..mid]);
+        mergeSortInternalAsync(T, io, array[mid..], tmp[mid..]);
+    }
+
+    mergeWithTemp(T, array, tmp, 0, mid - 1, mid, array.len - 1);
+    // mergeNoTemp(T, array, 0, mid - 1, mid, array.len - 1);
+}
+
+pub fn mergeSortAsync(
+    comptime T: type,
+    io: std.Io,
+    allocator: std.mem.Allocator,
+    array: []T,
+) void {
+    const tmp = allocator.alloc(T, array.len) catch unreachable;
+    defer allocator.free(tmp);
+    mergeSortInternalAsync(T, io, array, tmp);
+}
+
 pub fn iterativeMergeSort(
     comptime T: type,
+    _: std.Io,
     allocator: std.mem.Allocator,
     array: []T,
 ) void {
@@ -222,18 +271,20 @@ pub fn iterativeMergeSort(
 
 pub fn stdSort(
     comptime T: type,
+    _: std.Io,
     _: std.mem.Allocator,
     array: []T,
 ) void {
     std.mem.sort(T, array, {}, std.sort.asc(T));
 }
 
-const kExecutions = 30;
+const kExecutions = 3;
 
 pub fn SortFn(comptime T: type) type {
     return struct {
         name: []const u8,
         sort_function: *const fn (
+            std.Io,
             std.mem.Allocator,
             []T,
         ) void,
@@ -243,6 +294,7 @@ pub fn SortFn(comptime T: type) type {
             comptime name: []const u8,
             comptime sort_function: *const fn (
                 comptime type,
+                std.Io,
                 std.mem.Allocator,
                 []T,
             ) void,
@@ -250,8 +302,8 @@ pub fn SortFn(comptime T: type) type {
             return .{
                 .name = name,
                 .sort_function = struct {
-                    fn wrapper(allocator: std.mem.Allocator, array: []T) void {
-                        return sort_function(T, allocator, array);
+                    fn wrapper(io: std.Io, allocator: std.mem.Allocator, array: []T) void {
+                        return sort_function(T, io, allocator, array);
                     }
                 }.wrapper,
             };
@@ -278,7 +330,7 @@ pub fn SortFn(comptime T: type) type {
             for (0..kExecutions) |_| {
                 @memcpy(array, original_array);
                 const start_time = clock.now(io);
-                self.sort_function(allocator, array);
+                self.sort_function(io, allocator, array);
                 average_time.nanoseconds +=
                     std.Io.Timestamp.durationTo(
                         start_time,
@@ -300,9 +352,6 @@ pub fn main(init: std.process.Init) !void {
     const io = init.io;
     var stdout_writer = std.Io.File.stdout().writer(io, &stdout_buffer);
     stdout = &stdout_writer.interface;
-    // const file = try std.Io.Dir.openFile(std.Io.Dir.cwd(), io, "big_in", .{ .mode = .read_only });
-    // defer file.close(io);
-    // var stdin_reader = file.reader(io, &stdin_buffer);
     var stdin_reader = std.Io.File.stdin().reader(io, &stdin_buffer);
     stdin = &stdin_reader.interface;
 
@@ -319,6 +368,10 @@ pub fn main(init: std.process.Init) !void {
         SortFn(i32).init(
             "MergeSort",
             mergeSort,
+        ),
+        SortFn(i32).init(
+            "MergeSortAsync",
+            mergeSortAsync,
         ),
         SortFn(i32).init(
             "IterativeMergeSort",
