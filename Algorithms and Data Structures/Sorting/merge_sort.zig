@@ -6,6 +6,8 @@ var stdout: *std.Io.Writer = undefined;
 var stdin_buffer: [4096]u8 = undefined;
 var stdin: *std.Io.Reader = undefined;
 
+const kAsyncThreshold: i32 = 1e4;
+
 pub fn print(comptime format: []const u8, args: anytype) void {
     stdout.print(format, args) catch unreachable;
     stdout.flush() catch unreachable;
@@ -204,7 +206,7 @@ pub fn mergeSortInternalAsync(
 
     const mid = array.len >> 1;
 
-    if (array.len >= 1000) {
+    if (array.len >= kAsyncThreshold) {
         const mergeSortInternalAsyncWrapper = struct {
             fn wrapper(wio: std.Io, warray: []T, wtmp: []T) void {
                 return mergeSortInternalAsync(T, wio, warray, wtmp);
@@ -261,6 +263,78 @@ pub fn iterativeMergeSort(
                 const hi = @min(lo + block_size, array.len) - 1;
                 const mid = (lo + hi) >> 1;
                 mergeWithTemp(T, array, tmp, lo, mid, mid + 1, hi);
+            }
+        }
+    }
+    const hi = array.len - 1;
+    const mid = (block_size >> 1) - 1;
+    mergeWithTemp(T, array, tmp, 0, mid, mid + 1, hi);
+}
+
+pub fn iterativeMergeSortAsync(
+    comptime T: type,
+    io: std.Io,
+    allocator: std.mem.Allocator,
+    array: []T,
+) void {
+    const tmp = allocator.alloc(T, array.len) catch unreachable;
+    defer allocator.free(tmp);
+
+    var block_size: usize = 2;
+    while (block_size < array.len) : (block_size <<= 1) {
+        var lo: usize = 0;
+        if (block_size >= kAsyncThreshold) {
+            var group: std.Io.Group = .init;
+            defer group.cancel(io);
+            const mergeWithTempWrapper = struct {
+                fn wrapper(
+                    warray: []T,
+                    wtmp: []T,
+                    alo: usize,
+                    ahi: usize,
+                    blo: usize,
+                    bhi: usize,
+                ) void {
+                    return mergeWithTemp(T, warray, wtmp, alo, ahi, blo, bhi);
+                }
+            }.wrapper;
+            while (lo < array.len) : (lo += block_size) {
+                if (lo + block_size > array.len) {
+                    var j = lo + 1;
+                    const mid = while (j < array.len) : (j += 1) {
+                        if (array[j - 1] > array[j]) break j - 1;
+                    } else array.len;
+                    if (mid == array.len) continue;
+                    group.async(io, mergeWithTempWrapper, .{
+                        array,   tmp,
+                        lo,      mid,
+                        mid + 1, array.len - 1,
+                    });
+                } else {
+                    const hi = @min(lo + block_size, array.len) - 1;
+                    const mid = (lo + hi) >> 1;
+                    group.async(io, mergeWithTempWrapper, .{
+                        array,   tmp,
+                        lo,      mid,
+                        mid + 1, hi,
+                    });
+                }
+            }
+            group.await(io) catch unreachable;
+        } else {
+            while (lo < array.len) : (lo += block_size) {
+                if (lo + block_size > array.len) {
+                    var j = lo + 1;
+                    const mid = while (j < array.len) : (j += 1) {
+                        if (array[j - 1] > array[j]) break j - 1;
+                    } else array.len;
+                    if (mid == array.len) continue;
+                    mergeWithTemp(T, array, tmp, lo, mid, mid + 1, array.len - 1);
+                } else {
+                    const hi = @min(lo + block_size, array.len) - 1;
+                    const mid = (lo + hi) >> 1;
+                    mergeWithTemp(T, array, tmp, lo, mid, mid + 1, hi);
+                }
             }
         }
     }
@@ -376,6 +450,10 @@ pub fn main(init: std.process.Init) !void {
         SortFn(i32).init(
             "IterativeMergeSort",
             iterativeMergeSort,
+        ),
+        SortFn(i32).init(
+            "IterativeMergeSortAsync",
+            iterativeMergeSortAsync,
         ),
         SortFn(i32).init(
             "StdSort",
