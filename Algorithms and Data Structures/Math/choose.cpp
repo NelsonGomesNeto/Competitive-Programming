@@ -18,6 +18,7 @@ using namespace std;
     (0-indexed)
 */
 
+namespace combinatorics {
 const lli kMod = 1e9 + 7;  // could be two as well
 lli ModPow(lli x, lli y) {
   lli ans = 1;
@@ -28,8 +29,6 @@ lli ModPow(lli x, lli y) {
   return ans;
 }
 lli Inv(lli x) { return ModPow(x, kMod - 2); }
-
-namespace combinatorics {
 const int kMaxX = 1e6 + 1;
 lli fat[kMaxX], invFat[kMaxX];
 lli Choose(lli n, lli k) {

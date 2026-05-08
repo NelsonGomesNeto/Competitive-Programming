@@ -109,6 +109,7 @@
   * [Linhas de Metrô](https://www.urionlinejudge.com.br/judge/en/problems/view/2887) (Clever LCA problem, look for combinations of paths, AMAZING)
   * [Company](https://codeforces.com/contest/1062/problem/E) (MIND BLOWING "in and out" + LCA problem, look for the border vertices)
   * [QTREE2](https://www.spoj.com/problems/QTREE2/) (This problem is a MUST DO with Binary Lifting, at most O(lg(n)) in both queries, you can do it)
+  * [Heavy Buckets](https://atcoder.jp/contests/abc438/tasks/abc438_e) (Forget about LCA, this is PURE Binary Lifting! And you don't even need to build trees or care about cycles!)
 
 # Heavy-Light Decomposition (HLD)
 * #### Problems
@@ -380,6 +381,13 @@ https://usaco.guide/adv/lagrange?lang=cpp.
   * [HackerEarth DSU Problems](https://www.hackerearth.com/pt-br/practice/data-structures/disjoint-data-strutures/basics-of-disjoint-data-structures/practice-problems/) (There are some interesting problems)
   * [Friend Suggestions](https://atcoder.jp/contests/abc157/tasks/abc157_d) (VERY NICE use of DSU)
   * [Experience](https://codeforces.com/edu/course/2/lesson/7/1/practice/contest/289390/problem/C) (Amazingly clever DSU problem, no maps, just a smart use of DSU)
+  * [Sum of Subarray Minimums](https://leetcode.com/problems/sum-of-subarray-minimums/description/) (Clever DSU problem)
+
+## Stacks
+* Great resource to learn Monotonic Stacks: https://usaco.guide/gold/stacks.
+* #### Problems
+  * [Nearest Smaller Values](https://cses.fi/problemset/result/16970673/) (Awesome problem to learn monotonic stacks! \o/)
+  * [Sum of Subarray Minimums](https://leetcode.com/problems/sum-of-subarray-minimums/description/) (Great next step for monotic stacks! \o/)
 
 # String
 * #### Problems

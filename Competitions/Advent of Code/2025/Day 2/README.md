@@ -1,0 +1,1 @@
+Small numbers -> brute ftw. I solved in O(|ranges|*|range_size|) by just iterating through values and checking if they are made of repetitions.
