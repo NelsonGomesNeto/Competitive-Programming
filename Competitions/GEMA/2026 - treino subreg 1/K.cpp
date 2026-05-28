@@ -3,6 +3,31 @@
 #define lli long long int
 #define ldouble long double
 
+/*
+Brilliant O(confia) hahahaha
+
+### Idea
+"a mod x" has only 2 options:
+a < x -> nothing changes
+a >= x -> a becomes < x
+
+If you think deepily, a >= x will *at least* divide a by 2.
+That's because for `a` to become `x - 1`, it has to be (k*x + (x - 1)).
+So, for any `k`, `a` will be *at least* divided by 2.
+
+So, in the worst case, we need O(lg(n)) "a mod x" operations to reduce any
+number to 1.
+
+Which leads us to O(n*lg(n)) to do that for all numbers.
+
+### Solution
+"a mod x" operation:
+  Use a Segtree to find the maximum in a range.
+  Update each maximum individually until all values are less than x.
+Use the same Segtree to find the sum in a range.
+That's it hahahaha.
+*/
+
 struct Data {
   lli sum;
   int max, pos;

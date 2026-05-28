@@ -46,6 +46,7 @@
   * [Kaori, Asuna e Kirito](https://thehuxley.com/problem/1857) (AMAZING, segment tree's node is a array 32 ints)
   * [Culture Code](https://codeforces.com/contest/1197/problem/E) (Interesting use of segment tree to apply a greedy strategy)
   * [Enemy is weak](https://codeforces.com/problemset/problem/61/E) (MIND BLOWING inversion count problem)
+  * [The Child and Sequence](https://codeforces.com/problemset/problem/438/D) (O(trust), no fancy segtree, just a clever property of the `mod`)
 
 ## Segment Tree with Lazy Propagation :star:
 * #### Problems
