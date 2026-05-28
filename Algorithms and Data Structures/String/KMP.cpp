@@ -1,51 +1,70 @@
 #include <bits/stdc++.h>
 #define lli long long int
-using namespace std;
 
-vector<int> prefixFunction(string &s)
-{
-  vector<int> pi(s.size() + 1);
-  pi[0] = -1;
-  for (int i = 0, j = -1; i < s.size();)
-  {
-    while (j >= 0 && s[i] != s[j]) j = pi[j];
-    pi[++i] = ++j;
-  }
-  return pi;
-}
-vector<int> kmpSearch(string &s, string &sub, vector<int> &pi /* prefixFunction(sub) */)
-{
-  vector<int> occurrences;
-  for (int i = 0, j = 0; i < s.size();)
-  {
-    while (j >= 0 && s[i] != sub[j]) j = pi[j];
-    i ++, j ++;
-    if (j == sub.size())
-    {
-      occurrences.push_back(i - j);
-      j = pi[j];
+struct KMP {
+  std::vector<int> pi;
+  // Note that it's definitely possible to expand `pi` if the substring grows
+  // for some reason \o/. But I never needed it yet.
+  KMP(const std::string& s) {
+    pi.resize(s.size() + 1);
+    pi[0] = -1;
+    for (int i = 0, j = -1; i < s.size();) {
+      while (j >= 0 && s[i] != s[j]) j = pi[j];
+      pi[++i] = ++j;
     }
   }
-  return occurrences;
-}
+  // Returns all occurrences of `sub` on `s`.
+  // `sub` must be a prefix of the input on the constructor of KMP.
+  // `sub` is left as an argument to allow the optimization of precomputing the
+  // `pi` for a bigger string than `sub`. But `sub` MUST be a prefix.
+  std::vector<int> AllOccurrences(const std::string& s, const std::string sub,
+                                  const bool allow_overlap = false) const {
+    std::vector<int> occurrences;
+    for (int i = 0, j = 0; i < s.size();) {
+      while (j >= 0 && s[i] != sub[j]) j = pi[j];
+      i++, j++;
+      if (j == sub.size()) {
+        occurrences.push_back(i - j);
+        if (allow_overlap)
+          j = pi[j];
+        else
+          j = 0;
+      }
+    }
+    return occurrences;
+  }
+};
 
-const int maxN = 1e5; int n, m;
-char ss[maxN + 1];
-string s, t;
+const int maxN = 1e5;
+int n, m;
+std::string s, t;
 
-int main()
-{
-  scanf(" %s", ss);
-  s = string(ss);
-  scanf(" %s", ss);
-  t = string(ss);
+int main() {
+  std::getline(std::cin, s);
+  std::getline(std::cin, t);
 
-  vector<int> pi = prefixFunction(t);
+  const KMP kmp(t);
 
-  vector<int> occurrences = kmpSearch(s, t, pi);
-  printf("%d occurrences\n", (int) occurrences.size());
-  for (int i = 0; i < occurrences.size(); i ++)
-    printf("%d%c", occurrences[i], i < occurrences.size() - 1 ? ' ' : '\n');
+  for (const bool allow_overlap : std::vector<bool>{false, true}) {
+    std::println("allow_overlap={}", allow_overlap);
 
-  return(0);
+    const std::vector<int> occurrences =
+        kmp.AllOccurrences(s, t, allow_overlap);
+
+    std::println("{} occurrences", (int)occurrences.size());
+    std::println("{}", occurrences | std::views::transform([](const int x) {
+                         return std::format("{}", x);
+                       }) | std::views::join_with(' ') |
+                           std::ranges::to<std::string>());
+    std::println("{}", s);
+    int prev_pos = 0;
+    for (const auto [i, pos] : occurrences | std::views::enumerate) {
+      std::print("{}^", std::string(pos - prev_pos - (i != 0), ' '));
+      prev_pos = pos;
+    }
+    std::println("");
+    std::println("{}", std::string(80, '-'));
+  }
+
+  return 0;
 }
