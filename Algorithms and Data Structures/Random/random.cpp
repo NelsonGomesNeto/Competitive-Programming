@@ -1,11 +1,14 @@
 #include <bits/stdc++.h>
-#define DEBUG if(0)
-#define lli long long int
-#define ldouble long double
-using namespace std;
 
-int main()
-{
-  
+int main() {
+  std::random_device rd;
+  std::mt19937 g(rd());
+
+  std::vector<int> a(10);
+  std::ranges::iota(a, 1);
+  std::println("a        : {}", a);
+  std::ranges::shuffle(a, g);
+  std::println("shuffle a: {}", a);
+
   return 0;
 }
