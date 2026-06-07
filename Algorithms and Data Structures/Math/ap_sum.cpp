@@ -16,7 +16,7 @@ lli ApSum(lli a1, lli n, lli d) {
 
 int main() {
   lli a1, n, d;
-  while (std::cin >> a1  >> n >> d) {
+  while (std::cin >> a1 >> n >> d) {
     std::println("ApSum(a1={}, n={}, d={}) = {}", a1, n, d, ApSum(a1, n, d));
   }
   return (0);

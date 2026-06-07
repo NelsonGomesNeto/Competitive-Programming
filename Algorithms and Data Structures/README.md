@@ -398,6 +398,10 @@ https://usaco.guide/adv/lagrange?lang=cpp.
   * [Gluing Pictures](https://matcomgrader.com/problem/9641/gluing-pictures/) (Awesome Suffix Array problem, beautiful binary search (Suffix Automaton and Suffix Tree may be more direct))
   * [Three Substrigs](https://atcoder.jp/contests/panasonic2020/tasks/panasonic2020_e) (Awesome string match problem, think about the easy O(n^3) and try to reduce something on it to O(1) (given some precalculations :3))
 
+# Hash
+* #### Problems
+  * [Candy Rush](https://codeforces.com/gym/104736/problem/C) (AWESOME problem to learn "hash sum" for the O(n*lg(n)) solution)
+
 # Fast Fourier Transform (FFT)
 * #### Problems:
   * [Substring 2](https://atcoder.jp/contests/abc196/tasks/abc196_f) (Straightforward String Matching with FFT)
