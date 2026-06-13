@@ -266,8 +266,8 @@
 
 ## Lagrangian Relaxation (Aliens Trick)
 On problem where you need to make up to `k` choices, the immediate DP is often
-O(n*k) (position, current_choices). With Lagrangian Relaxation, you can reduce
-that to O(n*lg(k)).
+`O(n*k)` (position, current_choices). With Lagrangian Relaxation, you can reduce
+that to `O(n*lg(k))`.
 ### Intuition:
 Let `f(x)` be the optimal answer for `x` choices. Let `L(y) = v(y) - y*c(y)`,
 where `L(y)` is the optimal answer if every choice has penalty `y` and `v(y)` is
@@ -300,6 +300,7 @@ https://usaco.guide/adv/lagrange?lang=cpp.
   * [Phoenix and Computers](https://codeforces.com/contest/1515/problem/E) (MIND BLOWING, n^2, try to view on computers as segments)
 
 # Search
+## Binary Search, Ternary Search, Backtracking
 * #### Problems
   * [12192 - Grapevine](https://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=3344) (Interesting lowerBound + upperBound)
   * [Hamburgers](https://codeforces.com/problemset/problem/371/C) (Interesting easy binary search problem)
@@ -311,6 +312,21 @@ https://usaco.guide/adv/lagrange?lang=cpp.
   * [Minimizing Difference](https://codeforces.com/contest/1244/problem/E) (AWESOME ternary search inside binary search)
   * [Gluttony](https://atcoder.jp/contests/abc144/tasks/abc144_e) (Interesting easy binary search + greedy problem)
   * [11195 - Another N-Queen problem](https://onlinejudge.org/index.php?option=onlinejudge&page=show_problem&problem=2136) (Interesting backtracking + bitmasking problem)
+
+## Parallel Binary Search
+### Idea
+1. `O(n)` binary searches;
+1. Binary search check is expensive (e.g. `O(n)`);
+1. Binary search check is the same for `O(n)` searches.
+
+Then, you can maintain the search params for all binary searches and run the
+check `O(lg(n))` times while updating the search params on each check iteration.
+This way, instead of `O((n*lg(n))^2)`, we have `O(n*lg(n)^2)` \o/.
+
+Great tutorial: https://codeforces.com/blog/entry/45578.
+
+* #### Problems
+  * [METEORS - Meteors](https://www.spoj.com/problems/METEORS/) (Great first problem to learn "Parallel Binary Search". Unfortunately, it requires a bit of hyper optimization :()
 
 # Math
 * #### Problems
