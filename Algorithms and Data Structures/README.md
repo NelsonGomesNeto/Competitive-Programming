@@ -327,6 +327,7 @@ Great tutorial: https://codeforces.com/blog/entry/45578.
 
 * #### Problems
   * [METEORS - Meteors](https://www.spoj.com/problems/METEORS/) (Great first problem to learn "Parallel Binary Search". Unfortunately, it requires a bit of hyper optimization :()
+  * [D - Stamp Rally](https://atcoder.jp/contests/agc002/tasks/agc002_d) (THE BEST "Parallel Binary Search" to learn it. Simple and direct.)
 
 # Math
 * #### Problems

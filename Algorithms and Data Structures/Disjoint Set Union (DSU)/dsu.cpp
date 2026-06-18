@@ -7,8 +7,8 @@ struct DSU {
   int size;
   std::vector<int> parents;
   DSU() : size(0) { parents.clear(); }
-  DSU(const int sz) : size(sz) { Init(); }
-  void Init() { parents.resize(size, -1); }
+  DSU(const int sz) : size(sz) { parents.resize(size, -1); }
+  void Reset() { std::ranges::fill(parents, -1); }
   int Root(const int u) {
     return parents[u] < 0 ? u : parents[u] = Root(parents[u]);
   }
