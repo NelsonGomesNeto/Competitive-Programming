@@ -1,110 +1,111 @@
 #include <bits/stdc++.h>
-#define DEBUG if(1)
-using namespace std;
+#define DEBUG if (1)
 
-struct LCA
-{
-  vector<vector<int>> tree;
-  vector<int> level, logMemo;
-  vector<vector<int>> ancestor;
-  int n, logn;
+struct LCA {
+  std::vector<std::vector<int>> tree;
+  std::vector<int> level, log_memo;
+  std::vector<std::vector<int>> ancestor;
+  int n, log_n;
   LCA() {}
-  LCA(int n) : n(n), logn(ceil(log2(n)))
-  {
-    logMemo.clear(); logMemo.resize(n + 1);
-    logMemo[1] = 0; for (int i = 2; i <= n; ++i) logMemo[i] = logMemo[i >> 1] + 1;
+  LCA(const int n_) : n(n_), log_n(std::ceil(std::log2(std::max(2, n)))) {
+    log_memo.clear();
+    log_memo.resize(n + 1);
+    log_memo[1] = 0;
+    for (int i = 2; i <= n; ++i) log_memo[i] = log_memo[i >> 1] + 1;
 
-    tree.clear(); tree.resize(n);
-    level.clear(); level.resize(n, 0);
-    ancestor.clear(); ancestor.resize(n, vector<int>(logn, 0));
+    tree.clear();
+    tree.resize(n);
+    level.clear();
+    level.resize(n, 0);
+    ancestor.clear();
+    ancestor.resize(n, std::vector<int>(log_n, 0));
   }
 
-  void printBinary(int num)
-  {
-    if (!num) return;
-    printBinary(num >> 1);
-    printf("%d", num & 1);
-  }
-  void printMatrix()
-  {
-    printf("   |"); for (int i = 0; i < logn; ++i) printf("%3d%c", i, i < logn - 1 ? '|' : '\n');
-    for (int i = 0; i < n; ++i)
-    {
-      printf("%3d|", i);
-      for (int j = 0; j < logn; ++j)
-        printf("%3d%c", ancestor[i][j], j < logn - 1 ? '|' : '\n');
+  void PrintMatrix() {
+    std::println("\tancestor:");
+    std::println("u\\a|{}", std::views::iota(0, log_n) |
+                                std::views::transform([](const int a) {
+                                  return std::format("{:3d}", a);
+                                }) |
+                                std::views::join_with('|') |
+                                std::ranges::to<std::string>());
+    for (int i = 0; i < n; ++i) {
+      std::println("{:3d}|{}", i,
+                   ancestor[i] | std::views::transform([](const int a) {
+                     return std::format("{:3d}", a);
+                   }) | std::views::join_with('|') |
+                       std::ranges::to<std::string>());
     }
   }
-  void printSpacing(int s)
-  {
-    while (s --) printf("   ");
+
+  void AddEdge(const int u, const int v) {
+    tree[u].push_back(v), tree[v].push_back(u);
   }
 
-  void dfs(int u, int prv = -1)
-  {
-    DEBUG { printSpacing(level[u]); printf("%3d\n", u); }
-    for (int v: tree[u])
-      if (v != prv)
-      {
-        level[v] = level[u] + 1, ancestor[v][0] = u;
-        dfs(v, u);
-      }
+  void Dfs(const int u, const int prv = -1) {
+    DEBUG { std::println("{}{:3d}", std::string(level[u] * 3, ' '), u); }
+    for (const int v : tree[u]) {
+      if (v == prv) continue;
+      level[v] = level[u] + 1, ancestor[v][0] = u;
+      Dfs(v, u);
+    }
   }
-  void build()
-  {
-    level[0] = ancestor[0][0] = 0; dfs(0);
-    for (int i = 1; i < logn; ++i)
-      for (int u = 0; u < n; ++u)
-      {
+  void Build() {
+    level[0] = ancestor[0][0] = 0;
+    Dfs(0);
+    for (int i = 1; i < log_n; ++i) {
+      for (int u = 0; u < n; ++u) {
         ancestor[u][i] = ancestor[ancestor[u][i - 1]][i - 1];
         // If you want to add something about the path, like weight:
-        // weight[u][i] = combination of weight[u][i - 1] and weight[ancestor[u][i - 1]][i - 1]
+        // weight[u][i] = combination of weight[u][i - 1] and
+        // weight[ancestor[u][i - 1]][i - 1]
       }
+    }
   }
-  int lca(int u, int v)
-  {
-    if (level[v] > level[u]) swap(u, v);
+  int Lca(int u, int v) {
+    if (level[v] > level[u]) std::swap(u, v);
 
     DEBUG {
-      printf("(%d - %d) = %d ", level[u], level[v], level[u] - level[v]);
-      printBinary(level[u] - level[v]);
-      printf("\n");
+      std::println("\tlevel diff: ({} - {}) = {} {:b}", level[u], level[v],
+                   level[u] - level[v], level[u] - level[v]);
     }
-    for (int diff = level[u] - level[v], i = 0; diff; diff >>= 1, ++i)
+    for (int diff = level[u] - level[v], i = 0; diff; diff >>= 1, ++i) {
       if (diff & 1) u = ancestor[u][i];
+    }
 
-    if (u == v) return(u);
+    if (u == v) return u;
 
-    // (i = logn - 1; i >= 0; i --) works as well
-    for (int i = logMemo[level[u] - 1]; ancestor[u][0] != ancestor[v][0]; i --)
+    // (i = log_n - 1; i >= 0; i --) works as well
+    for (int i = log_memo[level[u] - 1]; ancestor[u][0] != ancestor[v][0];
+         --i) {
       if (ancestor[u][i] != ancestor[v][i])
         u = ancestor[u][i], v = ancestor[v][i];
+    }
 
-    return(ancestor[u][0]);
+    return ancestor[u][0];
   }
 };
 LCA lca;
 
-const int maxN = 1e5; int n;
-
-int main()
-{
-  scanf("%d", &n);
+int main() {
+  int n;
+  std::cin >> n;
   lca = LCA(n);
 
-  int u, v;
-  for (int i = 0; i < n - 1; ++i)
-  {
-    scanf("%d %d", &u, &v); --u, --v;
-    lca.tree[u].push_back(v), lca.tree[v].push_back(u);
+  for (int i = 0; i < n - 1; ++i) {
+    int u, v;
+    std::cin >> u >> v;
+    lca.AddEdge(u, v);
   }
-  lca.build();
-  lca.printMatrix();
+  lca.Build();
+  lca.PrintMatrix();
 
-  while (scanf("%d %d", &u, &v) != EOF)
-  {
-    --u, --v;
-    printf("LCA(%d, %d) = %d\n\n", u + 1, v + 1, lca.lca(u, v) + 1);
+  int q;
+  std::cin >> q;
+  for (int qi = 0; qi < q; ++qi) {
+    int u, v;
+    if (!(std::cin >> u >> v)) break;
+    std::println("LCA({}, {}) = {}", u, v, lca.Lca(u, v));
   }
-  return(0);
+  return (0);
 }
