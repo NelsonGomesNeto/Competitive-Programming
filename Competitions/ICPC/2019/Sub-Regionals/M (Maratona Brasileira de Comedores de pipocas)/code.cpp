@@ -11,8 +11,9 @@ struct TestCase {
   std::vector<int> p;
 
   int Can(const int x) {
+    const lli max_popcorn_per_competitor = (lli)t * x;
     for (int i = 0, competitor = 0, sum = 0; i < n; ++i) {
-      while (std::ceil((double)(sum + p[i]) / t) > x) {
+      while (sum + p[i] > max_popcorn_per_competitor) {
         ++competitor, sum = 0;
         if (competitor == c) return false;
       }
