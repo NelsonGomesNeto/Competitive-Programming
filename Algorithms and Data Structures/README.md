@@ -298,6 +298,7 @@ https://usaco.guide/adv/lagrange?lang=cpp.
   * [Square-free division(hard version)](https://codeforces.com/contest/1497/problem/E2) (MIND BLOWING, greedy precalc to maximize something and then traverse with DP using that precalc, BEAUTIFUL)
   * [Skyline Photo](https://codeforces.com/contest/1484/problem/E) (BEAUTIFUL, DP + (SegmentTree or Stacks), LOVELY)
   * [Phoenix and Computers](https://codeforces.com/contest/1515/problem/E) (MIND BLOWING, n^2, try to view on computers as segments)
+  * [Random Vault Heist](https://atcoder.jp/contests/abc464/tasks/abc464_f) (Hard Meet In The Middle. A reminder that TwoPointer sliding window can be a lot faster than a BinarySearch hahaha)
 
 # Search
 ## Binary Search, Ternary Search, Backtracking
