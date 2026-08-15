@@ -8,5 +8,7 @@ https://en.wikipedia.org/wiki/MD5 haha. https://twy.name/Tools/Hash/md5.html was
 helped A LOT to double-check my implementation was correct \o/.
 I'm pretty sure it's not optimal but it solves part 2 in 5 seconds! \o/
 
+With a few optimizations, I was able to get it down to 0.73s! \o/
+
 Playing with bits again was really fun. It reminded me of Huffman (
 https://github.com/NelsonGomesNeto/Huffman-Algorithm).

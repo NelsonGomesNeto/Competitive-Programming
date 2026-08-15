@@ -63,9 +63,13 @@ std::string Hash(std::string message, const bool verbose = false) {
     message.push_back(0x00);
   }
   // append original length in bits mod 2^64 to message
-  std::array<uint8_t, 8> bytes;
-  std::memcpy(bytes.data(), &original_length_in_bits, /*byte_count=*/8);
-  for (const auto byte : bytes) message.push_back(byte);
+  // 4th optimization: from 0.75s to 0.73s hahaha.
+  // std::array<uint8_t, 8> bytes;
+  // std::memcpy(bytes.data(), &original_length_in_bits, /*byte_count=*/8);
+  // for (const auto byte : bytes) message.push_back(byte);
+  message.resize(message.size() + 8);
+  std::memcpy(message.data() + ((int)message.size() - 8),
+              &original_length_in_bits, /*byte_count=*/8);
 
   if (verbose) {
     std::println("pre-processed message: {}",
@@ -104,19 +108,20 @@ std::string Hash(std::string message, const bool verbose = false) {
       if (i >= 0 && i <= 15) {
         F = (B & C) | ((~B) & D);
         // F = D ^ (B & (C ^ D));
-        g = i;
+        // g = i;
       } else if (i >= 16 && i <= 31) {
         F = (D & B) | ((~D) & C);
         // F = C ^ (D & (B ^ C));
-        g = (5 * i + 1) % 16;
+        // g = (5 * i + 1) % 16;
       } else if (i >= 32 && i <= 47) {
         F = B ^ C ^ D;
-        g = (3 * i + 5) % 16;
+        // g = (3 * i + 5) % 16;
       } else if (i >= 48 && i <= 63) {
         F = C ^ (B | (~D));
-        g = (7 * i) % 16;
+        // g = (7 * i) % 16;
       }
-      // g = g_table[i];
+      // 3rd optimization: from 0.8s to 0.75s
+      g = g_table[i];
       F += A + K[i] + M[g];  // M[g] must be a 32-bit block
       A = D;
       D = C;
@@ -134,14 +139,14 @@ std::string Hash(std::string message, const bool verbose = false) {
     d0 += D;
   }
 
-  std::array<uint32_t, 4> raw_digest = {a0, b0, c0, d0};
-  // std::array<uint32_t, 4> raw_digest = {d0, c0, b0, a0};
-  std::array<uint8_t, 16> digest_bytes;
-  std::memcpy(digest_bytes.data(), raw_digest.data(),
+  const std::array<uint32_t, 4> raw_digest = {a0, b0, c0, d0};
+  std::string digest(16, '\0');
+  std::memcpy(digest.data(), raw_digest.data(),
               /*byte_count=*/sizeof(uint8_t) * 16);
-  std::string digest;
-  for (const auto byte : digest_bytes) digest.push_back(byte);
-  return digest | std::views::transform([](const uint8_t c) {
+  return digest;
+}
+std::string HashToHex(const std::string& hash) {
+  return hash | std::views::transform([](const uint8_t c) {
            return std::format("{:02x}", c);
          }) |
          std::views::join | std::ranges::to<std::string>();
@@ -149,9 +154,20 @@ std::string Hash(std::string message, const bool verbose = false) {
 }  // namespace Md5
 
 int FindSmallest(const std::string& message) {
+  std::string curr = message;
+  curr.reserve(message.size() + 11);
   for (int i = 1;; ++i) {
-    const std::string hash = Md5::Hash(std::format("{}{}", message, i));
-    if (hash.starts_with(kTarget)) return i;
+    // 2nd optimization: from 1s to 0.8s
+    // const std::string hash = Md5::Hash(std::format("{}{}", message, i));
+    const std::string to_add = std::to_string(i);
+    curr.append(to_add);
+    const std::string hash = Md5::Hash(curr);
+    curr.erase(message.size());
+
+    // 1st optimization: from 5s to 1s! \o/
+    // if (Md5::HashToHex(hash).starts_with(kTarget)) return i;
+    // 0x000000 -> 00 (1 byte) + 00 (1 byte) + 00 (1 byte)
+    if (hash[0] == 0 && hash[1] == 0 && hash[2] == 0) return i;
   }
   return -1;
 }
@@ -163,12 +179,14 @@ int main() {
 
   std::println("message: {}", s);
   const std::string hash = Md5::Hash(s, /*verbose=*/true);
-  std::println("hash: {}", hash);
+  std::println("hash: {}", Md5::HashToHex(hash));
   std::println("{}", std::string(80, '-'));
 
   const int ans = FindSmallest(s);
+  // const int ans = 3938038;
   std::println("ans: {}", ans);
-  std::println("{} + {} -> {}", s, ans, Md5::Hash(std::format("{}{}", s, ans)));
+  const std::string ans_hash = Md5::Hash(std::format("{}{}", s, ans));
+  std::println("{} + {} -> {}", s, ans, Md5::HashToHex(ans_hash));
 
   return 0;
 }
