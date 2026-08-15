@@ -50,36 +50,23 @@ struct Decoration {
     for (auto& line : d.grid) std::ranges::fill(line, 0);
     return sin;
   }
-  std::array<std::array<int, kN>, kN> delta_grid_in, delta_grid_out;
   void Decorate() {
-    // TODO: Prove this doesn't work!
-    for (auto& line : delta_grid_in) std::ranges::fill(line, 0);
-    for (auto& line : delta_grid_out) std::ranges::fill(line, 0);
     for (const auto& c : commands) {
       for (int i = c.loi; i <= c.hii; ++i) {
-        switch (c.op) {
-          case kTurnOn:
-            delta_grid_in[i][c.loj] += 1;
-            delta_grid_out[i][c.hij] -= 1;
-            break;
-          case kToggle:
-            delta_grid_in[i][c.loj] += 2;
-            delta_grid_out[i][c.hij] -= 2;
-            break;
-          case kTurnOff:
-          default:
-            delta_grid_in[i][c.loj] -= 1;
-            delta_grid_out[i][c.hij] += 1;
-            break;
+        for (int j = c.loj; j <= c.hij; ++j) {
+          switch (c.op) {
+            case kTurnOn:
+              grid[i][j] += 1;
+              break;
+            case kToggle:
+              grid[i][j] += 2;
+              break;
+            case kTurnOff:
+            default:
+              grid[i][j] = std::max(grid[i][j] - 1, 0);
+              break;
+          }
         }
-      }
-    }
-    for (int i = 0; i < kN; ++i) {
-      int delta = 0;
-      for (int j = 0; j < kN; ++j) {
-        delta += delta_grid_in[i][j];
-        grid[i][j] = std::max(delta, 0);
-        delta += delta_grid_out[i][j];
       }
     }
   }
@@ -94,20 +81,20 @@ struct Decoration {
         {138, 43, 226},  // 6 violeta
     };
     const int max_brightness = [&]() {
-      int b = 0;
+      int max_brightness = 0;
       for (const auto& line : grid) {
         for (const auto c : line) {
-          b = std::max(b, c);
+          max_brightness = std::max(max_brightness, c);
         }
       }
-      return b;
+      return max_brightness;
     }();
     std::ofstream ofs("image.ppm", std::ios_base::out | std::ios_base::binary);
     ofs << "P6\n" << kN << " " << kN << "\n255\n";
     for (const auto& line : grid) {
       for (const auto c : line) {
         const double frac = (double)c / max_brightness;
-        const int color = (int)((double)(255 * (kRainbow.size() - 2)) * frac);
+        const int color = 255 * (kRainbow.size() - 2) * frac;
         const int ri = color / 255;
         const int t = color % 255;
         for (const auto [prv, nxt] :

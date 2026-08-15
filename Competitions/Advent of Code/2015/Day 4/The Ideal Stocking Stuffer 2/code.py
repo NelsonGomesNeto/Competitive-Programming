@@ -1,6 +1,5 @@
 import hashlib
 
-# TARGET = '00000'
 TARGET = '000000'
 
 

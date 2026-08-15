@@ -36,7 +36,9 @@ struct Map {
       for (const auto [k, d] : instructions | std::views::enumerate) {
         const auto [di, dj] = kDeltaByDir[d];
         i += di, j += dj;
+        // Keep the first step
         visited.emplace(std::make_pair(i, j), k + 1);
+        // Overwrite with latest step
         // visited[std::make_pair(i, j)] = k + 1;
       }
       return visited;

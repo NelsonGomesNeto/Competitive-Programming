@@ -1,7 +1,6 @@
 import hashlib
 
-# TARGET = '00000'
-TARGET = '000000'
+TARGET = '00000'
 
 
 def FindSmallest(s: str):

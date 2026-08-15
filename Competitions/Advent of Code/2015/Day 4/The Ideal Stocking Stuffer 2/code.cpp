@@ -36,6 +36,21 @@ const std::array<uint32_t, 64> K = {
     0xf4292244, 0x432aff97, 0xab9423a7, 0xfc93a039, 0x655b59c3, 0x8f0ccc92,
     0xffeff47d, 0x85845dd1, 0x6fa87e4f, 0xfe2ce6e0, 0xa3014314, 0x4e0811a1,
     0xf7537e82, 0xbd3af235, 0x2ad7d2bb, 0xeb86d391};
+const std::array<uint32_t, 64> g_table = []() {
+  std::array<uint32_t, 64> table;
+  for (auto [i, g] : table | std::views::enumerate) {
+    if (i >= 0 && i <= 15) {
+      g = i;
+    } else if (i >= 16 && i <= 31) {
+      g = (5 * i + 1) % 16;
+    } else if (i >= 32 && i <= 47) {
+      g = (3 * i + 5) % 16;
+    } else if (i >= 48 && i <= 63) {
+      g = (7 * i) % 16;
+    }
+  }
+  return table;
+}();
 
 // Returns an Md5 hash from a `message`.
 std::string Hash(std::string message, const bool verbose = false) {
@@ -69,16 +84,18 @@ std::string Hash(std::string message, const bool verbose = false) {
     std::println("in - 0x{:08x} 0x{:08x} 0x{:08x} 0x{:08x}", a0, b0, c0, d0);
   }
   // Process the message in successive 512-bit (64 bytes) chunks:
+  std::array<uint32_t, 16> M;
   for (const auto& chunk : message | std::views::chunk(64)) {
     // break chunk into sixteen 32-bit words M[j], 0 ≤ j ≤ 15
-    std::array<uint32_t, 16> M;
-    std::ranges::fill(M, 0);
-    for (auto [j, mj] : M | std::views::enumerate) {
-      // This must also be little-endian and the chunks must lose the sign :^)
-      for (int i = 3; i >= 0; --i) {
-        mj = (mj << 8) | (uint8_t)chunk[j * 4 + i];
-      }
-    }
+    // std::ranges::fill(M, 0);
+    // for (auto [j, mj] : M | std::views::enumerate) {
+    //   // This must also be little-endian and the chunks must lose the sign
+    //   :^) for (int i = 3; i >= 0; --i) {
+    //     mj = (mj << 8) | (uint8_t)chunk[j * 4 + i];
+    //   }
+    // }
+    std::memcpy(M.data(), chunk.data(), /*byte_count=*/sizeof(uint32_t) * 16);
+
     // Initialize hash value for this chunk:
     uint32_t A = a0, B = b0, C = c0, D = d0;
     // Main loop:
@@ -86,9 +103,11 @@ std::string Hash(std::string message, const bool verbose = false) {
       uint32_t F, g;
       if (i >= 0 && i <= 15) {
         F = (B & C) | ((~B) & D);
+        // F = D ^ (B & (C ^ D));
         g = i;
       } else if (i >= 16 && i <= 31) {
         F = (D & B) | ((~D) & C);
+        // F = C ^ (D & (B ^ C));
         g = (5 * i + 1) % 16;
       } else if (i >= 32 && i <= 47) {
         F = B ^ C ^ D;
@@ -97,6 +116,7 @@ std::string Hash(std::string message, const bool verbose = false) {
         F = C ^ (B | (~D));
         g = (7 * i) % 16;
       }
+      // g = g_table[i];
       F += A + K[i] + M[g];  // M[g] must be a 32-bit block
       A = D;
       D = C;
@@ -117,7 +137,8 @@ std::string Hash(std::string message, const bool verbose = false) {
   std::array<uint32_t, 4> raw_digest = {a0, b0, c0, d0};
   // std::array<uint32_t, 4> raw_digest = {d0, c0, b0, a0};
   std::array<uint8_t, 16> digest_bytes;
-  std::memcpy(digest_bytes.data(), raw_digest.data(), 16);
+  std::memcpy(digest_bytes.data(), raw_digest.data(),
+              /*byte_count=*/sizeof(uint8_t) * 16);
   std::string digest;
   for (const auto byte : digest_bytes) digest.push_back(byte);
   return digest | std::views::transform([](const uint8_t c) {
