@@ -1,0 +1,7 @@
+digraph {
+bgcolor="#000000"
+node [fontcolor="#ffffff", color="#ffffff", fillcolor="#333333", style=filled]
+edge [color="#ffffff", fontcolor="#ffffff"]
+"a" -> "c"
+"b" -> "c"
+}
