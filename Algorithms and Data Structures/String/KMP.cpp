@@ -5,11 +5,11 @@ struct KMP {
   std::vector<int> pi;
   // Note that it's definitely possible to expand `pi` if the substring grows
   // for some reason \o/. But I never needed it yet.
-  KMP(const std::string& s) {
-    pi.resize(s.size() + 1);
+  KMP(const std::string& sub) {
+    pi.resize(sub.size() + 1);
     pi[0] = -1;
     for (int i = 0, j = -1; i < s.size();) {
-      while (j >= 0 && s[i] != s[j]) j = pi[j];
+      while (j >= 0 && sub[i] != sub[j]) j = pi[j];
       pi[++i] = ++j;
     }
   }
@@ -17,7 +17,7 @@ struct KMP {
   // `sub` must be a prefix of the input on the constructor of KMP.
   // `sub` is left as an argument to allow the optimization of precomputing the
   // `pi` for a bigger string than `sub`. But `sub` MUST be a prefix.
-  std::vector<int> AllOccurrences(const std::string& s, const std::string sub,
+  std::vector<int> AllOccurrences(const std::string& s, const std::string& sub,
                                   const bool allow_overlap = false) const {
     std::vector<int> occurrences;
     for (int i = 0, j = 0; i < s.size();) {
