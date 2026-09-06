@@ -1,6 +1,6 @@
 #include <bits/stdc++.h>
 
-const int kMaxHouse = 1e7;
+const int kMaxHouse = 1e6;
 
 struct Elves {
   const std::array<int, kMaxHouse + 1> houses;

@@ -9,3 +9,6 @@ O(n*lg) hahaha.
 Anyways, I implemented the sieve up to 10^7 and just looped to find the answer.
 The sieve is O(n*log(log(n))), so it ran in 300ms for the first part and 100ms
 for the second part \o/.
+
+After talking to a friend, I realized that we don't need to go all the way up to
+10^7. 10^6 is more than enough hahaha.
