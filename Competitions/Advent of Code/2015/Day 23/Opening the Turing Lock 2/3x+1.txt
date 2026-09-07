@@ -1,0 +1,10 @@
+27
+0
+inc b
+jio a, +99
+jie a, +4
+tpl a
+inc a
+jmp +2
+hlf a
+jmp -7
